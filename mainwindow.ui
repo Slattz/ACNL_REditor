@@ -83,7 +83,7 @@
         <item row="0" column="0">
          <widget class="QTabWidget" name="tabWidget_exefs">
           <property name="currentIndex">
-           <number>2</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="tab_exefs_general">
            <attribute name="title">
@@ -531,7 +531,7 @@
             <item row="2" column="0">
              <widget class="QCheckBox" name="CB_TrampleFlowers">
               <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This allows you to run through flowers without ever trampling them&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This allows you to run through flowers without ever trampling them.&lt;/p&gt;&lt;p&gt;Credit to Scotline for the original code. :)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="text">
                <string>Flowers Never Trample</string>
@@ -654,14 +654,8 @@
     <addaction name="FileOpen"/>
     <addaction name="FileSave"/>
     <addaction name="FileClose"/>
-   </widget>
-   <widget class="QMenu" name="menuAbout">
-    <property name="acceptDrops">
-     <bool>false</bool>
-    </property>
-    <property name="title">
-     <string>About</string>
-    </property>
+    <addaction name="separator"/>
+    <addaction name="actionAbout"/>
    </widget>
    <widget class="QMenu" name="menuDebug">
     <property name="title">
@@ -672,7 +666,6 @@
     <addaction name="actionSetup_OutDir"/>
    </widget>
    <addaction name="menuFile"/>
-   <addaction name="menuAbout"/>
    <addaction name="menuDebug"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
@@ -710,6 +703,16 @@
   <action name="actionSetup_OutDir">
    <property name="text">
     <string>Setup OutDir</string>
+   </property>
+  </action>
+  <action name="actionACNL_REditor_by_Slattz">
+   <property name="text">
+    <string>ACNL REditor by Slattz</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
    </property>
   </action>
  </widget>

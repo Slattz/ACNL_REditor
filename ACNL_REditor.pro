@@ -37,7 +37,8 @@ SOURCES += \
         game.cpp \
         shophourseditor.cpp \
         itemrandomiser.cpp \
-        patch.cpp
+        patch.cpp \
+    aboutwindow.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -45,9 +46,11 @@ HEADERS += \
         game.h \
         shophourseditor.h \
         itemrandomiser.h \
-        patch.h
+        patch.h \
+    aboutwindow.h
 
 FORMS += \
         mainwindow.ui \
         shophourseditor.ui \
-        itemrandomiser.ui
+        itemrandomiser.ui \
+    aboutwindow.ui

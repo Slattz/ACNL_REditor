@@ -20,7 +20,6 @@ private slots:
     void on_FileOpen_triggered();
     void on_FileSave_triggered();
     void on_FileClose_triggered();
-    void on_menuAbout_triggered();
 
     void on_dial_PlyrSpeed_valueChanged(int value);
     void on_BTN_RandomItemPrice_clicked();
@@ -30,6 +29,8 @@ private slots:
     void on_actionListItemPrices_triggered();
 
     void on_actionSetup_OutDir_triggered();
+
+    void on_actionAbout_triggered();
 
 private:
     Ui::MainWindow *ui = nullptr;

@@ -1,9 +1,10 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "file.h"
-#include "game.h"
+#include "aboutwindow.h"
 #include "itemrandomiser.h"
 #include "shophourseditor.h"
+#include "file.h"
+#include "game.h"
 #include "patch.h"
 
 static const QString SpeedStrings[5] = {"Normal: x1", "Fast: x1.25", "Faster: x1.5", "Speedy: x2", "Speeding Bullet: x3"};
@@ -14,7 +15,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    connect(ui->menuAbout, SIGNAL(aboutToShow()), this, SLOT(on_menuAbout_triggered()));
     ui->label_PlyrSpeed->setText(SpeedStrings[0]);
 #ifdef QT_NO_DEBUG_OUTPUT //Only set for release ∴ can auto disable debug tab for release
     ui->menuDebug->menuAction()->setVisible(false);
@@ -132,10 +132,6 @@ void MainWindow::on_FileClose_triggered() {
         delete game;
 }
 
-void MainWindow::on_menuAbout_triggered() {
-    qDebug() << "About Pressed";
-}
-
 void MainWindow::on_dial_PlyrSpeed_valueChanged(int value) {
     ui->label_PlyrSpeed->setText(SpeedStrings[value-1]);
 }
@@ -155,6 +151,15 @@ void MainWindow::on_BTN_ShopTimes_clicked()
     ShopHoursEditor shopWindow;
     shopWindow.setModal(false);
     shopWindow.exec();
+}
+
+void MainWindow::on_actionAbout_triggered()
+{
+    qDebug() << "About Pressed";
+    AboutWindow aboutWindow(exedir);
+    aboutWindow.setStyleSheet("background-color: white;");
+    aboutWindow.setModal(false);
+    aboutWindow.exec();
 }
 
 /* Debug Stuff */

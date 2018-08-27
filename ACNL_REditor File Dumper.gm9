@@ -1,0 +1,93 @@
+# Dump Files for ACNL REditor
+# author: Slattz
+# credit: All authors of GM9Megascript, which was referenced a ton when writing this
+
+set ERRORMSG "An Error Has Occured."
+set PREVIEW_MODE "ACNL REditor File Dumper v1.0\nby Slattz"
+set OUTDIR "0:/ACNL_REditor"
+
+if	not find $[OUTDIR] NULL
+	if	not mkdir $[OUTDIR]
+        echo "Error: Couldn't create Base Folder ($[OUTDIR]).\nExiting."
+        goto GameSelect_Exit
+    end
+end
+
+# Main Menu #
+@Start
+set PREVIEW_MODE "ACNL REditor File Dumper v1.0\nby Slattz\n \nNote:\nACNL REditor only works with the latest update\nof ACNL games.\n \nTherefore, this script will only get\nfiles from the downloaded update.\n \nIt will not get files from\nthe base game or a cartridge."
+set OUTDIR "0:/ACNL_REditor"
+labelsel -o -s "Choose which game to dump files from." GameSelect_*
+goto Start
+
+@GameSelect_Orig_EUR
+set TIDLOW 00086400
+set GAME "Orig_EUR"
+goto DumpUpdate
+
+@GameSelect_Orig_USA
+set TIDLOW 00086300
+set GAME "Orig_USA"
+goto DumpUpdate
+
+@GameSelect_Orig_JPN
+set TIDLOW 00086200
+set GAME "Orig_JPN"
+goto DumpUpdate
+
+#@GameSelect_Orig_KOR
+#set TIDLOW 00086500
+#set GAME "Orig_KOR"
+#goto DumpUpdate
+
+@GameSelect_PreInstalled_WA_EUR
+set TIDLOW 00198f00
+set GAME "PreInstalled_WA_EUR"
+goto DumpUpdate
+
+@GameSelect_PreInstalled_WA_USA
+set TIDLOW 00198e00
+set GAME "PreInstalled_WA_USA"
+goto DumpUpdate
+
+@GameSelect_PreInstalled_WA_JPN
+set TIDLOW 00198d00
+set GAME "PreInstalled_WA_JPN"
+goto DumpUpdate
+
+#@GameSelect_PreInstalled_WA_KOR
+#set TIDLOW 00199000
+#set GAME "PreInstalled_WA_KOR"
+#goto DumpUpdate
+
+@DumpUpdate
+set PREVIEW_MODE "ACNL REditor Files Dumper\nby Slattz\n\n> Dumping Files From $[GAME]"
+if	not find A:/title/0004000e/$[TIDLOW]/content/0000000?.app UPDATE
+    echo "Couldn't find $[GAME].\nIt is likely not installed.\nTID: 0004000e$[TIDLOW]"
+	goto Start
+end
+imgmount $[UPDATE]
+
+if	find $[OUTDIR]/$[GAME] NULL
+    rm -o -s $[OUTDIR]/$[GAME]
+end
+set OUTDIR "$[OUTDIR]/$[GAME]/rom"
+set ROMFS "$[OUTDIR]/romfs"
+set EXEFS "$[OUTDIR]/exefs"
+
+mkdir $[OUTDIR]
+mkdir $[EXEFS]
+mkdir $[ROMFS]
+mkdir $[ROMFS]/Item/Param
+
+set ERRORMSG "Dumping code.bin failed."
+cp -w -n G:/exefs/.code $[EXEFS]/code.bin
+set ERRORMSG "Dumping Item.bin failed."
+cp -w -n G:/romfs/Item/Param/Item.bin $[ROMFS]/Item/Param/Item.bin
+imgumount
+
+echo "Files dumped succesfully:\n$[OUTDIR]/"
+
+#@GameSelect_About
+
+@GameSelect_Exit

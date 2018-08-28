@@ -4,10 +4,10 @@
 #include <QFile>
 #include <QFileDialog>
 #include "file.h"
-#include "itemrandomiser.h"
+#include "Headers/itemrandomiser.h"
 #include "ui_mainwindow.h"
-#include "shophourseditor.h"
-#include "patch.h"
+#include "Headers/shophourseditor.h"
+#include "Headers/patch.h"
 
 struct Dir_s {
     bool exist = false;

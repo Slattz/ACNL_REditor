@@ -11,7 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = ACNL_REditor
 RC_ICONS = icon.ico
 TEMPLATE = app
-RESOURCES = resources.qrc
+RESOURCES = Resources/resources.qrc
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
@@ -32,26 +32,26 @@ CONFIG += c++11
 
 
 SOURCES += \
-        main.cpp \
-        mainwindow.cpp \
-        file.cpp \
-        game.cpp \
-        shophourseditor.cpp \
-        itemrandomiser.cpp \
-        patch.cpp \
-    aboutwindow.cpp
+        Sources/main.cpp \
+        Sources/mainwindow.cpp \
+        Sources/file.cpp \
+        Sources/game.cpp \
+        Sources/shophourseditor.cpp \
+        Sources/itemrandomiser.cpp \
+        Sources/patch.cpp \
+        Sources/aboutwindow.cpp
 
 HEADERS += \
-        mainwindow.h \
-        file.h \
-        game.h \
-        shophourseditor.h \
-        itemrandomiser.h \
-        patch.h \
-    aboutwindow.h
+        Headers/mainwindow.h \
+        Headers/file.h \
+        Headers/game.h \
+        Headers/shophourseditor.h \
+        Headers/itemrandomiser.h \
+        Headers/patch.h \
+        Headers/aboutwindow.h
 
 FORMS += \
-        mainwindow.ui \
-        shophourseditor.ui \
-        itemrandomiser.ui \
-    aboutwindow.ui
+        Forms/mainwindow.ui \
+        Forms/shophourseditor.ui \
+        Forms/itemrandomiser.ui \
+        Forms/aboutwindow.ui

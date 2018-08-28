@@ -1,5 +1,5 @@
-#include "game.h"
-#include "mainwindow.h"
+#include "Headers/game.h"
+#include "Headers/mainwindow.h"
 
 /* Each entry relative to Game_s */
 QString TIDs[8] = {"0004000000086200", "0004000000086300", "0004000000086400", "0004000000086500",  //Orig Game

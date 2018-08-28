@@ -1,6 +1,6 @@
-#include "mainwindow.h"
+#include "Headers/mainwindow.h"
 #include <QApplication>
-#include "file.h"
+#include "Headers/file.h"
 
 int main(int argc, char *argv[])
 {

@@ -1,11 +1,11 @@
-#include "mainwindow.h"
+#include "Headers/mainwindow.h"
 #include "ui_mainwindow.h"
-#include "aboutwindow.h"
-#include "itemrandomiser.h"
-#include "shophourseditor.h"
-#include "file.h"
-#include "game.h"
-#include "patch.h"
+#include "Headers/aboutwindow.h"
+#include "Headers/itemrandomiser.h"
+#include "Headers/shophourseditor.h"
+#include "Headers/file.h"
+#include "Headers/game.h"
+#include "Headers/patch.h"
 
 static const QString SpeedStrings[5] = {"Normal: x1", "Fast: x1.25", "Faster: x1.5", "Speedy: x2", "Speeding Bullet: x3"};
 static QVector<ItemPrice_s*> ItemPrices;

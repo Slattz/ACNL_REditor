@@ -1,4 +1,4 @@
-#include "aboutwindow.h"
+#include "Headers/aboutwindow.h"
 #include "ui_aboutwindow.h"
 #include <QPushButton>
 

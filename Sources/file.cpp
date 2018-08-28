@@ -1,5 +1,5 @@
-#include "file.h"
-#include "mainwindow.h"
+#include "Headers/file.h"
+#include "Headers/mainwindow.h"
 #include "ui_mainwindow.h"
 
 File::File() : m_md5Hash(QCryptographicHash::Md5) { }

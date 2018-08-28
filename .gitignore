@@ -45,3 +45,6 @@ CMakeLists.txt.user*
 #Others
 /build
 /rom
+/ACNL_REditor
+/Orig_*
+/PreInstalled_WA_*

@@ -2,13 +2,11 @@
 #include "ui_aboutwindow.h"
 #include <QPushButton>
 
-AboutWindow::AboutWindow(QString exedir, QWidget *parent) :
+AboutWindow::AboutWindow(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AboutWindow)
 {
     ui->setupUi(this);
-    QPixmap pix(exedir + "/resources/icon.bmp");
-    ui->icon->setPixmap(pix);
 }
 
 AboutWindow::~AboutWindow()

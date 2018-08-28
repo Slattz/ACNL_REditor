@@ -156,7 +156,7 @@ void MainWindow::on_BTN_ShopTimes_clicked()
 void MainWindow::on_actionAbout_triggered()
 {
     qDebug() << "About Pressed";
-    AboutWindow aboutWindow(exedir);
+    AboutWindow aboutWindow;
     aboutWindow.setStyleSheet("background-color: white;");
     aboutWindow.setModal(false);
     aboutWindow.exec();

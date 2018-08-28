@@ -13,7 +13,7 @@ class AboutWindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit AboutWindow(QString exedir, QWidget *parent = nullptr);
+    explicit AboutWindow(QWidget *parent = nullptr);
     ~AboutWindow();
 
 private slots:

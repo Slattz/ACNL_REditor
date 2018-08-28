@@ -5,7 +5,7 @@
 QString TIDs[8] = {"0004000000086200", "0004000000086300", "0004000000086400", "0004000000086500",  //Orig Game
                    "0004000000198d00", "0004000000198e00", "0004000000198f00", "0004000000199000"}; //WA Preinstalled Game
 
-static const QByteArray CodebinMD5Hashes[8] = {"361749f1011b7a4deacc1cba3f1553fe", "0d5bebb090e4d7169c2f6be636b76291",
+static const QByteArray CodebinMD5Hashes[8] = {"361749f1011b7a4deacc1cba3f1553fe", "32a2472809962d13cc49a4fc07ef4624",
                                  "4c487a97506dba4adb2fd4b439f4ed90", "fffffffffffffffffffffffffffffffe",
                                  "244f373ef2e8c37417534173f1c9c7e1", "0d5bebb090e4d7169c2f6be636b76291",
                                  "846d694886bcab0fdd43f62a02a0c24c", "ffffffffffffffffffffffffffffffff"};

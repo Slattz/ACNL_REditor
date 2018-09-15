@@ -59,6 +59,9 @@ struct Patch
     static const Patch  Confetti;
     static const Patch  CherryBlossom;
     static const Patch  Weather;
+    static const Patch  Season;
+    static const Patch  CherryBTrees;
+    static const Patch  NoGrassDecay;
 
     /* Exefs->Player */
     static const Patch  PlayerSpeed;

@@ -13,6 +13,7 @@ static const QByteArray CodebinMD5Hashes[8] = {"361749f1011b7a4deacc1cba3f1553fe
 static const quint32    PlayerSpeeds[5]   = {0x3F800000, 0x3fa00000, 0x3fc00000, 0x40000000, 0x40400000};
 static const quint8     ConfettiAmount[5] = {0x0F, 0x3C, 0x78, 0xB4, 0xF0};
 static const quint8     CherryBAmount[5]  = {0x0F, 0x1E, 0x3C, 0x78, 0xF0};
+static const quint8     SeasonVals[4]  = {0x3, 0x7, 0x12, 0x16};
 
 const QString notcodebin = "code.bin is not from ACNL / the latest version of ACNL!\nSome features may be disabled as a result.";
 
@@ -164,22 +165,11 @@ quint32 Game::ReadCode(File *codebin, quint32 offset) {
 bool Game::ApplyPatches(Ui::MainWindow *mainui, File *codebin) {
     bool res = false;
     /* Exefs->General */
-    if (mainui->CB_Resetti->isChecked())
-        res |= !PatchCode(codebin, Patch::NoResetti.Offsets[m_GameType], Patch::NoResetti.Value[0]);
 
-    if(mainui->CB_NativeFruitSellPrice->isChecked())
-        res |= !PatchCode(codebin, Patch::NativeFruitPrice.Offsets[m_GameType], Patch::NativeFruitPrice.Value[0]);
-
-    if(mainui->CB_ReeseBuy->isChecked())
-        res |= !PatchCode(codebin, Patch::ReeseBuy.Offsets[m_GameType], Patch::ReeseBuy.Value[0]);
-
-    if(mainui->CB_NooklingBuy->isChecked()) {
-        res |= !PatchCode(codebin, Patch::NooklingsBuy.Offsets[m_GameType], Patch::NooklingsBuy.Value[0]);
-        res |= !PatchCode(codebin, Patch::NooklingsBuy.Offsets[m_GameType]+0x8, Patch::NooklingsBuy.Value[1]);
+    if(mainui->CB_CherryBTrees->isChecked()) {
+        res |= !PatchCode(codebin, Patch::CherryBTrees.Offsets[m_GameType], Patch::CherryBTrees.Value[0]);
+        res |= !PatchCode(codebin, Patch::CherryBTrees.Offsets[m_GameType]+0x150, Patch::CherryBTrees.Value[1]);
     }
-
-    if(mainui->CB_LeilaBuy->isChecked())
-        res |= !PatchCode(codebin, Patch::LeilaBuy.Offsets[m_GameType], Patch::LeilaBuy.Value[0]);
 
     if(mainui->CB_Confetti->isChecked()) {
         res |= !PatchCode(codebin, Patch::Confetti.Offsets[m_GameType], Patch::Confetti.Value[0]);
@@ -191,6 +181,10 @@ bool Game::ApplyPatches(Ui::MainWindow *mainui, File *codebin) {
         res |= !PatchCode(codebin, Patch::CherryBlossom.Offsets[m_GameType]+0x28, Patch::CherryBlossom.Value[0]);
         res |= !PatchCode(codebin, Patch::CherryBlossom.Offsets[m_GameType]+0x50, Patch::CherryBlossom.Value[1]);
         res |= !PatchCode(codebin, Patch::CherryBlossom.Offsets[m_GameType]+0x60, Patch::CherryBlossom.Value[2]);
+    }
+
+    if(mainui->CMB_Season->currentIndex() != 4) { //If not set at normal
+        res |= !PatchCode(codebin, Patch::Season.Offsets[m_GameType], Patch::Season.Value[0] | SeasonVals[mainui->CMB_Season->currentIndex()]);
     }
 
     if(mainui->CMB_Confetti->currentIndex() != 2) { //If not set at normal
@@ -210,6 +204,9 @@ bool Game::ApplyPatches(Ui::MainWindow *mainui, File *codebin) {
 
     /* Exefs->Player */
     res |= !PatchCode(codebin, Patch::PlayerSpeed.Offsets[m_GameType], PlayerSpeeds[mainui->dial_PlyrSpeed->value()-1]);
+    if (mainui->CB_Resetti->isChecked())
+        res |= !PatchCode(codebin, Patch::NoResetti.Offsets[m_GameType], Patch::NoResetti.Value[0]);
+
     if (mainui->CB_EditPatterns->isChecked())
         res |= !PatchCode(codebin, Patch::EditPattern.Offsets[m_GameType], Patch::EditPattern.Value[0]);
 
@@ -218,6 +215,21 @@ bool Game::ApplyPatches(Ui::MainWindow *mainui, File *codebin) {
 
     if(mainui->CB_Mosquito->isChecked())
         res |= !PatchCode(codebin, Patch::NoMosquito.Offsets[m_GameType], Patch::NoMosquito.Value[0]);
+
+    /* Exefs->Shops */
+    if(mainui->CB_NativeFruitSellPrice->isChecked())
+        res |= !PatchCode(codebin, Patch::NativeFruitPrice.Offsets[m_GameType], Patch::NativeFruitPrice.Value[0]);
+
+    if(mainui->CB_ReeseBuy->isChecked())
+        res |= !PatchCode(codebin, Patch::ReeseBuy.Offsets[m_GameType], Patch::ReeseBuy.Value[0]);
+
+    if(mainui->CB_NooklingBuy->isChecked()) {
+        res |= !PatchCode(codebin, Patch::NooklingsBuy.Offsets[m_GameType], Patch::NooklingsBuy.Value[0]);
+        res |= !PatchCode(codebin, Patch::NooklingsBuy.Offsets[m_GameType]+0x8, Patch::NooklingsBuy.Value[1]);
+    }
+
+    if(mainui->CB_LeilaBuy->isChecked())
+        res |= !PatchCode(codebin, Patch::LeilaBuy.Offsets[m_GameType], Patch::LeilaBuy.Value[0]);
 
     /* Exefs->Utilities */
     if(mainui->CB_RegionPass->isChecked())

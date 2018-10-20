@@ -381,7 +381,7 @@
             <item row="5" column="0">
              <widget class="QCheckBox" name="CB_XmasTrees">
               <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code patches the game so it will never remove the Xmas Cedar Trees, regardless of the time of the year. &lt;/p&gt;&lt;p&gt;This can be used in conjuction with the NTR Plugin and it's Real Time World Edit feature, or various save editors to place the trees in specific locations. &lt;/p&gt;&lt;p&gt;Otherwise, time travelling to time of the year that these appear in-game should convert normal cedar trees to the Xmas cedar trees.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This might not apply to the dream towns you upload.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code patches the game so it will never remove the Xmas Cedar Trees, regardless of the time of the year. &lt;/p&gt;&lt;p&gt;This can be used in conjuction with the NTR Plugin and it's Real Time World Edit feature, or various save editors to place the trees in specific locations. &lt;/p&gt;&lt;p&gt;Otherwise, time travelling to time of the year that these appear in-game should convert normal cedar trees to the Xmas cedar trees.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="text">
                <string>Keep Xmas Cedar Trees All Year</string>

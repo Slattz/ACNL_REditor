@@ -92,6 +92,9 @@
            <layout class="QGridLayout" name="gridLayout_3">
             <item row="1" column="1">
              <widget class="QLabel" name="label_Season">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This allows you to force a specific season at all times.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This might not apply to the dream towns you upload.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This may only be visible to you and not other players.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
               <property name="text">
                <string>Season Modifier:</string>
               </property>
@@ -138,7 +141,7 @@
             <item row="0" column="1">
              <widget class="QLabel" name="label_WeatherTxt">
               <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This allows you to force a specific weather at all times.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This allows you to force a specific weather at all times.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This might not apply to the dream towns you upload.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This may only be visible to you and not other players.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="text">
                <string>Weather Modifier:</string>
@@ -302,7 +305,7 @@
             <item row="4" column="1">
              <widget class="QLabel" name="label_CherryB">
               <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This changes how much Cherry Blossoms will be in the sky at once.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This changes how much Cherry Blossoms will be in the sky at once.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This may only be visible to you and not other players.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="text">
                <string>Cherry Blossoms Amount:</string>
@@ -315,7 +318,7 @@
             <item row="2" column="1">
              <widget class="QLabel" name="label_Confetti">
               <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This changes how much Confetti will be in the sky at once.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This changes how much Confetti will be in the sky at once.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This may only be visible to you and not other players.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="text">
                <string>Confetti Amount:</string>
@@ -340,6 +343,9 @@
             </item>
             <item row="1" column="0">
              <widget class="QCheckBox" name="CB_CherryBTrees">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code will force Cherry Blossom Trees in your town all year round. Usually, they only appears for a few days during April.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This might not apply to the dream towns you upload.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This may only be visible to you and not other players.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
               <property name="text">
                <string>Always Have Cherry Blossom Trees</string>
               </property>
@@ -348,7 +354,7 @@
             <item row="2" column="0">
              <widget class="QCheckBox" name="CB_Confetti">
               <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code will force Confetti in your town's sky all year round. Usually, it only appears during Pavé's Festivale.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code will force Confetti in your town's sky all year round. Usually, it only appears during Pavé's Festivale.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This might not apply to the dream towns you upload.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This may only be visible to you and not other players.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="text">
                <string>Always Have Confetti In Sky</string>
@@ -358,7 +364,7 @@
             <item row="4" column="0">
              <widget class="QCheckBox" name="CB_CherryB">
               <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code will force Cherry Blossoms in your town's sky all year round. Usually, they only appears for a few days during April.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code will force Cherry Blossoms in your town's sky all year round. Usually, they only appears for a few days during April.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This might not apply to the dream towns you upload.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This may only be visible to you and not other players.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="text">
                <string>Always Have Cherry Blossoms in Sky</string>
@@ -369,6 +375,16 @@
              <widget class="QCheckBox" name="CB_GrassDecay">
               <property name="text">
                <string>Grass Doesn't Deteriorate</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="0">
+             <widget class="QCheckBox" name="CB_XmasTrees">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code patches the game so it will never remove the Xmas Cedar Trees, regardless of the time of the year. &lt;/p&gt;&lt;p&gt;This can be used in conjuction with the NTR Plugin and it's Real Time World Edit feature, or various save editors to place the trees in specific locations. &lt;/p&gt;&lt;p&gt;Otherwise, time travelling to time of the year that these appear in-game should convert normal cedar trees to the Xmas cedar trees.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This might not apply to the dream towns you upload.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="text">
+               <string>Keep Xmas Cedar Trees All Year</string>
               </property>
              </widget>
             </item>
@@ -567,7 +583,7 @@
             <item row="0" column="0">
              <widget class="QCheckBox" name="CB_ReeseBuy">
               <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Reese originally buys items for ¼ of the price they'll be sold at. With this enabled, Reese will buy items for their sell price.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Reese originally buys items for ¼ of the price they'll be sold at. With this enabled, Reese will buy items for their sell price.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This may only be visible to you and not other players.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="text">
                <string>Reese Buys Items For Their Sell Price</string>
@@ -577,7 +593,7 @@
             <item row="2" column="0">
              <widget class="QCheckBox" name="CB_LeilaBuy">
               <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;On the island, Leila originally buys items for 1/80 of the price they'll be sold at. With this code enabled, Leila will buy items for their sell price.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;On the island, Leila originally buys items for 1/80 of the price they'll be sold at. With this code enabled, Leila will buy items for their sell price.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This may only be visible to you and not other players.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="text">
                <string>Leila Buys Items For Their Sell Price</string>
@@ -587,7 +603,7 @@
             <item row="1" column="0">
              <widget class="QCheckBox" name="CB_NooklingBuy">
               <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The Nooklings originally buys items for ⅕ of the price they'll be sold at. With this enabled, the Nooklings will buy items for their sell price.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The Nooklings originally buys items for ⅕ of the price they'll be sold at. With this enabled, the Nooklings will buy items for their sell price.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This may only be visible to you and not other players.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="text">
                <string>Nooklings Buy Items For Their Sell Price</string>
@@ -597,7 +613,7 @@
             <item row="5" column="0">
              <widget class="QPushButton" name="BTN_ShopTimes">
               <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This allows you to customise the opening hours of shops to your liking :)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This allows you to customise the opening hours of shops to your liking!&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This may only be visible to you and not other players.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="text">
                <string>Change Shops Opening Hours</string>
@@ -607,7 +623,7 @@
             <item row="3" column="0">
              <widget class="QCheckBox" name="CB_NativeFruitSellPrice">
               <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enabling this makes shops pay the same price for native fruit as they do for foreign fruit.&lt;/p&gt;&lt;p&gt;E.g. If oranges was your native fruit, 1 orange will now sell for 500 bells instead of 100 bells.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enabling this makes shops pay the same price for native fruit as they do for foreign fruit.&lt;/p&gt;&lt;p&gt;E.g. If oranges was your native fruit, 1 orange will now sell for 500 bells instead of 100 bells.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This may only be visible to you and not other players.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="text">
                <string>Shops Buy Native Fruit For Same Price As Foreign Fruit</string>

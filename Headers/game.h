@@ -39,6 +39,7 @@ public:
     ~Game();
     Game(const QString &dir);
 
+    QString GetCurrentGame(void);
     int DetermineGame(void);
     bool SetRomfsExists(const QString &dir);
     bool SetFilesExist(void);

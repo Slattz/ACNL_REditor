@@ -36,6 +36,22 @@ Game::Game(const QString &dir)
     }
 }
 
+QString Game::GetCurrentGame(void)
+{
+    QString Games[8] { "NL_JPN", "NL_USA", "NL_EUR", "NL_KOR",
+                       "WA_JPN", "WA_USA", "WA_EUR", "WA_KOR" };
+
+    if (m_codemd5Hash.isEmpty()) return "Error: Code.bin has no hash!";
+
+    for (int i = 0; i < 8; i++) {
+        if (m_codemd5Hash.toHex() == CodebinMD5Hashes[i]) {
+            return Games[i];
+        }
+    }
+
+    return "Reach End of GetCurrentGame";
+}
+
 int Game::DetermineGame(void)
 {
     m_codemd5Hash = codebin->getHash();
@@ -169,6 +185,10 @@ bool Game::ApplyPatches(Ui::MainWindow *mainui, File *codebin) {
     if(mainui->CB_CherryBTrees->isChecked()) {
         res |= !PatchCode(codebin, Patch::CherryBTrees.Offsets[m_GameType], Patch::CherryBTrees.Value[0]);
         res |= !PatchCode(codebin, Patch::CherryBTrees.Offsets[m_GameType]+0x150, Patch::CherryBTrees.Value[1]);
+    }
+
+    if(mainui->CB_XmasTrees->isChecked()) {
+        res |= !PatchCode(codebin, Patch::AlwaysXmasTrees.Offsets[m_GameType], Patch::AlwaysXmasTrees.Value[0]);
     }
 
     if(mainui->CB_Confetti->isChecked()) {

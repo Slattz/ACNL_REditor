@@ -54,7 +54,7 @@ void MainWindow::on_FileOpen_triggered() {
     ui->tab_cro->setEnabled(false); //No CRO cheats atm [Can only use CRO tab if folder exists]
 
     ui->BTN_RandomItemPrice->setEnabled(game->m_Itembin.meta.exist); //Can only use if Item.bin exists
-    ui->statusBar->showMessage("Folder opened successfully!", 10000);
+    ui->statusBar->showMessage("Folder opened successfully! Current Game: " + game->GetCurrentGame(), 10000);
 }
 
 void MainWindow::on_FileSave_triggered()

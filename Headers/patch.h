@@ -61,6 +61,7 @@ struct Patch
     static const Patch  Weather;
     static const Patch  Season;
     static const Patch  CherryBTrees;
+    static const Patch  AlwaysXmasTrees;
     static const Patch  NoGrassDecay;
 
     /* Exefs->Player */

@@ -6,19 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>500</width>
+    <width>352</width>
     <height>350</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>500</width>
+    <width>352</width>
     <height>350</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>500</width>
+    <width>352</width>
     <height>350</height>
    </size>
   </property>
@@ -31,22 +31,31 @@
   <widget class="QTextBrowser" name="textBrowser">
    <property name="geometry">
     <rect>
-     <x>190</x>
+     <x>0</x>
      <y>0</y>
-     <width>311</width>
+     <width>352</width>
      <height>350</height>
     </rect>
    </property>
+   <property name="minimumSize">
+    <size>
+     <width>352</width>
+     <height>350</height>
+    </size>
+   </property>
    <property name="maximumSize">
     <size>
-     <width>320</width>
-     <height>16777215</height>
+     <width>352</width>
+     <height>350</height>
     </size>
    </property>
    <property name="font">
     <font>
      <pointsize>10</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: lightgrey;</string>
    </property>
    <property name="frameShape">
     <enum>QFrame::NoFrame</enum>
@@ -67,7 +76,7 @@ p, li { white-space: pre-wrap; }
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;Donate: &lt;/span&gt;&lt;a href=&quot;https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;amp;hosted_button_id=APDWE9ZED4VBW&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Paypal&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p align=&quot;center&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p align=&quot;center&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Made using QT v5.11.1, which is licensed under &lt;a href=&quot;https://doc.qt.io/qt-5/lgpl.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;LGPLv3&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Made using QT v5.12.0, which is licensed under &lt;a href=&quot;https://doc.qt.io/qt-5/lgpl.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;LGPLv3&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;
 &lt;p align=&quot;center&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;ACNL REditor is not affiliated or endorsed by Nintendo in any way.&lt;/span&gt;&lt;/p&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;I am not responsible for any damage you somehow cause to your electronics.&lt;/span&gt;&lt;/p&gt;
@@ -79,11 +88,14 @@ p, li { white-space: pre-wrap; }
    <property name="textInteractionFlags">
     <set>Qt::LinksAccessibleByKeyboard|Qt::LinksAccessibleByMouse</set>
    </property>
+   <property name="openExternalLinks">
+    <bool>true</bool>
+   </property>
   </widget>
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
-     <x>420</x>
+     <x>260</x>
      <y>320</y>
      <width>75</width>
      <height>23</height>
@@ -102,35 +114,8 @@ p, li { white-space: pre-wrap; }
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QLabel" name="icon">
-   <property name="geometry">
-    <rect>
-     <x>-30</x>
-     <y>10</y>
-     <width>221</width>
-     <height>211</height>
-    </rect>
-   </property>
-   <property name="autoFillBackground">
-    <bool>false</bool>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap resource="resources.qrc">:/resources/icon.png</pixmap>
-   </property>
-   <property name="textInteractionFlags">
-    <set>Qt::NoTextInteraction</set>
-   </property>
-  </widget>
-  <zorder>icon</zorder>
-  <zorder>textBrowser</zorder>
-  <zorder>buttonBox</zorder>
  </widget>
- <resources>
-  <include location="resources.qrc"/>
- </resources>
+ <resources/>
  <connections>
   <connection>
    <sender>buttonBox</sender>

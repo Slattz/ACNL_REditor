@@ -36,15 +36,14 @@ ItemPrice_s* ItemRandomiser::SplitItemPrice(quint32 Rand) {
 }
 
 void ItemRandomiser::Save() {
-    QTime time;
     QVector<quint32> randnums;
-    QRandomGenerator gen(static_cast<quint32>(time.msecsSinceStartOfDay())); //Use time in msecs as seed
+    QRandomGenerator *gen = QRandomGenerator::global();
 
     randnums.resize(0x172B); //Amount of items in Item.bin
     m_Prices.clear(); //Clear any previous values
 
     for (int i = 0; i < randnums.size(); i++) {
-        randnums[i] = static_cast<quint32>(gen.bounded(ui->LE_MinPrice->text().toInt(), ui->LE_MaxPrice->text().toInt()));
+        randnums[i] = static_cast<quint32>(gen->bounded(ui->LE_MinPrice->text().toInt(), ui->LE_MaxPrice->text().toInt()));
         if (randnums[i]) //Make sure it's not 0
             m_Prices.push_back(SplitItemPrice(randnums[i]));
     }

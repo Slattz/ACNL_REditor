@@ -1,0 +1,1750 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ButtonRemap</class>
+ <widget class="QDialog" name="ButtonRemap">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>464</width>
+    <height>246</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Button Remapper</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="2" column="3">
+    <widget class="QLabel" name="LBL_SaveMenu">
+     <property name="text">
+      <string>Open Saving Menu</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QComboBox" name="CMB_RunB">
+     <property name="currentIndex">
+      <number>1</number>
+     </property>
+     <property name="sizeAdjustPolicy">
+      <enum>QComboBox::AdjustToContents</enum>
+     </property>
+     <item>
+      <property name="text">
+       <string>A</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>B</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>X</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Y</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Start/Select</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>L</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>R</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Touch Screen</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Up</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Down</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Right</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Up</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Down</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Right</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="4" column="3">
+    <widget class="QLabel" name="RunBLabel_14">
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="5">
+    <widget class="QComboBox" name="RunBBox_18">
+     <item>
+      <property name="text">
+       <string>A</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>B</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>X</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Y</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Select</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Start</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>L</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>R</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Touch Screen</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Up</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Down</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Right</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Up</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Down</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Right</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="0" column="3">
+    <widget class="QLabel" name="LBL_ScreenshotL">
+     <property name="text">
+      <string>Take Screenshot (L)</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="5">
+    <widget class="QComboBox" name="RunBBox_16">
+     <item>
+      <property name="text">
+       <string>A</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>B</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>X</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Y</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Select</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Start</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>L</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>R</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Touch Screen</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Up</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Down</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Right</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Up</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Down</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Right</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="1" column="3">
+    <widget class="QLabel" name="LBL_ScreenshotR">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>Take Screenshot (R)</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="5">
+    <widget class="QComboBox" name="RunBBox_13">
+     <item>
+      <property name="text">
+       <string>A</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>B</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>X</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Y</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Select</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Start</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>L</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>R</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Touch Screen</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Up</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Down</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Right</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Up</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Down</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Right</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="QComboBox" name="CMB_SwitchRight">
+     <property name="currentIndex">
+      <number>11</number>
+     </property>
+     <item>
+      <property name="text">
+       <string>A</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>B</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>X</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Y</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Start/Select</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>L</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>R</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Touch Screen</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Up</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Down</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Right</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Up</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Down</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Right</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="7" column="1">
+    <widget class="QComboBox" name="CMB_Pickup">
+     <property name="currentIndex">
+      <number>3</number>
+     </property>
+     <item>
+      <property name="text">
+       <string>A</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>B</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>X</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Y</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Start/Select</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>L</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>R</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Touch Screen</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Up</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Down</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Right</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Up</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Down</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Right</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="LBL_SwitchLeft">
+     <property name="text">
+      <string>Switch Handheld (Back)</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="0">
+    <widget class="QLabel" name="LBL_Pickup">
+     <property name="text">
+      <string>Pickup/Pull</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="LBL_RunB">
+     <property name="text">
+      <string>Running (B)</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QComboBox" name="CMB_RunR">
+     <property name="currentIndex">
+      <number>6</number>
+     </property>
+     <item>
+      <property name="text">
+       <string>A</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>B</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>X</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Y</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Start/Select</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>L</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>R</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Touch Screen</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Up</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Down</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Right</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Up</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Down</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Right</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="5" column="5">
+    <widget class="QComboBox" name="RunBBox_15">
+     <item>
+      <property name="text">
+       <string>A</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>B</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>X</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Y</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Select</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Start</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>L</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>R</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Touch Screen</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Up</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Down</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Right</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Up</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Down</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Right</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="LBL_RunL">
+     <property name="text">
+      <string>Running (L)</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="5">
+    <widget class="QComboBox" name="RunBBox_17">
+     <item>
+      <property name="text">
+       <string>A</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>B</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>X</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Y</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Select</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Start</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>L</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>R</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Touch Screen</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Up</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Down</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Right</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Up</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Down</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Right</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="0" column="2" rowspan="9">
+    <widget class="Line" name="line">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="3">
+    <widget class="QLabel" name="RunBLabel_15">
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="5">
+    <widget class="QComboBox" name="CMB_SaveMenu">
+     <property name="currentIndex">
+      <number>4</number>
+     </property>
+     <item>
+      <property name="text">
+       <string>A</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>B</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>X</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Y</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Start/Select</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>L</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>R</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Touch Screen</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Up</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Down</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Right</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Up</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Down</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Right</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="7" column="3">
+    <widget class="QLabel" name="RunBLabel_17">
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="3">
+    <widget class="QLabel" name="RunBLabel_16">
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="5">
+    <widget class="QComboBox" name="CMB_ScreenshotL">
+     <property name="currentIndex">
+      <number>5</number>
+     </property>
+     <item>
+      <property name="text">
+       <string>A</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>B</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>X</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Y</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Start/Select</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>L</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>R</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Touch Screen</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Up</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Down</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Right</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Up</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Down</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Right</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="LBL_Unequip">
+     <property name="text">
+      <string>Item Unequip</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QComboBox" name="CMB_Unequip">
+     <property name="currentIndex">
+      <number>9</number>
+     </property>
+     <item>
+      <property name="text">
+       <string>A</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>B</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>X</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Y</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Start/Select</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>L</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>R</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Touch Screen</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Up</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Down</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Right</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Up</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Down</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Right</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="3" column="3">
+    <widget class="QLabel" name="RunBLabel_13">
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="5">
+    <widget class="QComboBox" name="RunBBox_14">
+     <item>
+      <property name="text">
+       <string>A</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>B</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>X</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Y</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Select</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Start</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>L</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>R</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Touch Screen</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Up</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Down</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Right</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Up</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Down</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Right</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="6" column="0">
+    <widget class="QLabel" name="LBL_LookSky">
+     <property name="text">
+      <string>Look Up At Sky</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="QLabel" name="LBL_CMB_SwitchRight">
+     <property name="text">
+      <string>Switch Handheld (Forward)</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1">
+    <widget class="QComboBox" name="CMB_SwitchLeft">
+     <property name="currentIndex">
+      <number>10</number>
+     </property>
+     <item>
+      <property name="text">
+       <string>A</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>B</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>X</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Y</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Start/Select</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>L</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>R</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Touch Screen</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Up</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Down</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Right</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Up</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Down</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Right</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="6" column="1">
+    <widget class="QComboBox" name="CMB_LookSky">
+     <property name="currentIndex">
+      <number>8</number>
+     </property>
+     <item>
+      <property name="text">
+       <string>A</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>B</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>X</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Y</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Start/Select</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>L</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>R</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Touch Screen</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Up</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Down</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Right</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Up</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Down</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Right</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="8" column="0">
+    <widget class="QLabel" name="LBL_Interact">
+     <property name="text">
+      <string>Use Item/Interact</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="1">
+    <widget class="QComboBox" name="CMB_Interact">
+     <item>
+      <property name="text">
+       <string>A</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>B</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>X</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Y</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Start/Select</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>L</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>R</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Touch Screen</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Up</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Down</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Right</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Up</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Down</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Right</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QComboBox" name="CMB_RunL">
+     <property name="currentIndex">
+      <number>5</number>
+     </property>
+     <item>
+      <property name="text">
+       <string>A</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>B</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>X</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Y</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Start/Select</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>L</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>R</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Touch Screen</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Up</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Down</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Right</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Up</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Down</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Right</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="1" column="5">
+    <widget class="QComboBox" name="CMB_ScreenshotR">
+     <property name="currentIndex">
+      <number>6</number>
+     </property>
+     <item>
+      <property name="text">
+       <string>A</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>B</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>X</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Y</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Start/Select</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>L</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>R</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Touch Screen</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Up</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Down</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>DPad Right</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Up</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Down</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Left</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>CPad Right</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="LBL_RunR">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>Running (R)</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="3">
+    <widget class="QLabel" name="LBL_EWW">
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

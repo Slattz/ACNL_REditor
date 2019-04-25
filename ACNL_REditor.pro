@@ -22,7 +22,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG(release, debug|release):DEFINES += QT_NO_DEBUG_OUTPUT
 @
 
-CONFIG += c++11
+CONFIG += c++17
 
 # You can also make your code fail to compile if you use deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -38,7 +38,8 @@ SOURCES += \
         Sources/shophourseditor.cpp \
         Sources/itemrandomiser.cpp \
         Sources/patch.cpp \
-        Sources/aboutwindow.cpp
+        Sources/aboutwindow.cpp \
+        Sources/buttonremap.cpp
 
 HEADERS += \
         Headers/mainwindow.h \
@@ -47,10 +48,12 @@ HEADERS += \
         Headers/shophourseditor.h \
         Headers/itemrandomiser.h \
         Headers/patch.h \
-        Headers/aboutwindow.h
+        Headers/aboutwindow.h \
+        Headers/buttonremap.h
 
 FORMS += \
         Forms/mainwindow.ui \
         Forms/shophourseditor.ui \
         Forms/itemrandomiser.ui \
-        Forms/aboutwindow.ui
+        Forms/aboutwindow.ui \
+        Forms/buttonremap.ui

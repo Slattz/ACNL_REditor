@@ -45,8 +45,8 @@ public:
     bool SetFilesExist(void);
     bool SetCodebinExists(const QString &dir);
     bool SetupOutDir(const QString &exedir, const QString &outdir);
-    bool PatchCode(File *codebin, quint32 offset, quint32 code);
-    quint32 ReadCode(File *codebin, quint32 offset);
+    static bool PatchCode(File *codebin, quint32 offset, quint32 code);
+    static quint32 ReadCode(File *codebin, quint32 offset);
 
     bool ApplyPatches(Ui::MainWindow *mainui, File *codebin);
     bool ApplyItemRandomiser(File *Itembin, QVector<ItemPrice_s *> ItemPrices);

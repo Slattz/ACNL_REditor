@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "Headers/aboutwindow.h"
 #include "Headers/itemrandomiser.h"
+#include "Headers/buttonremap.h"
 #include "Headers/shophourseditor.h"
 #include "Headers/file.h"
 #include "Headers/game.h"
@@ -9,6 +10,8 @@
 
 static const QString SpeedStrings[5] = {"Normal: x1", "Fast: x1.25", "Faster: x1.5", "Speedy: x2", "Speeding Bullet: x3"};
 static QVector<ItemPrice_s*> ItemPrices;
+
+MainWindow* MainWindowInstance = nullptr;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -20,10 +23,15 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->menuDebug->menuAction()->setVisible(false);
 #endif
     exedir = QCoreApplication::applicationDirPath();
+    MainWindowInstance = this;
 }
 
 MainWindow::~MainWindow() {
     delete ui;
+}
+
+Game* MainWindow::GetGameInstance(void) {
+    return MainWindowInstance->game;
 }
 
 void MainWindow::on_FileOpen_triggered() {
@@ -44,6 +52,8 @@ void MainWindow::on_FileOpen_triggered() {
         ui->statusBar->showMessage("No exefs or romfs existed!", 10000);
         return;
     }
+
+    Patch::Init();
 
     ui->FileOpen->setEnabled(false); //Can't open more files
     ui->FileSave->setEnabled(true); //Can now save files
@@ -180,4 +190,11 @@ void MainWindow::on_actionListItemPrices_triggered()
 void MainWindow::on_actionSetup_OutDir_triggered()
 {
     game->SetupOutDir(exedir, exedir + "/luma/titles/" + TIDs[game->m_GameType]);
+}
+
+void MainWindow::on_BTN_Remapper_clicked()
+{
+    ButtonRemap remapWindow;
+    remapWindow.setModal(false);
+    remapWindow.exec();
 }

@@ -2,7 +2,11 @@
 #define PATCH_H
 
 #include <QtGlobal>
+#include <QCheckBox>
+#include <QComboBox>
 #include <QVector>
+#include <cstring>
+#include "file.h"
 
 #define KOR 0
 #define WAKOR 0
@@ -29,63 +33,107 @@ enum ShopTime : quint8 {
     EarlyBirdTime = 2
 };
 
-extern ShopCodeOffsets_s Retail;
-extern ShopCodeOffsets_s Nooklings[5];
-extern ShopCodeOffsets_s Garden;
-extern ShopCodeOffsets_s Ables;
-extern ShopCodeOffsets_s Sham;
-extern ShopCodeOffsets_s Kicks;
-extern ShopCodeOffsets_s Nooks;
-extern ShopCodeOffsets_s Katrina;
-extern ShopCodeOffsets_s Redd;
+struct PatchValues {
+    quint32 Value;
+    quint32 OffsetFromBaseAddr;
+};
 
-struct Patch
+extern ShopCodeOffsets_s off_Retail;
+extern ShopCodeOffsets_s off_Nooklings[5];
+extern ShopCodeOffsets_s off_Garden;
+extern ShopCodeOffsets_s off_Ables;
+extern ShopCodeOffsets_s off_Sham;
+extern ShopCodeOffsets_s off_Kicks;
+extern ShopCodeOffsets_s off_Nooks;
+extern ShopCodeOffsets_s off_Katrina;
+extern ShopCodeOffsets_s off_Redd;
+
+//Search function from Nanquitas's CTRPF Utils.h
+template <typename T>
+static quint32     Search(const char* start, const int size, const QVector<T> &pattern)
 {
+    if (!start || !size || pattern.empty())
+        return (0);
+
+    const quint32   patternSize = pattern.size() * sizeof(T);
+    const quint8    *patternc = reinterpret_cast<const quint8 *>(pattern.data());
+    const quint8    *startPos = reinterpret_cast<const quint8 *>(start);
+
+    quint32     table[256];
+
+    for (quint32 i = 0; i < 256; i++)
+        table[i] = patternSize;
+
+    for (quint32 i = 0; i < patternSize - 1; i++)
+        table[patternc[i]] = patternSize - i - 1;
+
+    quint32 j = 0;
+    while (j <= size - patternSize)
+    {
+        const quint8 c = startPos[j + patternSize - 1];
+        if (patternc[patternSize - 1] == c && std::memcmp(patternc, startPos + j, patternSize - 1) == 0)
+            return j;
+        j += table[c];
+    }
+    return (0);
+}
+
+class Patch
+{
+public:
+
+    Patch();
+
     Patch(quint32 NL_JPN, quint32 NL_USA, quint32 NL_EUR, quint32 NL_KOR,
-          quint32 WA_JPN, quint32 WA_USA, quint32 WA_EUR, quint32 WA_KOR, quint32 Value1, quint32 Value2=0, quint32 Value3=0,
-          quint32 Value4=0, quint32 Value5=0);
+          quint32 WA_JPN, quint32 WA_USA, quint32 WA_EUR, quint32 WA_KOR,
+          QVector<PatchValues> Values);
 
-    struct {
-        quint32 Offsets[8]; //Offsets are code.bin + 0x100000, therefore same offsets as code.bin in ram on the 3ds
-        quint32 Value[5];
-    } ;
+    Patch(const QVector<quint8> Pattern, QVector<PatchValues> Values, quint32 OffsetFromPattern = 0);
 
-    /* Exefs->General */
-    static const Patch  NativeFruitPrice;
-    static const Patch  ReeseBuy;
-    static const Patch  NooklingsBuy;
-    static const Patch  LeilaBuy;
-    static const Patch  NoResetti;
-    static const Patch  Confetti;
-    static const Patch  CherryBlossom;
-    static const Patch  Weather;
-    static const Patch  Season;
-    static const Patch  CherryBTrees;
-    static const Patch  AlwaysXmasTrees;
-    static const Patch  NoGrassDecay;
+    bool Apply(File* codebin, quint8 OR = 0);
 
-    /* Exefs->Player */
-    static const Patch  PlayerSpeed;
-    static const Patch  EditPattern;
-    static const Patch  FlowersNoTrample;
-    static const Patch  NoMosquito;
+    static void Init(void);
 
-    /* Exefs->Utilities */
-    static const Patch  RegionCheck;
-    static const Patch  ChecksumCheck;
+    quint32 m_Offset; //Offsets are code.bin + 0x100000, i.e. same offsets as hardware
 
-    /* Shop Times: Addresses are start of function */
-    static const Patch  Retail;
-    static const Patch  Nooklings;
-    static const Patch  Garden;
-    static const Patch  Ables;
-    static const Patch  Sham;
-    static const Patch  Kicks;
-    static const Patch  Nooks;
-    static const Patch  Katrina;
-    static const Patch  Redd;
-    static const Patch  NightOwl;
+private:
+    QVector<PatchValues> m_Values;
 
 };
+
+extern Patch NativeFruitPrice;
+extern Patch ReeseBuy;
+extern Patch NooklingsBuy;
+extern Patch LeilaBuy;
+extern Patch NoResetti;
+extern Patch Confetti;
+extern Patch CherryBlossom;
+extern Patch Weather;
+extern Patch Season;
+extern Patch CherryBTrees;
+extern Patch AlwaysXmasTrees;
+//extern Patch NoGrassDecay;
+
+/* Exefs->Player */
+extern Patch PlayerSpeed;
+extern Patch EditPattern;
+extern Patch FlowersNoTrample;
+extern Patch NoMosquito;
+
+/* Exefs->Utilities */
+extern Patch RegionCheck;
+extern Patch ChecksumCheck;
+
+/* Shop Times: Addresses are start of function */
+extern Patch Retail;
+extern Patch Nooklings;
+extern Patch Garden;
+extern Patch Ables;
+extern Patch Sham;
+extern Patch Kicks;
+extern Patch Nooks;
+extern Patch Katrina;
+extern Patch Redd;
+extern Patch NightOwl;
 
 #endif // PATCH_H

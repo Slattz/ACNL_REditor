@@ -16,6 +16,8 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    static Game* GetGameInstance(void);
+
 private slots:
     void on_FileOpen_triggered();
     void on_FileSave_triggered();
@@ -32,6 +34,8 @@ private slots:
 
     void on_actionAbout_triggered();
 
+    void on_BTN_Remapper_clicked();
+
 private:
     Ui::MainWindow *ui = nullptr;
     QString dir = "\0";
@@ -39,5 +43,7 @@ private:
     QString exedir;
     QString outdir;
 };
+
+extern MainWindow* MainWindowInstance;
 
 #endif // MAINWINDOW_H

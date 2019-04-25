@@ -650,32 +650,6 @@
             <string>Utilities</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_2">
-            <item row="0" column="0">
-             <widget class="QCheckBox" name="CB_RegionPass">
-              <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enabling this code makes the game skip region checks. This allows the game to load saves from games of all other regions. Without this patch, a EUR save may not work on a USA game, a JPN save may not work on a EUR game, etc.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-              <property name="toolTipDuration">
-               <number>-1</number>
-              </property>
-              <property name="text">
-               <string>Bypass Region Checks</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <spacer name="verticalSpacer_2">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>40</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
             <item row="0" column="1">
              <spacer name="horizontalSpacer_2">
               <property name="orientation">
@@ -689,6 +663,19 @@
               </property>
              </spacer>
             </item>
+            <item row="0" column="0">
+             <widget class="QCheckBox" name="CB_RegionPass">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enabling this code makes the game skip region checks. This allows the game to load saves from games of all other regions. Without this patch, a EUR save may not work on a USA game, a JPN save may not work on a EUR game, etc.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="toolTipDuration">
+               <number>-1</number>
+              </property>
+              <property name="text">
+               <string>Bypass Region Checks</string>
+              </property>
+             </widget>
+            </item>
             <item row="1" column="0">
              <widget class="QCheckBox" name="CB_ChecksumPass">
               <property name="toolTip">
@@ -696,6 +683,26 @@
               </property>
               <property name="text">
                <string>Bypass Save Checksums</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <spacer name="verticalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="2" column="0">
+             <widget class="QPushButton" name="BTN_Remapper">
+              <property name="text">
+               <string>Button Remapper</string>
               </property>
              </widget>
             </item>

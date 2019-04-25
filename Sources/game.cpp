@@ -183,80 +183,72 @@ bool Game::ApplyPatches(Ui::MainWindow *mainui, File *codebin) {
     /* Exefs->General */
 
     if(mainui->CB_CherryBTrees->isChecked()) {
-        res |= !PatchCode(codebin, Patch::CherryBTrees.Offsets[m_GameType], Patch::CherryBTrees.Value[0]);
-        res |= !PatchCode(codebin, Patch::CherryBTrees.Offsets[m_GameType]+0x150, Patch::CherryBTrees.Value[1]);
+        res |= CherryBTrees.Apply(codebin);
     }
 
     if(mainui->CB_XmasTrees->isChecked()) {
-        res |= !PatchCode(codebin, Patch::AlwaysXmasTrees.Offsets[m_GameType], Patch::AlwaysXmasTrees.Value[0]);
+        res |= AlwaysXmasTrees.Apply(codebin);
     }
 
     if(mainui->CB_Confetti->isChecked()) {
-        res |= !PatchCode(codebin, Patch::Confetti.Offsets[m_GameType], Patch::Confetti.Value[0]);
-        res |= !PatchCode(codebin, Patch::Confetti.Offsets[m_GameType]+0x30, Patch::Confetti.Value[1]);
+        res |= Confetti.Apply(codebin);
+        if(mainui->CMB_Confetti->currentIndex() != 2) { //If not set at normal
+            quint32 code = ReadCode(codebin, Confetti.m_Offset+0x30); //Read existing code
+            code = (code & 0xFFFFFF00) | ConfettiAmount[mainui->CMB_Confetti->currentIndex()];
+            res |= !PatchCode(codebin, Confetti.m_Offset+0x30, code);
+        }
     }
 
     if(mainui->CB_CherryB->isChecked()) {
-        res |= !PatchCode(codebin, Patch::CherryBlossom.Offsets[m_GameType], Patch::CherryBlossom.Value[0]);
-        res |= !PatchCode(codebin, Patch::CherryBlossom.Offsets[m_GameType]+0x28, Patch::CherryBlossom.Value[0]);
-        res |= !PatchCode(codebin, Patch::CherryBlossom.Offsets[m_GameType]+0x50, Patch::CherryBlossom.Value[1]);
-        res |= !PatchCode(codebin, Patch::CherryBlossom.Offsets[m_GameType]+0x60, Patch::CherryBlossom.Value[2]);
+        res |= CherryBlossom.Apply(codebin);
+        if(mainui->CMB_CherryB->currentIndex() != 2) { //If not set at normal
+            quint32 code = ReadCode(codebin, CherryBlossom.m_Offset+0x68); //Read existing code
+            code = (code & 0xFFFFFF00) | CherryBAmount[mainui->CMB_CherryB->currentIndex()];
+            res |= !PatchCode(codebin, CherryBlossom.m_Offset+0x68, code);
+        }
     }
 
     if(mainui->CMB_Season->currentIndex() != 4) { //If not set at normal
-        res |= !PatchCode(codebin, Patch::Season.Offsets[m_GameType], Patch::Season.Value[0] | SeasonVals[mainui->CMB_Season->currentIndex()]);
-    }
-
-    if(mainui->CMB_Confetti->currentIndex() != 2) { //If not set at normal
-        quint32 code = ReadCode(codebin, Patch::Confetti.Offsets[m_GameType]+0x30); //Read existing code
-        code = (code & 0xFFFFFF00) | ConfettiAmount[mainui->CMB_Confetti->currentIndex()];
-        res |= !PatchCode(codebin, Patch::Confetti.Offsets[m_GameType]+0x30, code);
-    }
-
-    if(mainui->CMB_CherryB->currentIndex() != 2) { //If not set at normal
-        quint32 code = ReadCode(codebin, Patch::CherryBlossom.Offsets[m_GameType]+0x68); //Read existing code
-        code = (code & 0xFFFFFF00) | CherryBAmount[mainui->CMB_CherryB->currentIndex()];
-        res |= !PatchCode(codebin, Patch::CherryBlossom.Offsets[m_GameType]+0x68, code);
+        res |= Season.Apply(codebin, SeasonVals[mainui->CMB_Season->currentIndex()]);
     }
 
     if(mainui->CMB_Weather->currentIndex() != 7) //If not set at no changes
-        res |= !PatchCode(codebin, Patch::Weather.Offsets[m_GameType], Patch::Weather.Value[0] | static_cast<quint8>(mainui->CMB_Weather->currentIndex()));
+        res |= Weather.Apply(codebin, static_cast<quint8>(mainui->CMB_Weather->currentIndex()));
 
     /* Exefs->Player */
-    res |= !PatchCode(codebin, Patch::PlayerSpeed.Offsets[m_GameType], PlayerSpeeds[mainui->dial_PlyrSpeed->value()-1]);
+    res |= !PatchCode(codebin, PlayerSpeed.m_Offset, PlayerSpeeds[mainui->dial_PlyrSpeed->value()-1]);
+
     if (mainui->CB_Resetti->isChecked())
-        res |= !PatchCode(codebin, Patch::NoResetti.Offsets[m_GameType], Patch::NoResetti.Value[0]);
+        res |= NoResetti.Apply(codebin);
 
     if (mainui->CB_EditPatterns->isChecked())
-        res |= !PatchCode(codebin, Patch::EditPattern.Offsets[m_GameType], Patch::EditPattern.Value[0]);
+        res |= EditPattern.Apply(codebin);
 
     if(mainui->CB_TrampleFlowers->isChecked())
-        res |= !PatchCode(codebin, Patch::FlowersNoTrample.Offsets[m_GameType], Patch::FlowersNoTrample.Value[0]);
+        res |= FlowersNoTrample.Apply(codebin);
 
     if(mainui->CB_Mosquito->isChecked())
-        res |= !PatchCode(codebin, Patch::NoMosquito.Offsets[m_GameType], Patch::NoMosquito.Value[0]);
+        res |= NoMosquito.Apply(codebin);
 
     /* Exefs->Shops */
     if(mainui->CB_NativeFruitSellPrice->isChecked())
-        res |= !PatchCode(codebin, Patch::NativeFruitPrice.Offsets[m_GameType], Patch::NativeFruitPrice.Value[0]);
+        res |= NativeFruitPrice.Apply(codebin);
 
     if(mainui->CB_ReeseBuy->isChecked())
-        res |= !PatchCode(codebin, Patch::ReeseBuy.Offsets[m_GameType], Patch::ReeseBuy.Value[0]);
+        res |= ReeseBuy.Apply(codebin);
 
-    if(mainui->CB_NooklingBuy->isChecked()) {
-        res |= !PatchCode(codebin, Patch::NooklingsBuy.Offsets[m_GameType], Patch::NooklingsBuy.Value[0]);
-        res |= !PatchCode(codebin, Patch::NooklingsBuy.Offsets[m_GameType]+0x8, Patch::NooklingsBuy.Value[1]);
-    }
+    if(mainui->CB_NooklingBuy->isChecked())
+        res |= NooklingsBuy.Apply(codebin);
 
     if(mainui->CB_LeilaBuy->isChecked())
-        res |= !PatchCode(codebin, Patch::LeilaBuy.Offsets[m_GameType], Patch::LeilaBuy.Value[0]);
+        res |= LeilaBuy.Apply(codebin);
 
     /* Exefs->Utilities */
     if(mainui->CB_RegionPass->isChecked())
-        res |= !PatchCode(codebin, Patch::RegionCheck.Offsets[m_GameType], Patch::RegionCheck.Value[0]);
+        res |= RegionCheck.Apply(codebin);
 
     if(mainui->CB_ChecksumPass->isChecked())
-        res |= !PatchCode(codebin, Patch::ChecksumCheck.Offsets[m_GameType], Patch::ChecksumCheck.Value[0]);
+        res |= ChecksumCheck.Apply(codebin);
 
     if (res == true)
         return false; //At least one PatchCode Failed
@@ -292,7 +284,7 @@ bool Game::WriteCustomShopCode(File *codebin, quint32 offset) {
     bool res = false;
     res |= !PatchCode(codebin, offset, 0xE1A00000); //NOP: Removes unused BL
     res |= !PatchCode(codebin, offset+4, 0xE1A00000); //NOP: Removes unused ADD
-    res |= !PatchCode(codebin, offset+8, MAKE_BRANCH_LINK(offset+8, Patch::NightOwl.Offsets[m_GameType])); //BL: Sets up BL to IsNightOwlOrdinance
+    res |= !PatchCode(codebin, offset+8, MAKE_BRANCH_LINK(offset+8, NightOwl.m_Offset)); //BL: Sets up BL to IsNightOwlOrdinance
     res |= !PatchCode(codebin, offset+0xC, 0xE3500000); //CMP R0, #0
     res |= !PatchCode(codebin, offset+0x10, 0xE1A00C44); //MOV R0, R4,ASR#24
     res |= !PatchCode(codebin, offset+0x14, 0xE1A00000); //NOP: This is where SUBEQ for normal time will go
@@ -305,63 +297,63 @@ bool Game::WriteCustomShopCode(File *codebin, quint32 offset) {
 
 void Game::ApplyCustomShopCode(File *codebin) {
     for (int i = 0; i < 5; i++) {
-      if (Nooklings[i].RequiresCustomCode)
-          Nooklings[i].HasNecessaryCode = WriteCustomShopCode(codebin, Patch::Nooklings.Offsets[m_GameType]+Nooklings[i].off_NormalOpen-0x14);
+      if (off_Nooklings[i].RequiresCustomCode)
+          off_Nooklings[i].HasNecessaryCode = WriteCustomShopCode(codebin, Nooklings.m_Offset+off_Nooklings[i].off_NormalOpen-0x14);
     }
 
-    if (Garden.RequiresCustomCode)
-        Garden.HasNecessaryCode = WriteCustomShopCode(codebin, Patch::Garden.Offsets[m_GameType]+Garden.off_NormalOpen-0x14);
+    if (off_Garden.RequiresCustomCode)
+        off_Garden.HasNecessaryCode = WriteCustomShopCode(codebin, Garden.m_Offset+off_Garden.off_NormalOpen-0x14);
 
-    if (Ables.RequiresCustomCode)
-        Ables.HasNecessaryCode = WriteCustomShopCode(codebin, Patch::Ables.Offsets[m_GameType]+Ables.off_NormalOpen-0x14);
+    if (off_Ables.RequiresCustomCode)
+        off_Ables.HasNecessaryCode = WriteCustomShopCode(codebin, Ables.m_Offset+off_Ables.off_NormalOpen-0x14);
 
-    if (Sham.RequiresCustomCode)
-        Sham.HasNecessaryCode = WriteCustomShopCode(codebin, Patch::Sham.Offsets[m_GameType]+Sham.off_NormalOpen-0x14);
+    if (off_Sham.RequiresCustomCode)
+        off_Sham.HasNecessaryCode = WriteCustomShopCode(codebin, Sham.m_Offset+off_Sham.off_NormalOpen-0x14);
 
-    if (Kicks.RequiresCustomCode)
-        Kicks.HasNecessaryCode = WriteCustomShopCode(codebin, Patch::Kicks.Offsets[m_GameType]+Kicks.off_NormalOpen-0x14);
+    if (off_Kicks.RequiresCustomCode)
+        off_Kicks.HasNecessaryCode = WriteCustomShopCode(codebin, Kicks.m_Offset+off_Kicks.off_NormalOpen-0x14);
 
-    if (Nooks.RequiresCustomCode)
-        Nooks.HasNecessaryCode = WriteCustomShopCode(codebin, Patch::Nooks.Offsets[m_GameType]+Nooks.off_NormalOpen-0x14);
+    if (off_Nooks.RequiresCustomCode)
+        off_Nooks.HasNecessaryCode = WriteCustomShopCode(codebin, Nooks.m_Offset+off_Nooks.off_NormalOpen-0x14);
 
-    if (Katrina.RequiresCustomCode)
-        Katrina.HasNecessaryCode = WriteCustomShopCode(codebin, Patch::Katrina.Offsets[m_GameType]+Katrina.off_NormalOpen-0x14);
+    if (off_Katrina.RequiresCustomCode)
+        off_Katrina.HasNecessaryCode = WriteCustomShopCode(codebin, Katrina.m_Offset+off_Katrina.off_NormalOpen-0x14);
 }
 
 bool Game::ApplyAlwaysOpenPatches(File *codebin) {
     bool res = false;
 
     if(g_AlwaysOpen.Retail)
-        res |= !PatchCode(codebin, Patch::Retail.Offsets[m_GameType]+Retail.off_AlwaysOpen, SHOPALWAYSOPEN);
+        res |= !PatchCode(codebin, Retail.m_Offset+off_Retail.off_AlwaysOpen, SHOPALWAYSOPEN);
 
     for (int i = 0; i < 5; i++) { /* For each nookling shop */
         static const quint8  off_BLEarly[5] = {0x3C, 0x54, 0x3C, 0x54, 0x3C};
-        quint32 off_AlwaysOpen = Patch::Nooklings.Offsets[m_GameType]+Nooklings[i].off_NormalOpen-off_BLEarly[i];
+        quint32 off_AlwaysOpen = Nooklings.m_Offset+off_Nooklings[i].off_NormalOpen-off_BLEarly[i];
 
         if(g_AlwaysOpen.Nooklings[i])
-            res |= !PatchCode(codebin, off_AlwaysOpen, MAKE_BRANCH(off_AlwaysOpen, Patch::Nooklings.Offsets[m_GameType]+Nooklings[i].off_AlwaysOpen));
+            res |= !PatchCode(codebin, off_AlwaysOpen, MAKE_BRANCH(off_AlwaysOpen, Nooklings.m_Offset+off_Nooklings[i].off_AlwaysOpen));
     }
 
     if(g_AlwaysOpen.Garden)
-        res |= !PatchCode(codebin, Patch::Garden.Offsets[m_GameType]+Garden.off_AlwaysOpen, SHOPALWAYSOPEN);
+        res |= !PatchCode(codebin, Garden.m_Offset+off_Garden.off_AlwaysOpen, SHOPALWAYSOPEN);
 
     if(g_AlwaysOpen.Ables)
-        res |= !PatchCode(codebin, Patch::Ables.Offsets[m_GameType]+Ables.off_AlwaysOpen, SHOPALWAYSOPEN);
+        res |= !PatchCode(codebin, Ables.m_Offset+off_Ables.off_AlwaysOpen, SHOPALWAYSOPEN);
 
     if(g_AlwaysOpen.Sham)
-        res |= !PatchCode(codebin, Patch::Sham.Offsets[m_GameType]+Sham.off_AlwaysOpen, SHOPALWAYSOPEN);
+        res |= !PatchCode(codebin, Sham.m_Offset+off_Sham.off_AlwaysOpen, SHOPALWAYSOPEN);
 
     if(g_AlwaysOpen.Kicks)
-        res |= !PatchCode(codebin, Patch::Kicks.Offsets[m_GameType]+Kicks.off_AlwaysOpen, SHOPALWAYSOPEN);
+        res |= !PatchCode(codebin, Kicks.m_Offset+off_Kicks.off_AlwaysOpen, SHOPALWAYSOPEN);
 
     if(g_AlwaysOpen.Nooks)
-        res |= !PatchCode(codebin, Patch::Nooks.Offsets[m_GameType]+Nooks.off_AlwaysOpen, SHOPALWAYSOPEN);
+        res |= !PatchCode(codebin, Nooks.m_Offset+off_Nooks.off_AlwaysOpen, SHOPALWAYSOPEN);
 
     if(g_AlwaysOpen.Katrina)
-        res |= !PatchCode(codebin, Patch::Katrina.Offsets[m_GameType]+Katrina.off_AlwaysOpen, SHOPALWAYSOPEN);
+        res |= !PatchCode(codebin, Katrina.m_Offset+off_Katrina.off_AlwaysOpen, SHOPALWAYSOPEN);
 
     if(g_AlwaysOpen.Redd)
-        res |= !PatchCode(codebin, Patch::Redd.Offsets[m_GameType]+Redd.off_AlwaysOpen, SHOPALWAYSOPEN);
+        res |= !PatchCode(codebin, Redd.m_Offset+off_Redd.off_AlwaysOpen, SHOPALWAYSOPEN);
 
     if (res == true)
         return false; //At least one PatchCode Failed
@@ -386,7 +378,7 @@ bool Game::MakeShopHourCode(File *codebin, Patch ShopBaseAddr, ShopCodeOffsets_s
     if (ClosingHour < Hours.OpenHour) { //Used if shop closes in early hours of morning, except 12am
         subcode = subASM | (ClosingHour&0xFF); //Make SUB instruction
         cmpcode = 0xE3500000 | ((Hours.OpenHour - ClosingHour)&0xFF); //Make CMP instruction
-        checkcode = ReadCode(codebin, ShopBaseAddr.Offsets[m_GameType]+off_ShopOpen[HourType]+off_ShopClose+4); //Read existing code
+        checkcode = ReadCode(codebin, ShopBaseAddr.m_Offset+off_ShopOpen[HourType]+off_ShopClose+4); //Read existing code
         if (checkcode>>24 == 0x3A) //If instruction is a BCC
             checkcode = 0x2A000000 | (checkcode & 0x00FFFFFF); //BCC instruction --> BCS instruction
     }
@@ -394,13 +386,13 @@ bool Game::MakeShopHourCode(File *codebin, Patch ShopBaseAddr, ShopCodeOffsets_s
     else {
         subcode = subASM | (Hours.OpenHour&0xFF); //Make SUB instruction
         cmpcode = 0xE3500000 | ((ClosingHour - Hours.OpenHour)&0xFF); //Make CMP instruction
-        checkcode = ReadCode(codebin, ShopBaseAddr.Offsets[m_GameType]+off_ShopOpen[HourType]+off_ShopClose+4); //Read existing code
+        checkcode = ReadCode(codebin, ShopBaseAddr.m_Offset+off_ShopOpen[HourType]+off_ShopClose+4); //Read existing code
         //No need for BCS --> BCC here, game's orig code works fine! Having this implemented caused alot of breakage! :/
     }
 
-    res |= !PatchCode(codebin, ShopBaseAddr.Offsets[m_GameType]+off_ShopOpen[HourType], subcode);
-    res |= !PatchCode(codebin, ShopBaseAddr.Offsets[m_GameType]+off_ShopOpen[HourType]+off_ShopClose, cmpcode);
-    res |= !PatchCode(codebin, ShopBaseAddr.Offsets[m_GameType]+off_ShopOpen[HourType]+off_ShopClose+4, checkcode);
+    res |= !PatchCode(codebin, ShopBaseAddr.m_Offset+off_ShopOpen[HourType], subcode);
+    res |= !PatchCode(codebin, ShopBaseAddr.m_Offset+off_ShopOpen[HourType]+off_ShopClose, cmpcode);
+    res |= !PatchCode(codebin, ShopBaseAddr.m_Offset+off_ShopOpen[HourType]+off_ShopClose+4, checkcode);
 
     if (res == true)
         return false; //At least one PatchCode Failed
@@ -411,34 +403,34 @@ bool Game::MakeShopHourCode(File *codebin, Patch ShopBaseAddr, ShopCodeOffsets_s
 bool Game::ApplyNormalShopTimes(File *codebin) {
     bool res = false;
 
-    if (Retail.HasNecessaryCode)
-        res |= !MakeShopHourCode(codebin, Patch::Retail, Retail, g_NormalTimes.Retail, NormalTime);
+    if (off_Retail.HasNecessaryCode)
+        res |= !MakeShopHourCode(codebin, Retail, off_Retail, g_NormalTimes.Retail, NormalTime);
 
     for (int i = 0; i < 5; i++) { /* For each nookling shop */
-        if (Nooklings[i].HasNecessaryCode)
-            res |= !MakeShopHourCode(codebin, Patch::Nooklings, Nooklings[i], g_NormalTimes.Nooklings[i], NormalTime);
+        if (off_Nooklings[i].HasNecessaryCode)
+            res |= !MakeShopHourCode(codebin, Nooklings, off_Nooklings[i], g_NormalTimes.Nooklings[i], NormalTime);
     }
 
-    if (Garden.HasNecessaryCode)
-        res |= !MakeShopHourCode(codebin, Patch::Garden, Garden, g_NormalTimes.Garden, NormalTime);
+    if (off_Garden.HasNecessaryCode)
+        res |= !MakeShopHourCode(codebin, Garden, off_Garden, g_NormalTimes.Garden, NormalTime);
 
-    if (Ables.HasNecessaryCode)
-        res |= !MakeShopHourCode(codebin, Patch::Ables, Ables, g_NormalTimes.Ables, NormalTime);
+    if (off_Ables.HasNecessaryCode)
+        res |= !MakeShopHourCode(codebin, Ables, off_Ables, g_NormalTimes.Ables, NormalTime);
 
-    if (Sham.HasNecessaryCode)
-        res |= !MakeShopHourCode(codebin, Patch::Sham, Sham, g_NormalTimes.Sham, NormalTime);
+    if (off_Sham.HasNecessaryCode)
+        res |= !MakeShopHourCode(codebin, Sham, off_Sham, g_NormalTimes.Sham, NormalTime);
 
-    if (Kicks.HasNecessaryCode)
-        res |= !MakeShopHourCode(codebin, Patch::Kicks, Kicks, g_NormalTimes.Kicks, NormalTime);
+    if (off_Kicks.HasNecessaryCode)
+        res |= !MakeShopHourCode(codebin, Kicks, off_Kicks, g_NormalTimes.Kicks, NormalTime);
 
-    if (Nooks.HasNecessaryCode)
-        res |= !MakeShopHourCode(codebin, Patch::Nooks, Nooks, g_NormalTimes.Nooks, NormalTime);
+    if (off_Nooks.HasNecessaryCode)
+        res |= !MakeShopHourCode(codebin, Nooks, off_Nooks, g_NormalTimes.Nooks, NormalTime);
 
-    if (Katrina.HasNecessaryCode)
-        res |= !MakeShopHourCode(codebin, Patch::Katrina, Katrina, g_NormalTimes.Katrina, NormalTime);
+    if (off_Katrina.HasNecessaryCode)
+        res |= !MakeShopHourCode(codebin, Katrina, off_Katrina, g_NormalTimes.Katrina, NormalTime);
 
-    if (Redd.HasNecessaryCode)
-        res |= !MakeShopHourCode(codebin, Patch::Redd, Redd, g_NormalTimes.Redd, NormalTime);
+    if (off_Redd.HasNecessaryCode)
+        res |= !MakeShopHourCode(codebin, Redd, off_Redd, g_NormalTimes.Redd, NormalTime);
 
     if (res == true)
         return false; //At least one PatchCode Failed
@@ -449,34 +441,34 @@ bool Game::ApplyNormalShopTimes(File *codebin) {
 bool Game::ApplyEarlyShopTimes(File *codebin) {
     bool res = false;
 
-    if (Retail.HasNecessaryCode)
-        res |= !MakeShopHourCode(codebin, Patch::Retail, Retail, g_EarlyBirdTimes.Retail, EarlyBirdTime);
+    if (off_Retail.HasNecessaryCode)
+        res |= !MakeShopHourCode(codebin, Retail, off_Retail, g_EarlyBirdTimes.Retail, EarlyBirdTime);
 
     for (int i = 0; i < 5; i++) { /* For each nookling shop */
-        if (Nooklings[i].HasNecessaryCode)
-            res |= !MakeShopHourCode(codebin, Patch::Nooklings, Nooklings[i], g_EarlyBirdTimes.Nooklings[i], EarlyBirdTime);
+        if (off_Nooklings[i].HasNecessaryCode)
+            res |= !MakeShopHourCode(codebin, Nooklings, off_Nooklings[i], g_EarlyBirdTimes.Nooklings[i], EarlyBirdTime);
     }
 
-    if (Garden.HasNecessaryCode)
-        res |= !MakeShopHourCode(codebin, Patch::Garden, Garden, g_EarlyBirdTimes.Garden, EarlyBirdTime);
+    if (off_Garden.HasNecessaryCode)
+        res |= !MakeShopHourCode(codebin, Garden, off_Garden, g_EarlyBirdTimes.Garden, EarlyBirdTime);
 
-    if (Ables.HasNecessaryCode)
-        res |= !MakeShopHourCode(codebin, Patch::Ables, Ables, g_EarlyBirdTimes.Ables, EarlyBirdTime);
+    if (off_Ables.HasNecessaryCode)
+        res |= !MakeShopHourCode(codebin, Ables, off_Ables, g_EarlyBirdTimes.Ables, EarlyBirdTime);
 
-    if (Sham.HasNecessaryCode)
-        res |= !MakeShopHourCode(codebin, Patch::Sham, Sham, g_EarlyBirdTimes.Sham, EarlyBirdTime);
+    if (off_Sham.HasNecessaryCode)
+        res |= !MakeShopHourCode(codebin, Sham, off_Sham, g_EarlyBirdTimes.Sham, EarlyBirdTime);
 
-    if (Kicks.HasNecessaryCode)
-        res |= !MakeShopHourCode(codebin, Patch::Kicks, Kicks, g_EarlyBirdTimes.Kicks, EarlyBirdTime);
+    if (off_Kicks.HasNecessaryCode)
+        res |= !MakeShopHourCode(codebin, Kicks, off_Kicks, g_EarlyBirdTimes.Kicks, EarlyBirdTime);
 
-    if (Nooks.HasNecessaryCode)
-        res |= !MakeShopHourCode(codebin, Patch::Nooks, Nooks, g_EarlyBirdTimes.Nooks, EarlyBirdTime);
+    if (off_Nooks.HasNecessaryCode)
+        res |= !MakeShopHourCode(codebin, Nooks, off_Nooks, g_EarlyBirdTimes.Nooks, EarlyBirdTime);
 
-    if (Katrina.HasNecessaryCode)
-        res |= !MakeShopHourCode(codebin, Patch::Katrina, Katrina, g_EarlyBirdTimes.Katrina, EarlyBirdTime);
+    if (off_Katrina.HasNecessaryCode)
+        res |= !MakeShopHourCode(codebin, Katrina, off_Katrina, g_EarlyBirdTimes.Katrina, EarlyBirdTime);
 
-    if (Redd.HasNecessaryCode)
-        res |= !MakeShopHourCode(codebin, Patch::Redd, Redd, g_EarlyBirdTimes.Redd, EarlyBirdTime);
+    if (off_Redd.HasNecessaryCode)
+        res |= !MakeShopHourCode(codebin, Redd, off_Redd, g_EarlyBirdTimes.Redd, EarlyBirdTime);
 
     if (res == true)
         return false; //At least one PatchCode Failed
@@ -487,34 +479,34 @@ bool Game::ApplyEarlyShopTimes(File *codebin) {
 bool Game::ApplyNightShopTimes(File *codebin) {
     bool res = false;
 
-    if (Retail.HasNecessaryCode)
-        res |= !MakeShopHourCode(codebin, Patch::Retail, Retail, g_NightOwlTimes.Retail, NightOwlTime);
+    if (off_Retail.HasNecessaryCode)
+        res |= !MakeShopHourCode(codebin, Retail, off_Retail, g_NightOwlTimes.Retail, NightOwlTime);
 
     for (int i = 0; i < 5; i++) { /* For each nookling shop */
-        if (Nooklings[i].HasNecessaryCode)
-            res |= !MakeShopHourCode(codebin, Patch::Nooklings, Nooklings[i], g_NightOwlTimes.Nooklings[i], NightOwlTime);
+        if (off_Nooklings[i].HasNecessaryCode)
+            res |= !MakeShopHourCode(codebin, Nooklings, off_Nooklings[i], g_NightOwlTimes.Nooklings[i], NightOwlTime);
     }
 
-    if (Garden.HasNecessaryCode)
-        res |= !MakeShopHourCode(codebin, Patch::Garden, Garden, g_NightOwlTimes.Garden, NightOwlTime);
+    if (off_Garden.HasNecessaryCode)
+        res |= !MakeShopHourCode(codebin, Garden, off_Garden, g_NightOwlTimes.Garden, NightOwlTime);
 
-    if (Ables.HasNecessaryCode)
-        res |= !MakeShopHourCode(codebin, Patch::Ables, Ables, g_NightOwlTimes.Ables, NightOwlTime);
+    if (off_Ables.HasNecessaryCode)
+        res |= !MakeShopHourCode(codebin, Ables, off_Ables, g_NightOwlTimes.Ables, NightOwlTime);
 
-    if (Sham.HasNecessaryCode)
-        res |= !MakeShopHourCode(codebin, Patch::Sham, Sham, g_NightOwlTimes.Sham, NightOwlTime);
+    if (off_Sham.HasNecessaryCode)
+        res |= !MakeShopHourCode(codebin, Sham, off_Sham, g_NightOwlTimes.Sham, NightOwlTime);
 
-    if (Kicks.HasNecessaryCode)
-        res |= !MakeShopHourCode(codebin, Patch::Kicks, Kicks, g_NightOwlTimes.Kicks, NightOwlTime);
+    if (off_Kicks.HasNecessaryCode)
+        res |= !MakeShopHourCode(codebin, Kicks, off_Kicks, g_NightOwlTimes.Kicks, NightOwlTime);
 
-    if (Nooks.HasNecessaryCode)
-        res |= !MakeShopHourCode(codebin, Patch::Nooks, Nooks, g_NightOwlTimes.Nooks, NightOwlTime);
+    if (off_Nooks.HasNecessaryCode)
+        res |= !MakeShopHourCode(codebin, Nooks, off_Nooks, g_NightOwlTimes.Nooks, NightOwlTime);
 
-    if (Katrina.HasNecessaryCode)
-        res |= !MakeShopHourCode(codebin, Patch::Katrina, Katrina, g_NightOwlTimes.Katrina, NightOwlTime);
+    if (off_Katrina.HasNecessaryCode)
+        res |= !MakeShopHourCode(codebin, Katrina, off_Katrina, g_NightOwlTimes.Katrina, NightOwlTime);
 
-    if (Redd.HasNecessaryCode)
-        res |= !MakeShopHourCode(codebin, Patch::Redd, Redd, g_NightOwlTimes.Redd, NightOwlTime);
+    if (off_Redd.HasNecessaryCode)
+        res |= !MakeShopHourCode(codebin, Redd, off_Redd, g_NightOwlTimes.Redd, NightOwlTime);
 
     if (res == true)
         return false; //At least one PatchCode Failed

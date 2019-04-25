@@ -674,6 +674,9 @@
               <property name="text">
                <string>Bypass Region Checks</string>
               </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
              </widget>
             </item>
             <item row="1" column="0">
@@ -683,6 +686,9 @@
               </property>
               <property name="text">
                <string>Bypass Save Checksums</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
               </property>
              </widget>
             </item>

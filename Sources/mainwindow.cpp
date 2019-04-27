@@ -99,22 +99,10 @@ void MainWindow::on_FileSave_triggered()
             QMessageBox::warning(nullptr, "ApplyAlwaysOpenPatches Error", "At least one PatchCode Failed in ApplyAlwaysOpenPatches.");
         }
 
-        res = game->ApplyNormalShopTimes(codebin_o);
+        res = game->ApplyShopTimes(codebin_o);
         if(!res) {
             errors++;
-            QMessageBox::warning(nullptr, "ApplyNormalShopTimes Error", "At least one PatchCode Failed in ApplyNormalShopTimes.");
-        }
-
-        res = game->ApplyNightShopTimes(codebin_o);
-        if(!res) {
-            errors++;
-            QMessageBox::warning(nullptr, "ApplyNightShopTimes Error", "At least one PatchCode Failed in ApplyNightShopTimes.");
-        }
-
-        res = game->ApplyEarlyShopTimes(codebin_o);
-        if(!res) {
-            errors++;
-            QMessageBox::warning(nullptr, "ApplyEarlyShopTimes Error", "At least one PatchCode Failed in ApplyEarlyShopTimes.");
+            QMessageBox::warning(nullptr, "ApplyShopTimes Error", "At least one PatchCode Failed in ApplyShopTimes.");
         }
 
         codebin_o->m_file->flush();

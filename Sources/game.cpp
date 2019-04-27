@@ -415,116 +415,66 @@ bool Game::MakeShopHourCode(File *codebin, Patch ShopBaseAddr, ShopCodeOffsets_s
     return true; //No PatchCode Failed
 }
 
-bool Game::ApplyNormalShopTimes(File *codebin) {
+bool Game::ApplyShopTimes(File *codebin) {
     bool res = false;
 
-    if (off_Retail.HasNecessaryCode)
+    if (off_Retail.HasNecessaryCode) {
         res |= !MakeShopHourCode(codebin, Retail, off_Retail, g_NormalTimes.Retail, NormalTime);
-
-    for (int i = 0; i < 5; i++) { /* For each nookling shop */
-        if (off_Nooklings[i].HasNecessaryCode)
-            res |= !MakeShopHourCode(codebin, Nooklings, off_Nooklings[i], g_NormalTimes.Nooklings[i], NormalTime);
-    }
-
-    if (off_Garden.HasNecessaryCode)
-        res |= !MakeShopHourCode(codebin, Garden, off_Garden, g_NormalTimes.Garden, NormalTime);
-
-    if (off_Ables.HasNecessaryCode)
-        res |= !MakeShopHourCode(codebin, Ables, off_Ables, g_NormalTimes.Ables, NormalTime);
-
-    if (off_Sham.HasNecessaryCode)
-        res |= !MakeShopHourCode(codebin, Sham, off_Sham, g_NormalTimes.Sham, NormalTime);
-
-    if (off_Kicks.HasNecessaryCode)
-        res |= !MakeShopHourCode(codebin, Kicks, off_Kicks, g_NormalTimes.Kicks, NormalTime);
-
-    if (off_Nooks.HasNecessaryCode)
-        res |= !MakeShopHourCode(codebin, Nooks, off_Nooks, g_NormalTimes.Nooks, NormalTime);
-
-    if (off_Katrina.HasNecessaryCode)
-        res |= !MakeShopHourCode(codebin, Katrina, off_Katrina, g_NormalTimes.Katrina, NormalTime);
-
-    if (off_Redd.HasNecessaryCode)
-        res |= !MakeShopHourCode(codebin, Redd, off_Redd, g_NormalTimes.Redd, NormalTime);
-
-    if (res == true)
-        return false; //At least one PatchCode Failed
-
-    return true; //No PatchCode Failed
-}
-
-bool Game::ApplyEarlyShopTimes(File *codebin) {
-    bool res = false;
-
-    if (off_Retail.HasNecessaryCode)
         res |= !MakeShopHourCode(codebin, Retail, off_Retail, g_EarlyBirdTimes.Retail, EarlyBirdTime);
-
-    for (int i = 0; i < 5; i++) { /* For each nookling shop */
-        if (off_Nooklings[i].HasNecessaryCode)
-            res |= !MakeShopHourCode(codebin, Nooklings, off_Nooklings[i], g_EarlyBirdTimes.Nooklings[i], EarlyBirdTime);
-    }
-
-    if (off_Garden.HasNecessaryCode)
-        res |= !MakeShopHourCode(codebin, Garden, off_Garden, g_EarlyBirdTimes.Garden, EarlyBirdTime);
-
-    if (off_Ables.HasNecessaryCode)
-        res |= !MakeShopHourCode(codebin, Ables, off_Ables, g_EarlyBirdTimes.Ables, EarlyBirdTime);
-
-    if (off_Sham.HasNecessaryCode)
-        res |= !MakeShopHourCode(codebin, Sham, off_Sham, g_EarlyBirdTimes.Sham, EarlyBirdTime);
-
-    if (off_Kicks.HasNecessaryCode)
-        res |= !MakeShopHourCode(codebin, Kicks, off_Kicks, g_EarlyBirdTimes.Kicks, EarlyBirdTime);
-
-    if (off_Nooks.HasNecessaryCode)
-        res |= !MakeShopHourCode(codebin, Nooks, off_Nooks, g_EarlyBirdTimes.Nooks, EarlyBirdTime);
-
-    if (off_Katrina.HasNecessaryCode)
-        res |= !MakeShopHourCode(codebin, Katrina, off_Katrina, g_EarlyBirdTimes.Katrina, EarlyBirdTime);
-
-    if (off_Redd.HasNecessaryCode)
-        res |= !MakeShopHourCode(codebin, Redd, off_Redd, g_EarlyBirdTimes.Redd, EarlyBirdTime);
-
-    if (res == true)
-        return false; //At least one PatchCode Failed
-
-    return true; //No PatchCode Failed
-}
-
-bool Game::ApplyNightShopTimes(File *codebin) {
-    bool res = false;
-
-    if (off_Retail.HasNecessaryCode)
         res |= !MakeShopHourCode(codebin, Retail, off_Retail, g_NightOwlTimes.Retail, NightOwlTime);
-
-    for (int i = 0; i < 5; i++) { /* For each nookling shop */
-        if (off_Nooklings[i].HasNecessaryCode)
-            res |= !MakeShopHourCode(codebin, Nooklings, off_Nooklings[i], g_NightOwlTimes.Nooklings[i], NightOwlTime);
     }
 
-    if (off_Garden.HasNecessaryCode)
+    for (int i = 0; i < 5; i++) { /* For each nookling shop */
+        if (off_Nooklings[i].HasNecessaryCode) {
+            res |= !MakeShopHourCode(codebin, Nooklings, off_Nooklings[i], g_NormalTimes.Nooklings[i], NormalTime);
+            res |= !MakeShopHourCode(codebin, Nooklings, off_Nooklings[i], g_EarlyBirdTimes.Nooklings[i], EarlyBirdTime);
+            res |= !MakeShopHourCode(codebin, Nooklings, off_Nooklings[i], g_NightOwlTimes.Nooklings[i], NightOwlTime);
+        }
+    }
+
+    if (off_Garden.HasNecessaryCode) {
+        res |= !MakeShopHourCode(codebin, Garden, off_Garden, g_NormalTimes.Garden, NormalTime);
+        res |= !MakeShopHourCode(codebin, Garden, off_Garden, g_EarlyBirdTimes.Garden, EarlyBirdTime);
         res |= !MakeShopHourCode(codebin, Garden, off_Garden, g_NightOwlTimes.Garden, NightOwlTime);
+    }
 
-    if (off_Ables.HasNecessaryCode)
+    if (off_Ables.HasNecessaryCode) {
+        res |= !MakeShopHourCode(codebin, Ables, off_Ables, g_NormalTimes.Ables, NormalTime);
+        res |= !MakeShopHourCode(codebin, Ables, off_Ables, g_EarlyBirdTimes.Ables, EarlyBirdTime);
         res |= !MakeShopHourCode(codebin, Ables, off_Ables, g_NightOwlTimes.Ables, NightOwlTime);
+    }
 
-    if (off_Sham.HasNecessaryCode)
+    if (off_Sham.HasNecessaryCode) {
+        res |= !MakeShopHourCode(codebin, Sham, off_Sham, g_NormalTimes.Sham, NormalTime);
+        res |= !MakeShopHourCode(codebin, Sham, off_Sham, g_EarlyBirdTimes.Sham, EarlyBirdTime);
         res |= !MakeShopHourCode(codebin, Sham, off_Sham, g_NightOwlTimes.Sham, NightOwlTime);
+    }
 
-    if (off_Kicks.HasNecessaryCode)
+    if (off_Kicks.HasNecessaryCode) {
+        res |= !MakeShopHourCode(codebin, Kicks, off_Kicks, g_NormalTimes.Kicks, NormalTime);
+        res |= !MakeShopHourCode(codebin, Kicks, off_Kicks, g_EarlyBirdTimes.Kicks, EarlyBirdTime);
         res |= !MakeShopHourCode(codebin, Kicks, off_Kicks, g_NightOwlTimes.Kicks, NightOwlTime);
+    }
 
-    if (off_Nooks.HasNecessaryCode)
+    if (off_Nooks.HasNecessaryCode) {
+        res |= !MakeShopHourCode(codebin, Nooks, off_Nooks, g_NormalTimes.Nooks, NormalTime);
+        res |= !MakeShopHourCode(codebin, Nooks, off_Nooks, g_EarlyBirdTimes.Nooks, EarlyBirdTime);
         res |= !MakeShopHourCode(codebin, Nooks, off_Nooks, g_NightOwlTimes.Nooks, NightOwlTime);
+    }
 
-    if (off_Katrina.HasNecessaryCode)
+    if (off_Katrina.HasNecessaryCode) {
+        res |= !MakeShopHourCode(codebin, Katrina, off_Katrina, g_NormalTimes.Katrina, NormalTime);
+        res |= !MakeShopHourCode(codebin, Katrina, off_Katrina, g_EarlyBirdTimes.Katrina, EarlyBirdTime);
         res |= !MakeShopHourCode(codebin, Katrina, off_Katrina, g_NightOwlTimes.Katrina, NightOwlTime);
+    }
 
-    if (off_Redd.HasNecessaryCode)
+    if (off_Redd.HasNecessaryCode) {
+        res |= !MakeShopHourCode(codebin, Redd, off_Redd, g_NormalTimes.Redd, NormalTime);
+        res |= !MakeShopHourCode(codebin, Redd, off_Redd, g_EarlyBirdTimes.Redd, EarlyBirdTime);
         res |= !MakeShopHourCode(codebin, Redd, off_Redd, g_NightOwlTimes.Redd, NightOwlTime);
+    }
 
-    if (res == true)
-        return false; //At least one PatchCode Failed
+    if (res == true) return false; //At least one PatchCode Failed
 
     return true; //No PatchCode Failed
 }

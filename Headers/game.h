@@ -53,9 +53,7 @@ public:
     void ApplyCustomShopCode(File *codebin);
     bool ApplyAlwaysOpenPatches(File *codebin);
     bool MakeShopHourCode(File *codebin, Patch ShopBaseAddr, ShopCodeOffsets_s Shop, HoursInfo_s Hours, quint8 HourType);
-    bool ApplyNormalShopTimes(File *codebin);
-    bool ApplyEarlyShopTimes(File *codebin);
-    bool ApplyNightShopTimes(File *codebin);
+    bool ApplyShopTimes(File *codebin);
 
     File *codebin = nullptr;
     Dir_s m_romfs;

@@ -40,19 +40,47 @@ static const QVector<quint8> XmasTreePattern = { //Thumb
 0x14, 0x46, 0x06, 0x9E
 };
 
+static const QVector<quint8> Island3NumsPattern = { //ARM
+0x56, 0x10, 0xA0, 0xE3, 0x4C, 0x40, 0x86, 0xE2,
+0x00, 0x10, 0x80, 0xE5, 0x11, 0x1E, 0xA0, 0xE3
+};
+
+static const QVector<quint8> AllToursPattern = {
+0xF0, 0x4F, 0x2D, 0xE9, 0x00, 0x50, 0xA0, 0xE1,
+0x00, 0xB0, 0xA0, 0xE3, 0x02, 0x8B, 0x2D, 0xED
+};
+
+static const QVector<quint8> MusicEchoPattern = {
+0x6C, 0x02, 0x95, 0xE5, 0x06, 0x00, 0x50, 0xE1,
+0x01, 0x00, 0x76, 0x13
+};
+
+static const QVector<quint8> SaveChecksPattern = {
+0x08, 0xD0, 0x4D, 0xE2, 0x0B, 0xB0, 0xA0, 0xE3,
+0x05, 0x80, 0xA0, 0xE3, 0x0C, 0x60, 0xA0, 0xE3
+};
+
+static const QVector<quint8> RegionChecksPattern = {
+0x62, 0x5A, 0x84, 0xE2, 0x4E, 0x01, 0xD5, 0xE5,
+0x0F, 0x00, 0x00, 0xE2
+};
+
 /* Exefs->General */
 
 Patch NativeFruitPrice;
 Patch ReeseBuy;
 Patch NooklingsBuy;
 Patch LeilaBuy;
-Patch NoResetti;
-Patch Confetti;
-Patch CherryBlossom;
+Patch NoResetti; //Pattern: 57 0C 80 E2 0A 10 D0 E5  02 10 81 E3 0A 10 C0 E5 + 0x8
+Patch Confetti; //Pattern: 16 5B 84 E2 AC 50 85 E2  00 00 95 E5 00 00 50 E3 + 0x8
+Patch CherryBlossom; //Pattern: 10 D0 4D E2 02 00 A0 E3  16 6B 84 E2 AC 60 86 E2 + 0x8
 Patch Weather; //Pattern: 1st find of [06 10 41 E2 00 00 51 E3  18 10 81 B2 34 00 50 E3] + 0x88
 Patch Season; //Pattern: 1st find of [00 00 A0 E3 0C 34 83 E1 00 10 A0 E1 73 30 FF E6] + 0x18
-Patch CherryBTrees;
-Patch AlwaysXmasTrees;
+Patch CherryBTrees; //Pattern: 00 80 A0 E1  20 10 A0 E3 50 00 8D E2 + 0x0
+Patch AlwaysXmasTrees; //Thumb; Pattern: F8 B5 7B 21 14 46 06 9E + 0xA
+Patch Island3Nums; //Pattern: 56 10 A0 E3 4C 40 86 E2 00 10 80 E5 11 1E A0 E3 - 0x10
+Patch PickAllTours; //Pattern: F0 4F 2D E9 00 50 A0 E1 00 B0 A0 E3  02 8B 2D ED + 0x8
+Patch MusicHasEcho; //Pattern:
 //Patch NoGrassDecay(JPN, USA, EUR, KOR, JPN, USA, EUR, WAKOR, 0xE3A0000FF);
 
 /* Exefs->Player */
@@ -62,8 +90,9 @@ Patch FlowersNoTrample;
 Patch NoMosquito; //Pattern: 10 40 BD E8 03 20 A0 E1 A6 10 A0 E3
 
 /* Exefs->Utilities */
-Patch RegionCheck;
-Patch ChecksumCheck;
+Patch RegionCheck; //Pattern: 62 5A 84 E2 4E 01 D5 E5 0F 00 00 E2 - 0xC
+Patch ChecksumCheck; //Pattern: 08 D0 4D E2 0B B0 A0 E3 05 80 A0 E3 0C 60 A0 E3 + 0xB4
+Patch SecureValueCheck; //Pattern: 08 D0 4D E2 0B B0 A0 E3 05 80 A0 E3 0C 60 A0 E3 + 0xE0
 
 /* Shop Times: Addresses are start of function */
 Patch Retail;
@@ -135,6 +164,9 @@ void Patch::Init(void) {
     Season =            Patch(0x56B090, 0x56C758, 0x56B7A0, KOR, 0x56B090, 0x56BC70, 0x56B7A0, WAKOR, QVector<PatchValues>({{0xE3A01000,0}})); //Pattern: 1st find of [00 00 A0 E3 0C 34 83 E1 00 10 A0 E1 73 30 FF E6] + 0x18
     CherryBTrees =      Patch(CherryBTreePattern, QVector<PatchValues>({{0xE3A08005,0}, {0xE28F2074, 0x150}}), 0);
     AlwaysXmasTrees =   Patch(XmasTreePattern, QVector<PatchValues>({{0x1C002000, 0}}), 0xA);
+    Island3Nums =       Patch(Island3NumsPattern, NOPVec, static_cast<quint32>(-0x10));
+    PickAllTours =      Patch(AllToursPattern, QVector<PatchValues>({{0xE3E0B000, 0}}), 8);
+    MusicHasEcho =      Patch(MusicEchoPattern, QVector<PatchValues>({{0xE1A00000,0}, {0xE3A01003, 4}}), 0xC);
     //static const Patch  NoGrassDecay(JPN, USA, EUR, KOR, JPN, USA, EUR, WAKOR, 0xE3A0000FF);
 
     /* Exefs->Player */
@@ -144,8 +176,9 @@ void Patch::Init(void) {
     NoMosquito =        Patch(0x5C245C, 0x5C3B24, 0x5C2B6C, KOR, 0x5C245C, 0x5C3054, 0x5C2B6C, WAKOR, QVector<PatchValues>({{0xE3A01006,0}})); //Pattern: 10 40 BD E8 03 20 A0 E1 A6 10 A0 E3
 
     /* Exefs->Utilities */
-    RegionCheck =       Patch(0x7577C4, 0x759024, 0x75802C, KOR, 0x75779C, 0x758008, 0x758004, WAKOR, QVector<PatchValues>({{0xE1A00005,0}}));
-    ChecksumCheck =     Patch(0x1D4300, 0x1D43A4, 0x1D43C4, KOR, 0x1D4300, 0x1D3DE8, 0x1D43C4, WAKOR, QVector<PatchValues>({{0xE3A00001,0}}));
+    RegionCheck =       Patch(RegionChecksPattern, QVector<PatchValues>({{0xE1A00005,0}}), static_cast<quint32>(-0xC));
+    ChecksumCheck =     Patch(SaveChecksPattern, QVector<PatchValues>({{0xE3A00001,0}, {0xE3A00001,0x1C}}), 0xB4);
+    SecureValueCheck =  Patch(SaveChecksPattern, QVector<PatchValues>({{0xE3A00001, 0}}), 0xE0);
 
     /* Shop Times: Addresses are start of function */
     Retail =            Patch(0x309310, 0x30929C, 0x309298, KOR, 0x309310, 0x309384, 0x309298, WAKOR, FFVec);

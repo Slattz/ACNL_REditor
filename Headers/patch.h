@@ -112,6 +112,9 @@ extern Patch Weather;
 extern Patch Season;
 extern Patch CherryBTrees;
 extern Patch AlwaysXmasTrees;
+extern Patch Island3Nums;
+extern Patch PickAllTours;
+extern Patch MusicHasEcho;
 //extern Patch NoGrassDecay;
 
 /* Exefs->Player */
@@ -123,6 +126,7 @@ extern Patch NoMosquito;
 /* Exefs->Utilities */
 extern Patch RegionCheck;
 extern Patch ChecksumCheck;
+extern Patch SecureValueCheck;
 
 /* Shop Times: Addresses are start of function */
 extern Patch Retail;

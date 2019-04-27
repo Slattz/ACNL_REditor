@@ -190,6 +190,18 @@ bool Game::ApplyPatches(Ui::MainWindow *mainui, File *codebin) {
         res |= AlwaysXmasTrees.Apply(codebin);
     }
 
+    if(mainui->CB_Island3Nums->isChecked()) {
+        res |= Island3Nums.Apply(codebin);
+    }
+
+    if(mainui->CB_AnyTours->isChecked()) {
+        res |= PickAllTours.Apply(codebin);
+    }
+
+    if(mainui->CB_MusicEcho->isChecked()) {
+        res |= MusicHasEcho.Apply(codebin);
+    }
+
     if(mainui->CB_Confetti->isChecked()) {
         res |= Confetti.Apply(codebin);
         if(mainui->CMB_Confetti->currentIndex() != 2) { //If not set at normal
@@ -249,6 +261,9 @@ bool Game::ApplyPatches(Ui::MainWindow *mainui, File *codebin) {
 
     if(mainui->CB_ChecksumPass->isChecked())
         res |= ChecksumCheck.Apply(codebin);
+
+    if(mainui->CB_SecureValPass->isChecked())
+        res |= SecureValueCheck.Apply(codebin);
 
     if (res == true)
         return false; //At least one PatchCode Failed

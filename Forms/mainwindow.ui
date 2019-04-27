@@ -90,64 +90,54 @@
             <string>General</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_3">
-            <item row="1" column="1">
-             <widget class="QLabel" name="label_Season">
-              <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This allows you to force a specific season at all times.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This might not apply to the dream towns you upload.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This may only be visible to you and not other players.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            <item row="2" column="2">
+             <widget class="QComboBox" name="CMB_Confetti">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
               </property>
-              <property name="text">
-               <string>Season Modifier:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="2">
-             <widget class="QComboBox" name="CMB_Season">
               <property name="currentIndex">
-               <number>4</number>
+               <number>2</number>
               </property>
               <property name="maxCount">
-               <number>5</number>
+               <number>7</number>
               </property>
               <item>
                <property name="text">
-                <string>Spring</string>
+                <string>Tiny</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>Summer</string>
+                <string>Small</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>Autumn</string>
+                <string>Normal</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>Winter</string>
+                <string>Big</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>No Changes</string>
+                <string>Large</string>
                </property>
               </item>
              </widget>
             </item>
-            <item row="0" column="1">
-             <widget class="QLabel" name="label_WeatherTxt">
+            <item row="6" column="0">
+             <widget class="QCheckBox" name="CB_Island3Nums">
               <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This allows you to force a specific weather at all times.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This might not apply to the dream towns you upload.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This may only be visible to you and not other players.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code patches the game so you can type more than 3 numbers in a message on the island.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Pre-WA, this limit was not in-place.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="text">
-               <string>Weather Modifier:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               <string>Can Type More Than 3 Numbers On The Island</string>
               </property>
              </widget>
             </item>
@@ -207,58 +197,82 @@
               </item>
              </widget>
             </item>
-            <item row="7" column="2">
-             <spacer name="verticalSpacer_5">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
+            <item row="0" column="1">
+             <widget class="QLabel" name="label_WeatherTxt">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This allows you to force a specific weather at all times.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This might not apply to the dream towns you upload.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This may only be visible to you and not other players.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>40</height>
-               </size>
+              <property name="text">
+               <string>Weather Modifier:</string>
               </property>
-             </spacer>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
             </item>
-            <item row="2" column="2">
-             <widget class="QComboBox" name="CMB_Confetti">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
+            <item row="1" column="2">
+             <widget class="QComboBox" name="CMB_Season">
               <property name="currentIndex">
-               <number>2</number>
+               <number>4</number>
               </property>
               <property name="maxCount">
-               <number>7</number>
+               <number>5</number>
               </property>
               <item>
                <property name="text">
-                <string>Tiny</string>
+                <string>Spring</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>Small</string>
+                <string>Summer</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>Normal</string>
+                <string>Autumn</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>Big</string>
+                <string>Winter</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>Large</string>
+                <string>No Changes</string>
                </property>
               </item>
+             </widget>
+            </item>
+            <item row="5" column="0">
+             <widget class="QCheckBox" name="CB_XmasTrees">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code patches the game so it will never remove the Xmas Cedar Trees, regardless of the time of the year. &lt;/p&gt;&lt;p&gt;This can be used in conjuction with the NTR Plugin and it's Real Time World Edit feature, or various save editors to place the trees in specific locations. &lt;/p&gt;&lt;p&gt;Otherwise, time travelling to time of the year that these appear in-game should convert normal cedar trees to the Xmas cedar trees.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="text">
+               <string>Keep Xmas Cedar Trees All Year</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QLabel" name="label_CherryB">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This changes how much Cherry Blossoms will be in the sky at once.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This may only be visible to you and not other players.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="text">
+               <string>Cherry Blossoms Amount:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QCheckBox" name="CB_GrassDecay">
+              <property name="text">
+               <string>Grass Doesn't Deteriorate</string>
+              </property>
              </widget>
             </item>
             <item row="4" column="2">
@@ -302,13 +316,23 @@
               </item>
              </widget>
             </item>
-            <item row="4" column="1">
-             <widget class="QLabel" name="label_CherryB">
+            <item row="4" column="0">
+             <widget class="QCheckBox" name="CB_CherryB">
               <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This changes how much Cherry Blossoms will be in the sky at once.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This may only be visible to you and not other players.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code will force Cherry Blossoms in your town's sky all year round. Usually, they only appears for a few days during April.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This might not apply to the dream towns you upload.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This may only be visible to you and not other players.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="text">
-               <string>Cherry Blossoms Amount:</string>
+               <string>Always Have Cherry Blossoms in Sky</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLabel" name="label_Season">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This allows you to force a specific season at all times.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This might not apply to the dream towns you upload.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This may only be visible to you and not other players.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="text">
+               <string>Season Modifier:</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -327,19 +351,6 @@
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
              </widget>
-            </item>
-            <item row="6" column="0">
-             <spacer name="horizontalSpacer_4">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
             </item>
             <item row="1" column="0">
              <widget class="QCheckBox" name="CB_CherryBTrees">
@@ -361,32 +372,51 @@
               </property>
              </widget>
             </item>
-            <item row="4" column="0">
-             <widget class="QCheckBox" name="CB_CherryB">
+            <item row="7" column="0">
+             <widget class="QCheckBox" name="CB_AnyTours">
               <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code will force Cherry Blossoms in your town's sky all year round. Usually, they only appears for a few days during April.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This might not apply to the dream towns you upload.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This may only be visible to you and not other players.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code patches the game to allow you to pick from all tour when on the Island.&lt;/p&gt;&lt;p&gt;This allows you to pick from any tour in the game rather than just what is being offerend for that day.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="text">
-               <string>Always Have Cherry Blossoms in Sky</string>
+               <string>Pick From All Tours On The Island</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="0">
-             <widget class="QCheckBox" name="CB_GrassDecay">
+            <item row="8" column="0">
+             <widget class="QCheckBox" name="CB_MusicEcho">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code patches the game so all music will have an echo.&lt;br/&gt;The echo is usually only enabled when in a Dream Town.&lt;br/&gt;&lt;br/&gt;This patches the game so it available regardless of in a Dream Town or not.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
               <property name="text">
-               <string>Grass Doesn't Deteriorate</string>
+               <string>Music Always Has The Dream World Echo</string>
               </property>
              </widget>
             </item>
-            <item row="5" column="0">
-             <widget class="QCheckBox" name="CB_XmasTrees">
-              <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code patches the game so it will never remove the Xmas Cedar Trees, regardless of the time of the year. &lt;/p&gt;&lt;p&gt;This can be used in conjuction with the NTR Plugin and it's Real Time World Edit feature, or various save editors to place the trees in specific locations. &lt;/p&gt;&lt;p&gt;Otherwise, time travelling to time of the year that these appear in-game should convert normal cedar trees to the Xmas cedar trees.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            <item row="5" column="2" rowspan="6">
+             <spacer name="verticalSpacer_5">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
               </property>
-              <property name="text">
-               <string>Keep Xmas Cedar Trees All Year</string>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
               </property>
-             </widget>
+             </spacer>
+            </item>
+            <item row="9" column="0" colspan="2">
+             <spacer name="horizontalSpacer_4">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
             </item>
            </layout>
           </widget>
@@ -650,7 +680,46 @@
             <string>Utilities</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_2">
-            <item row="0" column="1">
+            <item row="1" column="0">
+             <widget class="QCheckBox" name="CB_ChecksumPass">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enabling this code makes the game skip garden_plus.dat checksum checks.&lt;/p&gt;&lt;p&gt;This allows the game to load most saves that it would otherwise consider corrupt.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="text">
+               <string>Bypass Save Checksums</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <spacer name="verticalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="2" column="0">
+             <widget class="QCheckBox" name="CB_SecureValPass">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enabling this code makes the game skip the Secure Value check.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;The Secure Value is used by ACNL for Save Data Rollback Protection.&lt;br/&gt;i.e. you can't restore a previous version of your save. &lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;However, most popular Save Managers (e.g. Checkpoint and JKSM) automatically delete the Secure Value upon restoring a save anyways.&lt;br/&gt;Therefore, this patch is here more for completion and is not that useful.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="text">
+               <string>Bypass Secure Value Checks</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
              <spacer name="horizontalSpacer_2">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
@@ -666,7 +735,7 @@
             <item row="0" column="0">
              <widget class="QCheckBox" name="CB_RegionPass">
               <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enabling this code makes the game skip region checks. This allows the game to load saves from games of all other regions. Without this patch, a EUR save may not work on a USA game, a JPN save may not work on a EUR game, etc.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enabling this code makes the game skip region checks. This allows the game to load saves from games of all other regions. &lt;/p&gt;&lt;p&gt;Without this patch, a EUR save may not work on a USA game, a JPN save may not work on a EUR game, etc.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="toolTipDuration">
                <number>-1</number>
@@ -679,33 +748,7 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="0">
-             <widget class="QCheckBox" name="CB_ChecksumPass">
-              <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enabling this code makes the game skip garden_plus.dat checksum checks.&lt;/p&gt;&lt;p&gt;This allows the game to load most saves that it would otherwise consider corrupt.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-              <property name="text">
-               <string>Bypass Save Checksums</string>
-              </property>
-              <property name="checked">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="0">
-             <spacer name="verticalSpacer_2">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>40</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="2" column="0">
+            <item row="0" column="1">
              <widget class="QPushButton" name="BTN_Remapper">
               <property name="text">
                <string>Button Remapper</string>

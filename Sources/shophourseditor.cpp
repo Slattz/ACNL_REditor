@@ -10,11 +10,17 @@ ShopsHours_s g_NightOwlTimes  = {{9,2},{{8,0},{7,5},{9,0},{10,3},{9,0}}, {9,23},
 ShopsHours_s g_EarlyBirdTimes = {{6,23},{{6,22},{6,0},{6,20},{6,23},{6,21}}, {7,20}, {7,21}, {7,20}, {7,20}, {7,20}, {6,19}, {7,0}};
 AlwaysOpen_s g_AlwaysOpen     = {false, {false, false, false, false, false}, false, false, false, false, false, false, false};
 
+static bool g_AOEnabledAll = false;
+
 ShopHoursEditor::ShopHoursEditor(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ShopHoursEditor)
 {
     ui->setupUi(this);
+
+    if (g_AOEnabledAll) ui->BTN_EnableAll_AO->setText("Disable All");
+    else ui->BTN_EnableAll_AO->setText("Enable All");
+
     SetupNormalTimes();
     SetupEarlyTimes();
     SetupNightTimes();
@@ -349,4 +355,24 @@ void ShopHoursEditor::on_CB_Nooklings_toggled(bool checked)
 void ShopHoursEditor::on_CMB_NooklingsType_AO_currentIndexChanged(int index)
 {
     ui->CB_Nooklings->setChecked(m_AONooklings[index]);
+}
+
+void ShopHoursEditor::on_BTN_EnableAll_AO_clicked()
+{
+    g_AOEnabledAll = !g_AOEnabledAll;
+
+    ui->CB_Redd->setChecked(g_AOEnabledAll);
+    ui->CB_Sham->setChecked(g_AOEnabledAll);
+    ui->CB_Ables->setChecked(g_AOEnabledAll);
+    ui->CB_Kicks->setChecked(g_AOEnabledAll);
+    ui->CB_Nooks->setChecked(g_AOEnabledAll);
+    ui->CB_Garden->setChecked(g_AOEnabledAll);
+    ui->CB_Retail->setChecked(g_AOEnabledAll);
+    ui->CB_Katrina->setChecked(g_AOEnabledAll);
+    ui->CB_Nooklings->setChecked(g_AOEnabledAll);
+    for (int i = 0; i < 5; i++) {
+        m_AONooklings[i] = g_AOEnabledAll;
+    }
+    if (g_AOEnabledAll) ui->BTN_EnableAll_AO->setText("Disable All");
+    else ui->BTN_EnableAll_AO->setText("Enable All");
 }

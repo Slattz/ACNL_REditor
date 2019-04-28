@@ -16,6 +16,9 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>3</number>
+     </property>
      <property name="usesScrollButtons">
       <bool>true</bool>
      </property>
@@ -8064,6 +8067,13 @@
           </size>
          </property>
         </spacer>
+       </item>
+       <item row="0" column="0">
+        <widget class="QPushButton" name="BTN_EnableAll_AO">
+         <property name="text">
+          <string>Enable/Disable All</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>

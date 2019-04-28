@@ -62,8 +62,8 @@ private slots:
     void on_CMB_NooklingsOpen_E_currentIndexChanged(int index);
     void on_CMB_NooklingsClose_E_currentIndexChanged(int index);
     void on_CB_Nooklings_toggled(bool checked);
-
     void on_CMB_NooklingsType_AO_currentIndexChanged(int index);
+    void on_BTN_EnableAll_AO_clicked();
 
 private:
     Ui::ShopHoursEditor *ui;

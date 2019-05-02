@@ -202,6 +202,11 @@ bool Game::ApplyPatches(Ui::MainWindow *mainui, File *codebin) {
         res |= MusicHasEcho.Apply(codebin);
     }
 
+    if(mainui->CB_VillagersNMove->isChecked()) {
+        res |= VillagersNeverMove.Apply(codebin);
+        res |= VillagersNeverMove2.Apply(codebin);
+    }
+
     if(mainui->CB_Confetti->isChecked()) {
         res |= Confetti.Apply(codebin);
         if(mainui->CMB_Confetti->currentIndex() != 2) { //If not set at normal

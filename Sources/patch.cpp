@@ -65,6 +65,40 @@ static const QVector<quint8> RegionChecksPattern = {
 0x0F, 0x00, 0x00, 0xE2
 };
 
+/*
+ * Pattern for 'MoveVillagerOutOfTown' function;
+ * This is called by only 'CheckVillagersThatNeedToMoveOut' in code.bin which we also patch
+ * But just incase a CRO uses this function or something, give it the same patch
+ */
+static const QVector<quint8> VillagersNeverMovePattern = { //Thumb
+0x06, 0x98, 0x05, 0x99, 0x0A, 0x28
+};
+
+//Pattern for 'CheckVillagersThatNeedToMoveOut' function
+static const QVector<quint8> VillagersNeverMovePattern2 = { //Thumb
+0x2F, 0x18, 0x03, 0x20,
+0x38, 0x56, 0x00, 0x28
+};
+
+
+/*
+ * Custom Function to replace the 'MoveVillagerOutOfTown' function
+ * This function removes the boxed status from all villagers
+*/
+static const QVector<quint8> VillagersNeverMoveFunction = {
+0x01, 0xA1, 0x08, 0x47, // BX to our actual function; Needed to go from Thumb -> ARM
+0x00, 0x1C, 0x70, 0x47, //Padding (MOV R0, R0 and BX LR in Thumb just incase somehow used)
+0x00, 0xC0, 0xE0, 0xE3, 0x30, 0x20, 0x9F, 0xE5,
+0x25, 0x3C, 0x80, 0xE2, 0x2C, 0x10, 0x9F, 0xE5,
+0x02, 0xC0, 0xC0, 0xE7, 0x10, 0x30, 0x83, 0xE2,
+0x66, 0x0B, 0x80, 0xE2, 0x00, 0x20, 0x93, 0xE5,
+0x01, 0x20, 0x02, 0xE0, 0x00, 0x20, 0x83, 0xE5,
+0x25, 0x3C, 0x83, 0xE2, 0x18, 0x30, 0x83, 0xE2,
+0x03, 0x00, 0x50, 0xE1, 0xF8, 0xFF, 0xFF, 0x1A,
+0x1E, 0xFF, 0x2F, 0xE1, //End of Function Code
+0x63, 0x97, 0x01, 0x00, 0xFC, 0xF9, 0xFF, 0xFF //Const values
+};
+
 /* Exefs->General */
 
 Patch NativeFruitPrice;
@@ -81,6 +115,8 @@ Patch AlwaysXmasTrees; //Thumb; Pattern: F8 B5 7B 21 14 46 06 9E + 0xA
 Patch Island3Nums; //Pattern: 56 10 A0 E3 4C 40 86 E2 00 10 80 E5 11 1E A0 E3 - 0x10
 Patch PickAllTours; //Pattern: F0 4F 2D E9 00 50 A0 E1 00 B0 A0 E3  02 8B 2D ED + 0x8
 Patch MusicHasEcho; //Pattern:
+Patch VillagersNeverMove; //Thumb; Pattern: 06 98 05 99 0A 28
+Patch VillagersNeverMove2; //Thumb; Pattern: 2F 18 03 20 38 56 00 28
 //Patch NoGrassDecay(JPN, USA, EUR, KOR, JPN, USA, EUR, WAKOR, 0xE3A0000FF);
 
 /* Exefs->Player */
@@ -152,6 +188,30 @@ bool Patch::Apply(File* code, quint8 OR) {
     return res;
 }
 
+QVector<PatchValues> Patch::MakeARMPatchValuesFromFunctionBytes(QVector<quint8> function) {
+    static const quint8 codesize = 4;
+    QVector<PatchValues> vec;
+
+    quint32 size = static_cast<quint32>(function.size());
+    if ((size % codesize) != 0) { //Check if function bytes has fully completed instructions
+        qDebug() << "Function bytes are missing, not full function!";
+        return vec;
+    }
+
+    quint32 i = 0;
+    while (i < size) {
+        quint32 instruction = 0;
+        for (quint8 j = 0; j < codesize; j++) {
+            quint8 byte = function[i+j];
+            instruction |= byte<<(8*j);
+        }
+        vec.push_back({instruction, i});
+        i+=4;
+    }
+
+    return vec;
+}
+
 void Patch::Init(void) {
     NativeFruitPrice =  Patch(0x30576C, 0x3056AC, 0x3056B8, KOR, 0x30576C, 0x305714, 0x3056B8, WAKOR, NOPVec);
     ReeseBuy =          Patch(0x768EE0, 0x76A740, 0x769748, KOR, 0x768EB8, 0x769724, 0x769720, WAKOR, NOPVec);
@@ -167,6 +227,8 @@ void Patch::Init(void) {
     Island3Nums =       Patch(Island3NumsPattern, NOPVec, static_cast<quint32>(-0x10));
     PickAllTours =      Patch(AllToursPattern, QVector<PatchValues>({{0xE3E0B000, 0}}), 8);
     MusicHasEcho =      Patch(MusicEchoPattern, QVector<PatchValues>({{0xE1A00000,0}, {0xE3A01003, 4}}), 0xC);
+    VillagersNeverMove= Patch(VillagersNeverMovePattern, MakeARMPatchValuesFromFunctionBytes(VillagersNeverMoveFunction), static_cast<quint32>(-4));
+    VillagersNeverMove2=Patch(VillagersNeverMovePattern2, MakeARMPatchValuesFromFunctionBytes(VillagersNeverMoveFunction), static_cast<quint32>(-0xA));
     //static const Patch  NoGrassDecay(JPN, USA, EUR, KOR, JPN, USA, EUR, WAKOR, 0xE3A0000FF);
 
     /* Exefs->Player */

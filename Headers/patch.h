@@ -93,6 +93,7 @@ public:
     bool Apply(File* codebin, quint8 OR = 0);
 
     static void Init(void);
+    static QVector<PatchValues> MakeARMPatchValuesFromFunctionBytes(QVector<quint8> function);
 
     quint32 m_Offset; //Offsets are code.bin + 0x100000, i.e. same offsets as hardware
 
@@ -115,6 +116,8 @@ extern Patch AlwaysXmasTrees;
 extern Patch Island3Nums;
 extern Patch PickAllTours;
 extern Patch MusicHasEcho;
+extern Patch VillagersNeverMove;
+extern Patch VillagersNeverMove2;
 //extern Patch NoGrassDecay;
 
 /* Exefs->Player */

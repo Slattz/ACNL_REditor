@@ -451,7 +451,7 @@
                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This allows you to run through flowers without ever trampling them.&lt;/p&gt;&lt;p&gt;Credit to Scotline for the original code. :)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="text">
-               <string>Flowers Never Trample</string>
+               <string>Never Trample Flowers</string>
               </property>
              </widget>
             </item>

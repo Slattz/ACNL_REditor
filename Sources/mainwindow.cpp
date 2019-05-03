@@ -8,6 +8,8 @@
 #include "Headers/game.h"
 #include "Headers/patch.h"
 
+#define VERSION "v1.1"
+
 static const QString SpeedStrings[5] = {"Normal: x1", "Fast: x1.25", "Faster: x1.5", "Speedy: x2", "Speeding Bullet: x3"};
 static QVector<ItemPrice_s*> ItemPrices;
 
@@ -18,10 +20,17 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->label_PlyrSpeed->setText(SpeedStrings[0]);
+    QString title = "ACNL REditor ";
+    title += VERSION;
+
 #ifdef QT_NO_DEBUG_OUTPUT //Only set for release ∴ can auto disable debug tab for release
     ui->menuDebug->menuAction()->setVisible(false);
+#else
+    title += " [Debug]";
 #endif
+
+    this->setWindowTitle(title);
+    ui->label_PlyrSpeed->setText(SpeedStrings[0]);
     exedir = QCoreApplication::applicationDirPath();
     MainWindowInstance = this;
 }

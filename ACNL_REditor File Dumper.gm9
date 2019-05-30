@@ -5,6 +5,7 @@
 set ERRORMSG "An Error Has Occured."
 set PREVIEW_MODE "ACNL REditor File Dumper v1.0\nby Slattz"
 set OUTDIR "0:/ACNL_REditor"
+set GAMEPATH ""
 
 if	not find $[OUTDIR] NULL
 	if	not mkdir $[OUTDIR]
@@ -15,79 +16,233 @@ end
 
 # Main Menu #
 @Start
-set PREVIEW_MODE "ACNL REditor File Dumper v1.0\nby Slattz\n \nNote:\nACNL REditor only works with the latest update\nof ACNL games.\n \nTherefore, this script will only get\nfiles from the downloaded update.\n \nIt will not get files from\nthe base game or a cartridge."
+set PREVIEW_MODE "ACNL REditor File Dumper v1.0\nby Slattz\n \nNote:\nACNL REditor only works with the latest update\nof ACNL games (v1.5)."
 set OUTDIR "0:/ACNL_REditor"
+set GAMEPATH ""
 labelsel -o -s "Choose which game to dump files from." GameSelect_*
 goto Start
 
 @GameSelect_Orig_EUR
 set TIDLOW 00086400
 set GAME "Orig_EUR"
-goto DumpUpdate
+goto Common
 
 @GameSelect_Orig_USA
 set TIDLOW 00086300
 set GAME "Orig_USA"
-goto DumpUpdate
+goto Common
 
 @GameSelect_Orig_JPN
 set TIDLOW 00086200
 set GAME "Orig_JPN"
-goto DumpUpdate
+goto Common
 
 #@GameSelect_Orig_KOR
 #set TIDLOW 00086500
 #set GAME "Orig_KOR"
-#goto DumpUpdate
+#goto Common
 
 @GameSelect_PreInstalled_WA_EUR
 set TIDLOW 00198f00
 set GAME "PreInstalled_WA_EUR"
-goto DumpUpdate
+goto Common
 
 @GameSelect_PreInstalled_WA_USA
 set TIDLOW 00198e00
 set GAME "PreInstalled_WA_USA"
-goto DumpUpdate
+goto Common
 
 @GameSelect_PreInstalled_WA_JPN
 set TIDLOW 00198d00
 set GAME "PreInstalled_WA_JPN"
-goto DumpUpdate
+goto Common
 
 #@GameSelect_PreInstalled_WA_KOR
 #set TIDLOW 00199000
 #set GAME "PreInstalled_WA_KOR"
-#goto DumpUpdate
+#goto Common
 
-@DumpUpdate
+@Common
 set PREVIEW_MODE "ACNL REditor Files Dumper\nby Slattz\n\n> Dumping Files From $[GAME]"
-if	not find A:/title/0004000e/$[TIDLOW]/content/0000000?.app UPDATE
-    echo "Couldn't find $[GAME].\nIt is likely not installed.\nTID: 0004000e$[TIDLOW]"
-	goto Start
-end
-imgmount $[UPDATE]
 
 if	find $[OUTDIR]/$[GAME] NULL
     rm -o -s $[OUTDIR]/$[GAME]
 end
-set OUTDIR "$[OUTDIR]/$[GAME]/rom"
-set ROMFS "$[OUTDIR]/romfs"
-set EXEFS "$[OUTDIR]/exefs"
+set ROMDIR "$[OUTDIR]/$[GAME]/rom"
+set ROMFS "$[ROMDIR]/romfs"
+set EXEFS "$[ROMDIR]/exefs"
 
-mkdir $[OUTDIR]
+mkdir $[ROMDIR]
 mkdir $[EXEFS]
 mkdir $[ROMFS]
 mkdir $[ROMFS]/Item/Param
 
+if chk $[GAME] "Orig_EUR"
+    goto DumpOrigFiles
+elif chk $[GAME] "Orig_USA"
+    goto DumpOrigFiles
+elif chk $[GAME] "Orig_JPN"
+    goto DumpOrigFiles
+#elif chk $[GAME] "Orig_KOR"
+#    goto DumpOrigFiles
+elif chk $[GAME] "PreInstalled_WA_EUR"
+    goto DumpWAFiles
+elif chk $[GAME] "PreInstalled_WA_USA"
+    goto DumpUSA_WAFiles
+elif chk $[GAME] "PreInstalled_WA_JPN"
+    goto DumpWAFiles
+#elif chk $[GAME] "PreInstalled_WA_KOR"
+#    goto DumpWAFiles
+else
+    echo "GAME was not set to a recognised value: $[GAME]"
+    goto Start
+end
+
+#All Orig games have to have the update
+@DumpOrigFiles
+set PREVIEW_MODE "ACNL REditor Orig Files Dumper\nby Slattz\n\n> Dumping Files From $[GAME]"
+
+if	not find A:/title/0004000e/$[TIDLOW]/content/0000000?.app UPDATE
+    echo "Couldn't find $[GAME]'s update.\nIt is likely not installed.\nTID: 0004000e$[TIDLOW]"
+    if find $[OUTDIR]/$[GAME] NULL
+        rm -o -s $[OUTDIR]/$[GAME]
+    end
+	goto Start
+end
+imgmount $[UPDATE]
+
 set ERRORMSG "Dumping code.bin failed."
 cp -w -n G:/exefs/.code $[EXEFS]/code.bin
-set ERRORMSG "Dumping Item.bin failed."
+
+set ERRORMSG "Orig: Dumping Item.bin failed."
 cp -w -n G:/romfs/Item/Param/Item.bin $[ROMFS]/Item/Param/Item.bin
 imgumount
 
-echo "Files dumped succesfully:\n$[OUTDIR]/"
+echo "Orig: All files dumped to:\n$[ROMDIR]/"
+goto GameSelect_Exit
 
-#@GameSelect_About
+
+
+#Specific to Preinstalled-WA USA
+@DumpUSA_WAFiles
+set PREVIEW_MODE "ACNL REditor USA WA Files Dumper\nby Slattz\n\n> Dumping Files From $[GAME]"
+
+if not find C:/00040000$[TIDLOW]_*.3ds CARTPATH
+    goto DumpWAUSAFiles_Installed_On_SD
+end
+
+labelsel -o -s "Choose which game type to dump files from." DumpUSA_WAFiles_*
+goto GameSelect_Exit
+
+#Specific to Preinstalled-WA USA; If user has cart
+@DumpUSA_WAFiles_Cartridge
+if not find C:/00040000$[TIDLOW]_*.3ds CARTPATH
+    echo "Couldn't find $[GAME] Cart.\nMake sure you have the ACNL $[GAME] cart inserted!\nTID: 00040000$[TIDLOW]"
+    if	find $[OUTDIR]/$[GAME] NULL
+        rm -o -s $[OUTDIR]/$[GAME]
+    end
+	goto Start
+end
+
+imgmount $[CARTPATH]
+
+set ERRORMSG "Dumping code.bin failed."
+cp -w -n G:/content0.game/exefs/.code $[EXEFS]/code.bin
+
+set ERRORMSG "WA USA Cart: Dumping Item.bin failed."
+cp -w -n G:/content0.game/romfs/Item/Param/Item.bin $[ROMFS]/Item/Param/Item.bin
+imgumount
+
+echo "WA USA Cart: Files dumped succesfully to:\n$[ROMDIR]/"
+goto GameSelect_Exit
+
+
+#Specific to Preinstalled-WA USA; If user has SD
+@DumpUSA_WAFiles_Installed_On_SD
+if	not find A:/title/00040000/$[TIDLOW]/content/00000000.app BASE
+    echo "Couldn't find $[GAME] BaseGame.\nIt's weird you have the update but not the game.\nIf you have a cartridge, please instert it and try again.\nTID: 00040000$[TIDLOW]"
+    if	find $[OUTDIR]/$[GAME] NULL
+        rm -o -s $[OUTDIR]/$[GAME]
+    end
+    goto Start
+end
+
+imgmount $[BASE]
+
+
+set ERRORMSG "Dumping code.bin failed."
+cp -w -n G:/exefs/.code $[EXEFS]/code.bin
+
+set ERRORMSG "WA USA SD: Dumping Item.bin failed."
+cp -w -n G:/romfs/Item/Param/Item.bin $[ROMFS]/Item/Param/Item.bin
+imgumount
+
+echo "WA USA SD: Files dumped succesfully to:\n$[ROMDIR]/"
+goto GameSelect_Exit
+
+
+
+#Specific to Preinstalled-WA non-USA, as we have to get files from the update and base game.
+@DumpWAFiles
+set PREVIEW_MODE "ACNL REditor WA Files Dumper\nby Slattz\n\n> Dumping Files From $[GAME]"
+
+if	not find A:/title/0004000e/$[TIDLOW]/content/0000000?.app UPDATE
+    echo "Couldn't find $[GAME]'s update.\nIt is likely not installed.\nTID: 0004000e$[TIDLOW]"
+    if	find $[OUTDIR]/$[GAME] NULL
+        rm -o -s $[OUTDIR]/$[GAME]
+    end
+	goto Start
+end
+imgmount $[UPDATE]
+
+set ERRORMSG "Dumping code.bin failed."
+cp -w -n G:/exefs/.code $[EXEFS]/code.bin
+imgumount
+
+if not find C:/00040000$[TIDLOW]_*.3ds CARTPATH
+    goto DumpWAFiles_Installed_On_SD
+end
+
+labelsel -o -s "Choose which game type to dump files from." DumpWAFiles_*
+goto GameSelect_Exit
+
+
+#Specific to Preinstalled-WA; If user has cart
+@DumpWAFiles_Cartridge
+if not find C:/00040000$[TIDLOW]_*.3ds CARTPATH
+    echo "Couldn't find $[GAME] BaseGame.\nMake sure you have the ACNL $[GAME] cart inserted!\nTID: 00040000$[TIDLOW]"
+    if	find $[OUTDIR]/$[GAME] NULL
+        rm -o -s $[OUTDIR]/$[GAME]
+    end
+	goto Start
+end
+
+imgmount $[CARTPATH]
+
+set ERRORMSG "WA Cart: Dumping Item.bin failed."
+cp -w -n G:/content0.game/romfs/Item/Param/Item.bin $[ROMFS]/Item/Param/Item.bin
+imgumount
+
+echo "WA Cart: Files dumped succesfully to:\n$[ROMDIR]/"
+goto GameSelect_Exit
+
+#Specific to Preinstalled-WA; If user has SD
+@DumpWAFiles_Installed_On_SD
+if	not find A:/title/00040000/$[TIDLOW]/content/00000000.app BASE
+    echo "Couldn't find $[GAME] BaseGame.\nIt's weird you have the update but not the game.\nIf you have a cartridge, please insert it and try again.\nTID: 00040000$[TIDLOW]"
+    if	find $[OUTDIR]/$[GAME] NULL
+        rm -o -s $[OUTDIR]/$[GAME]
+    end
+    goto Start
+end
+
+imgmount $[BASE]
+
+set ERRORMSG "WA SD: Dumping Item.bin failed."
+cp -w -n G:/romfs/Item/Param/Item.bin $[ROMFS]/Item/Param/Item.bin
+imgumount
+
+echo "WA SD: Files dumped succesfully to:\n$[ROMDIR]/"
+goto GameSelect_Exit
 
 @GameSelect_Exit

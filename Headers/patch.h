@@ -95,9 +95,7 @@ public:
     static void Init(void);
     static QVector<PatchValues> MakeARMPatchValuesFromFunctionBytes(QVector<quint8> function);
 
-    quint32 m_Offset; //Offsets are code.bin + 0x100000, i.e. same offsets as hardware
-
-private:
+    quint32 m_Offset = 0; //Offsets are code.bin + 0x100000, i.e. same offsets as hardware
     QVector<PatchValues> m_Values;
 
 };
@@ -142,5 +140,24 @@ extern Patch Nooks;
 extern Patch Katrina;
 extern Patch Redd;
 extern Patch NightOwl;
+
+/* Button Remapper */
+extern Patch Button_RunB;
+extern Patch Button_RunL;
+extern Patch Button_RunR;
+extern Patch Button_Unequip;
+extern Patch Button_ItemSwitchDL;
+extern Patch Button_ItemSwitchDR;
+extern Patch Button_LookUp;
+extern Patch Button_Pickup;
+extern Patch Button_Interact;
+extern Patch Button_ScreenshotL;
+extern Patch Button_ScreenshotR;
+extern Patch Button_SaveMenu;
+
+/* Button Remapper Utils */
+extern Patch hidKeysDown;
+extern Patch hidKeysHeld;
+extern Patch hidKeysUp;
 
 #endif // PATCH_H

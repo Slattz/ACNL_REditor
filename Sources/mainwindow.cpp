@@ -114,6 +114,12 @@ void MainWindow::on_FileSave_triggered()
             QMessageBox::warning(nullptr, "ApplyShopTimes Error", "At least one PatchCode Failed in ApplyShopTimes.");
         }
 
+        res = ButtonRemap::Apply(codebin_o);
+        if(!res) {
+            errors++;
+            QMessageBox::warning(nullptr, "ButtonRemap Error", "At least one PatchCode Failed in ButtonRemap::Apply.");
+        }
+
         codebin_o->m_file->flush();
         codebin_o->m_file->close();
     }

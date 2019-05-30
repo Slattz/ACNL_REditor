@@ -99,6 +99,45 @@ static const QVector<quint8> VillagersNeverMoveFunction = {
 0x63, 0x97, 0x01, 0x00, 0xFC, 0xF9, 0xFF, 0xFF //Const values
 };
 
+//Check if button is newly pressed
+static const QVector<quint8> hidKeysDownPattern = { // -0x30 for function start
+0x00, 0x00, 0xA0, 0x93, 0x04, 0x00, 0x90, 0xE5,
+0x04, 0x00, 0x10, 0xE0, 0x01, 0x00, 0xA0, 0x13
+};
+
+//Check if button is being held
+static const QVector<quint8> hidKeysHeldPattern = { // -0x38 for function start
+0x0C, 0x00, 0x90, 0xE5, 0x01, 0x00, 0x80, 0xE1,
+0x04, 0x00, 0x10, 0xE0, 0x01, 0x00, 0xA0, 0x13
+};
+
+//Check if button is newly released
+static const QVector<quint8> hidKeysUpPattern = { // -0x30 for function start
+0x00, 0x00, 0xA0, 0x93, 0x08, 0x00, 0x90, 0xE5,
+0x04, 0x00, 0x10, 0xE0, 0x01, 0x00, 0xA0, 0x13
+};
+
+static const QVector<quint8> BTN_SaveMenuPattern = { //+4
+0x24, 0x00, 0x9F, 0xE5, 0x40, 0x10, 0xA0, 0xE3,
+0x00, 0x00, 0x90, 0xE5
+};
+
+static const QVector<quint8> BTN_ScreenshotPattern = { //+0x10 for L, +0x24 for R
+0x00, 0x04, 0x94, 0xE5, 0x00, 0x00, 0x50, 0xE3,
+0x01, 0x00, 0x40, 0xC2, 0x00, 0x00, 0x81, 0xC5
+};
+
+/*
+RunB: +0x94; RunL: +0xAC; RunR: +0xC0; Look Up +0x154; ItemSwitchR: +0x1D4
+ItemSwitchL: +0x208; Unequip: +0x240; Interact: +0x11C; Pickup: +0xE4
+*/
+static const QVector<quint8> BTN_General = { //0x68D140 in EUR orig 1.5
+0x11, 0x00, 0xD5, 0xE5, 0x11, 0x00, 0xC4, 0xE5,
+0x12, 0x00, 0xD5, 0xE5, 0x12, 0x00, 0xC4, 0xE5,
+0x13, 0x00, 0xD5, 0xE5, 0x13, 0x00, 0xC4, 0xE5,
+0x14, 0xD0, 0x8D, 0xE2, 0x00, 0x00, 0xA0, 0xE3
+};
+
 /* Exefs->General */
 
 Patch NativeFruitPrice;
@@ -141,6 +180,26 @@ Patch Nooks;
 Patch Katrina;
 Patch Redd;
 Patch NightOwl;
+
+/* Button Remapper */
+Patch Button_RunB;
+Patch Button_RunL;
+Patch Button_RunR;
+Patch Button_Unequip;
+Patch Button_ItemSwitchDL;
+Patch Button_ItemSwitchDR;
+Patch Button_LookUp;
+Patch Button_Pickup;
+Patch Button_Interact;
+Patch Button_ScreenshotL;
+Patch Button_ScreenshotR;
+Patch Button_SaveMenu;
+
+/* Button Remapper Utils */
+Patch hidKeysDown;
+Patch hidKeysHeld;
+Patch hidKeysUp;
+
 
 Patch::Patch() { }
 
@@ -253,4 +312,25 @@ void Patch::Init(void) {
     Katrina =           Patch(0x7167A0, 0x717FEC, 0x716FF4, KOR, 0x716778, 0x71749C, 0x716FCC, WAKOR, FFVec);
     Redd =              Patch(0x716B1C, 0x718368, 0x717370, KOR, 0x716AF4, 0x717818, 0x717348, WAKOR, FFVec);
     NightOwl =          Patch(0x7585C4, 0x759E24, 0x758E2C, KOR, 0x75859C, 0x758E08, 0x758E04, WAKOR, FFVec);
+
+    /* Button Remap */
+    Button_RunB =       Patch(BTN_General, QVector<PatchValues>({{0xE3A00002, 0}}), 0x94);
+    Button_RunL =       Patch(BTN_General, QVector<PatchValues>({{0xE3A00A02, 0}}), 0xAC);
+    Button_RunR =       Patch(BTN_General, QVector<PatchValues>({{0xE3A00901, 0}}), 0xC0);
+    Button_Unequip =    Patch(BTN_General, QVector<PatchValues>({{0xE3A00802, 0}}), 0x240);
+    Button_ItemSwitchDL=Patch(BTN_General, QVector<PatchValues>({{0xE3A00701, 0}}), 0x208);
+    Button_ItemSwitchDR=Patch(BTN_General, QVector<PatchValues>({{0xE3A00702, 0}}), 0x1D4);
+    Button_LookUp =     Patch(BTN_General, QVector<PatchValues>({{0xE3A00801, 0}}), 0x154);
+    Button_Pickup =     Patch(BTN_General, QVector<PatchValues>({{0xE3A00010, 0}}), 0xE4);
+    Button_Interact =   Patch(BTN_General, QVector<PatchValues>({{0xE3A00001, 0}}), 0x11C);
+
+    Button_ScreenshotL= Patch(BTN_ScreenshotPattern, QVector<PatchValues>({{0xE3A00A02, 0}}), 0x10);
+    Button_ScreenshotR= Patch(BTN_ScreenshotPattern, QVector<PatchValues>({{0xE3A00901, 0}}), 0x24);
+    Button_SaveMenu =   Patch(BTN_SaveMenuPattern, QVector<PatchValues>({{0xE1A00000, 0}, {0xE3A00B02, 4}, {0xEB0E02A8, 8}}), 4);
+
+    /* Button Remapper Utils */
+    hidKeysDown =       Patch(hidKeysDownPattern, QVector<PatchValues>({{0xE92D4010,0}}), static_cast<quint32>(-0x30));
+    hidKeysHeld =       Patch(hidKeysHeldPattern, QVector<PatchValues>({{0xE92D4010,0}}), static_cast<quint32>(-0x38));
+    hidKeysUp =         Patch(hidKeysUpPattern, QVector<PatchValues>({{0xE92D4010,0}}), static_cast<quint32>(-0x30));
+
 }

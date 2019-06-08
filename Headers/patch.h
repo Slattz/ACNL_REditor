@@ -100,6 +100,19 @@ public:
 
 };
 
+/* General Utils */
+extern Patch UnusedCode;
+extern Patch UnusedRoData;
+
+/* Button Remapper Utils */
+extern Patch hidKeysDown;
+extern Patch hidKeysHeld;
+extern Patch hidKeysUp;
+
+/* Rainbow Text Utils */
+extern Patch RainbowFunction;
+extern Patch RainbowFunctionRoData;
+
 extern Patch NativeFruitPrice;
 extern Patch ReeseBuy;
 extern Patch NooklingsBuy;
@@ -116,6 +129,7 @@ extern Patch PickAllTours;
 extern Patch MusicHasEcho;
 extern Patch VillagersNeverMove;
 extern Patch VillagersNeverMove2;
+extern Patch RainbowText;
 //extern Patch NoGrassDecay;
 
 /* Exefs->Player */
@@ -154,10 +168,5 @@ extern Patch Button_Interact;
 extern Patch Button_ScreenshotL;
 extern Patch Button_ScreenshotR;
 extern Patch Button_SaveMenu;
-
-/* Button Remapper Utils */
-extern Patch hidKeysDown;
-extern Patch hidKeysHeld;
-extern Patch hidKeysUp;
 
 #endif // PATCH_H

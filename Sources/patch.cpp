@@ -15,6 +15,20 @@ ShopCodeOffsets_s off_Redd = {0xD0,0xC0,0x90,0xDC,false, true};
 static const QVector<PatchValues> NOPVec({{NOP, 0}});
 static const QVector<PatchValues> FFVec({{0xFFFFFFFF, 0}});
 
+//Unused Japanese Debug Text in .rodata
+static const QVector<quint8> UnusedRoData_Pattern = {
+0xE9, 0x80, 0x9A, 0xE4, 0xBF, 0xA1, 0xE3, 0x82,
+0xBB, 0xE3, 0x83, 0xBC, 0xE3, 0x83, 0x96
+};
+
+//Unused functions in .text
+static const QVector<quint8> UnusedCode_Pattern = {
+0x14, 0x20, 0xA0, 0xE3, 0xD0, 0x00, 0x80, 0xE5,
+0xD8, 0x20, 0x80, 0xE5, 0x28, 0xC0, 0x8F, 0xE2,
+0xD4, 0x30, 0x80, 0xE5, 0x01, 0x40, 0xA0, 0xE3,
+0xBC, 0xC0, 0x80, 0xE5
+};
+
 static const QVector<quint8> NoResettiPattern = {
 0x57, 0x0C, 0x80, 0xE2, 0x0A, 0x10, 0xD0, 0xE5,
 0x02, 0x10, 0x81, 0xE3, 0x0A, 0x10, 0xC0, 0xE5
@@ -138,8 +152,51 @@ static const QVector<quint8> BTN_General = { //0x68D140 in EUR orig 1.5
 0x14, 0xD0, 0x8D, 0xE2, 0x00, 0x00, 0xA0, 0xE3
 };
 
-/* Exefs->General */
+/*
+ * Custom Function for Rainbow Text
+ * This function cycles through predetermined rainbow values and returns them
+*/
+static const QVector<quint8> GetNextRainbowColour_Function = {
+0x1E, 0x40, 0x2D, 0xE9, //Start Of Function: STMFD SP!, {R1-R4,LR}
+0x2C, 0x30, 0x9F, 0xE5, 0xB0, 0x30, 0xD3, 0xE5,
+0x73, 0x30, 0xEF, 0xE6, 0x05, 0x00, 0x53, 0xE3,
+0x01, 0x30, 0xA0, 0x83, 0x1C, 0x10, 0x9F, 0x95,
+0x01, 0x20, 0x83, 0x92, 0x03, 0x01, 0x91, 0x97,
+0x72, 0x30, 0xEF, 0x96, 0x08, 0x20, 0x9F, 0xE5,
+0x0C, 0x00, 0x9F, 0x85, 0xB0, 0x30, 0xC2, 0xE5,
+0x1E, 0x80, 0xBD, 0xE8, //End Of Function: LDMFD SP!, {R1-R4,PC}
+0x00, 0x4B, 0x94, 0x00, //Offset for byte
+0x00, 0x00, 0x00, 0x00, //Offset for RainbowTable
+0xFF, 0x00, 0x00, 0xFF  //RainbowTable[0]
+};
 
+static const QVector<quint8> GetNextRainbowColour_FunctionRoData = {
+0xFF, 0x00, 0x00, 0xFF,  0xFF, 0x7F, 0x00, 0xFF,
+0xFF, 0xEF, 0x00, 0xFF,  0x00, 0xF1, 0x1D, 0xFF,
+0x00, 0x79, 0xFF, 0xFF,  0xA8, 0x00, 0xFF, 0xFF
+};
+
+static const QVector<quint8> RainbowTextPattern = {
+0x10, 0x00, 0x97, 0xE5, 0x00, 0xC0, 0xA0, 0xE1,
+0x00, 0x28, 0xA0, 0xE1, 0x00, 0x3C, 0xA0, 0xE1,
+0x22, 0x2C, 0xA0, 0xE1, 0x02, 0x38, 0x83, 0xE1,
+0x00, 0x24, 0xA0, 0xE1, 0x22, 0x2C, 0xA0, 0xE1
+};
+
+/* General Utils */
+Patch UnusedCode;
+Patch UnusedRoData;
+
+/* Button Remapper Utils */
+Patch hidKeysDown;
+Patch hidKeysHeld;
+Patch hidKeysUp;
+
+/* Rainbow Text Utils */
+Patch RainbowFunction;
+Patch RainbowFunctionRoData;
+
+/* Exefs->General */
 Patch NativeFruitPrice;
 Patch ReeseBuy;
 Patch NooklingsBuy;
@@ -156,6 +213,7 @@ Patch PickAllTours; //Pattern: F0 4F 2D E9 00 50 A0 E1 00 B0 A0 E3  02 8B 2D ED 
 Patch MusicHasEcho; //Pattern:
 Patch VillagersNeverMove; //Thumb; Pattern: 06 98 05 99 0A 28
 Patch VillagersNeverMove2; //Thumb; Pattern: 2F 18 03 20 38 56 00 28
+Patch RainbowText;
 //Patch NoGrassDecay(JPN, USA, EUR, KOR, JPN, USA, EUR, WAKOR, 0xE3A0000FF);
 
 /* Exefs->Player */
@@ -194,12 +252,6 @@ Patch Button_Interact;
 Patch Button_ScreenshotL;
 Patch Button_ScreenshotR;
 Patch Button_SaveMenu;
-
-/* Button Remapper Utils */
-Patch hidKeysDown;
-Patch hidKeysHeld;
-Patch hidKeysUp;
-
 
 Patch::Patch() { }
 
@@ -272,6 +324,22 @@ QVector<PatchValues> Patch::MakeARMPatchValuesFromFunctionBytes(QVector<quint8> 
 }
 
 void Patch::Init(void) {
+
+    /* General Utils */
+    UnusedCode =       Patch(UnusedCode_Pattern, QVector<PatchValues>({{0x00000000,0}}), static_cast<quint32>(-8));
+    UnusedRoData =     Patch(UnusedRoData_Pattern, QVector<PatchValues>({{0x00000000,0}}), 0);
+    while (UnusedRoData.m_Offset % 4) UnusedRoData.m_Offset++; //Align to 4 bytes
+    while (UnusedCode.m_Offset % 4) UnusedCode.m_Offset++; //Align to 4 bytes
+
+    /* Rainbow Text Utils */
+    RainbowFunction =  Patch(UnusedCode_Pattern, MakeARMPatchValuesFromFunctionBytes(GetNextRainbowColour_Function), 0);
+    RainbowFunctionRoData = Patch(UnusedRoData_Pattern, MakeARMPatchValuesFromFunctionBytes(GetNextRainbowColour_FunctionRoData), 0);
+
+    /* Button Remapper Utils */
+    hidKeysDown =       Patch(hidKeysDownPattern, QVector<PatchValues>({{0xE92D4010,0}}), static_cast<quint32>(-0x30));
+    hidKeysHeld =       Patch(hidKeysHeldPattern, QVector<PatchValues>({{0xE92D4010,0}}), static_cast<quint32>(-0x38));
+    hidKeysUp =         Patch(hidKeysUpPattern, QVector<PatchValues>({{0xE92D4010,0}}), static_cast<quint32>(-0x30));
+
     NativeFruitPrice =  Patch(0x30576C, 0x3056AC, 0x3056B8, KOR, 0x30576C, 0x305714, 0x3056B8, WAKOR, NOPVec);
     ReeseBuy =          Patch(0x768EE0, 0x76A740, 0x769748, KOR, 0x768EB8, 0x769724, 0x769720, WAKOR, NOPVec);
     NooklingsBuy =      Patch(0x769148, 0x76A9A8, 0x7699B0, KOR, 0x769120, 0x76998C, 0x769988, WAKOR, QVector<PatchValues>({{0xE1A041A0, 0}, {NOP, 8}}));
@@ -288,6 +356,7 @@ void Patch::Init(void) {
     MusicHasEcho =      Patch(MusicEchoPattern, QVector<PatchValues>({{0xE1A00000,0}, {0xE3A01003, 4}}), 0xC);
     VillagersNeverMove= Patch(VillagersNeverMovePattern, MakeARMPatchValuesFromFunctionBytes(VillagersNeverMoveFunction), static_cast<quint32>(-4));
     VillagersNeverMove2=Patch(VillagersNeverMovePattern2, MakeARMPatchValuesFromFunctionBytes(VillagersNeverMoveFunction), static_cast<quint32>(-0xA));
+    RainbowText =       Patch(RainbowTextPattern, QVector<PatchValues>({{0xE5970010, 0}, {0xE3E00000, static_cast<quint32>(-0x24)}}), 0);
     //static const Patch  NoGrassDecay(JPN, USA, EUR, KOR, JPN, USA, EUR, WAKOR, 0xE3A0000FF);
 
     /* Exefs->Player */
@@ -327,10 +396,4 @@ void Patch::Init(void) {
     Button_ScreenshotL= Patch(BTN_ScreenshotPattern, QVector<PatchValues>({{0xE3A00A02, 0}}), 0x10);
     Button_ScreenshotR= Patch(BTN_ScreenshotPattern, QVector<PatchValues>({{0xE3A00901, 0}}), 0x24);
     Button_SaveMenu =   Patch(BTN_SaveMenuPattern, QVector<PatchValues>({{0xE1A00000, 0}, {0xE3A00B02, 4}, {0xEB0E02A8, 8}}), 4);
-
-    /* Button Remapper Utils */
-    hidKeysDown =       Patch(hidKeysDownPattern, QVector<PatchValues>({{0xE92D4010,0}}), static_cast<quint32>(-0x30));
-    hidKeysHeld =       Patch(hidKeysHeldPattern, QVector<PatchValues>({{0xE92D4010,0}}), static_cast<quint32>(-0x38));
-    hidKeysUp =         Patch(hidKeysUpPattern, QVector<PatchValues>({{0xE92D4010,0}}), static_cast<quint32>(-0x30));
-
 }

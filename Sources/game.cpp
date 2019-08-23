@@ -207,27 +207,6 @@ bool Game::ApplyPatches(Ui::MainWindow *mainui, File *codebin) {
         res |= VillagersNeverMove2.Apply(codebin);
     }
 
-    if(mainui->CB_RainbowText->isChecked()) {
-        quint32 off_Rodata = UnusedRoData.m_Offset;
-        quint32 off_Code = UnusedCode.m_Offset;
-        RainbowFunctionRoData.m_Offset = off_Rodata;
-        RainbowFunction.m_Offset = off_Code;
-
-        qDebug() << "off_Rodata: 0x" + QString::number(off_Rodata, 16);
-        RainbowFunction.m_Values[15].Value = RainbowFunctionRoData.m_Offset;
-        RainbowFunction.m_Values[14].Value = 0x00944F50;
-
-        res |= RainbowFunctionRoData.Apply(codebin);
-        res |= RainbowFunction.Apply(codebin);
-
-        //Update Offsets as space has been used
-        UnusedCode.m_Offset += static_cast<quint32>(RainbowFunction.m_Values.size())*sizeof(RainbowFunction.m_Values[0].Value);
-        UnusedRoData.m_Offset += static_cast<quint32>(RainbowFunctionRoData.m_Values.size())*sizeof(RainbowFunctionRoData.m_Values[0].Value);
-
-        RainbowText.m_Values[0].Value = MAKE_BRANCH_LINK(RainbowText.m_Offset, RainbowFunction.m_Offset);
-        res |= RainbowText.Apply(codebin);
-    }
-
     if(mainui->CB_Confetti->isChecked()) {
         res |= Confetti.Apply(codebin);
         if(mainui->CMB_Confetti->currentIndex() != 2) { //If not set at normal

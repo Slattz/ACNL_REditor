@@ -271,6 +271,9 @@ bool Game::ApplyPatches(Ui::MainWindow *mainui, File *codebin) {
     if(mainui->CB_SecureValPass->isChecked())
         res |= SecureValueCheck.Apply(codebin);
 
+    if(mainui->CB_InstantText->isChecked())
+        res |= InstantText.Apply(codebin);
+
     if (res == true)
         return false; //At least one PatchCode Failed
 

@@ -79,6 +79,11 @@ static const QVector<quint8> RegionChecksPattern = {
 0x0F, 0x00, 0x00, 0xE2
 };
 
+static const QVector<quint8> InstantTextPattern = {
+0x08, 0x10, 0x8D, 0xE5, 0x08, 0x10, 0x8D, 0xE2,
+0x04, 0x00, 0xA0, 0xE1
+};
+
 /*
  * Pattern for 'MoveVillagerOutOfTown' function;
  * This is called by only 'CheckVillagersThatNeedToMoveOut' in code.bin which we also patch
@@ -189,6 +194,7 @@ Patch NoMosquito; //Pattern: 10 40 BD E8 03 20 A0 E1 A6 10 A0 E3
 Patch RegionCheck; //Pattern: 62 5A 84 E2 4E 01 D5 E5 0F 00 00 E2 - 0xC
 Patch ChecksumCheck; //Pattern: 08 D0 4D E2 0B B0 A0 E3 05 80 A0 E3 0C 60 A0 E3 + 0xB4
 Patch SecureValueCheck; //Pattern: 08 D0 4D E2 0B B0 A0 E3 05 80 A0 E3 0C 60 A0 E3 + 0xE0
+Patch InstantText; //Pattern: 08 10 8D E5 08 10 8D E2 04 00 A0 E1 + 0x10
 
 /* Shop Times: Addresses are start of function */
 Patch Retail;
@@ -317,18 +323,21 @@ void Patch::Init(void) {
     VillagersNeverMove= Patch(VillagersNeverMovePattern, MakeARMPatchValuesFromFunctionBytes(VillagersNeverMoveFunction), static_cast<quint32>(-4));
     VillagersNeverMove2=Patch(VillagersNeverMovePattern2, MakeARMPatchValuesFromFunctionBytes(VillagersNeverMoveFunction), static_cast<quint32>(-0xA));
     //static const Patch  NoGrassDecay(JPN, USA, EUR, KOR, JPN, USA, EUR, WAKOR, 0xE3A0000FF);
-    qDebug() << "End Exefs->Player";
+    qDebug() << "End Exefs->General";
 
     /* Exefs->Player */
     PlayerSpeed =       Patch(0x651708, 0x652C10, 0x651C48, KOR, 0x651708, 0x652138, 0x651C48, WAKOR, QVector<PatchValues>({{0x3F800000, 0}}));
     EditPattern =       Patch(0x2FEC78, 0x2FEC44, 0x2FECCC, KOR, 0x2FEC78, 0x2FE9C0, 0x2FECCC, WAKOR, QVector<PatchValues>({{0xE3A00001, 0}}));
     FlowersNoTrample =  Patch(0x596890, 0x597F58, 0x596FA0, KOR, 0x596890, 0x597470, 0x596FA0, WAKOR, QVector<PatchValues>({{0xE3A0001D, 0}}));
     NoMosquito =        Patch(0x5C245C, 0x5C3B24, 0x5C2B6C, KOR, 0x5C245C, 0x5C3054, 0x5C2B6C, WAKOR, QVector<PatchValues>({{0xE3A01006,0}})); //Pattern: 10 40 BD E8 03 20 A0 E1 A6 10 A0 E3
+    qDebug() << "End Exefs->Player";
 
     /* Exefs->Utilities */
     RegionCheck =       Patch(RegionChecksPattern, QVector<PatchValues>({{0xE1A00005,0}}), static_cast<quint32>(-0xC));
     ChecksumCheck =     Patch(SaveChecksPattern, QVector<PatchValues>({{0xE3A00001,0}, {0xE3A00001,0x1C}}), 0xB4);
     SecureValueCheck =  Patch(SaveChecksPattern, QVector<PatchValues>({{0xE3A00001, 0}}), 0xE0);
+    InstantText =       Patch(InstantTextPattern, QVector<PatchValues>({{0xE3A00001, 0}}), 0x48);
+    qDebug() << "End Exefs->Utilities";
 
     /* Shop Times: Addresses are start of function */
     Retail =            Patch(0x309310, 0x30929C, 0x309298, KOR, 0x309310, 0x309384, 0x309298, WAKOR, FFVec);
@@ -341,6 +350,7 @@ void Patch::Init(void) {
     Katrina =           Patch(0x7167A0, 0x717FEC, 0x716FF4, KOR, 0x716778, 0x71749C, 0x716FCC, WAKOR, FFVec);
     Redd =              Patch(0x716B1C, 0x718368, 0x717370, KOR, 0x716AF4, 0x717818, 0x717348, WAKOR, FFVec);
     NightOwl =          Patch(0x7585C4, 0x759E24, 0x758E2C, KOR, 0x75859C, 0x758E08, 0x758E04, WAKOR, FFVec);
+    qDebug() << "End Shop Times";
 
     /* Button Remap */
     Button_RunB =       Patch(BTN_General, QVector<PatchValues>({{0xE3A00002, 0}}), 0x94);
@@ -356,4 +366,5 @@ void Patch::Init(void) {
     Button_ScreenshotL= Patch(BTN_ScreenshotPattern, QVector<PatchValues>({{0xE3A00A02, 0}}), 0x10);
     Button_ScreenshotR= Patch(BTN_ScreenshotPattern, QVector<PatchValues>({{0xE3A00901, 0}}), 0x24);
     Button_SaveMenu =   Patch(BTN_SaveMenuPattern, QVector<PatchValues>({{0xE1A00000, 0}, {0xE3A00B02, 4}, {0xEB0E02A8, 8}}), 4);
+    qDebug() << "End Button Remap";
 }

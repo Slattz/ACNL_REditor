@@ -142,6 +142,7 @@ extern Patch NoMosquito;
 extern Patch RegionCheck;
 extern Patch ChecksumCheck;
 extern Patch SecureValueCheck;
+extern Patch InstantText;
 
 /* Shop Times: Addresses are start of function */
 extern Patch Retail;

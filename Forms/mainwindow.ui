@@ -768,6 +768,16 @@
               </property>
              </widget>
             </item>
+            <item row="3" column="0">
+             <widget class="QCheckBox" name="CB_InstantText">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enabling this code makes text render instantly.&lt;/p&gt;&lt;p&gt;Generally, text renders a letter at a time.&lt;/p&gt;&lt;p&gt;This speeds up rendering so text appears instantly.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="text">
+               <string>Instant Text</string>
+              </property>
+             </widget>
+            </item>
            </layout>
           </widget>
          </widget>

@@ -45,7 +45,6 @@ SOURCES += \
         Sources/file.cpp \
         Sources/game.cpp \
         Sources/shophourseditor.cpp \
-        Sources/itemrandomiser.cpp \
         Sources/patch.cpp \
         Sources/aboutwindow.cpp \
         Sources/buttonremap.cpp \
@@ -57,7 +56,6 @@ HEADERS += \
         Headers/file.h \
         Headers/game.h \
         Headers/shophourseditor.h \
-        Headers/itemrandomiser.h \
         Headers/patch.h \
         Headers/aboutwindow.h \
         Headers/buttonremap.h \
@@ -68,6 +66,5 @@ FORMS += \
         Forms/itempricechanger.ui \
         Forms/mainwindow.ui \
         Forms/shophourseditor.ui \
-        Forms/itemrandomiser.ui \
         Forms/aboutwindow.ui \
         Forms/buttonremap.ui

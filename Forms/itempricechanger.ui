@@ -64,22 +64,22 @@
      </property>
      <item>
       <property name="text">
-       <string>Item Names</string>
+       <string>Filter Type: Item Names</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Item IDs</string>
+       <string>Filter Type: Item IDs</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Buy Prices</string>
+       <string>Filter Type: Buy Prices</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Retail Sell Prices</string>
+       <string>Filter Type: Retail Sell Prices</string>
       </property>
      </item>
     </widget>

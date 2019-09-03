@@ -139,6 +139,7 @@ void MainWindow::on_FileSave_triggered()
 
 void MainWindow::on_FileClose_triggered() {
     qDebug() << "Close Pressed";
+    ItemPriceChanger::ClearPrices();
     ui->FileOpen->setEnabled(true); //Can open files
     ui->FileSave->setEnabled(false); //Can't save files
     ui->FileClose->setEnabled(false); //Can't close files

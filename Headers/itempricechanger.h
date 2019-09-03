@@ -29,7 +29,8 @@ class ItemPriceChanger : public QDialog
 public:
     explicit ItemPriceChanger(QWidget *parent = nullptr);
     ~ItemPriceChanger();
-    static QVector<ItemPrice_s *> GetPrices(void);
+    static const QVector<ItemPrice_s *>& GetPrices(void);
+    static void ClearPrices(void);
 
     enum TableColumns : int {
         ItemID = 0,
@@ -46,18 +47,17 @@ private slots:
     void on_tableWidget_itemChanged(QTableWidgetItem *item);
     void on_CMB_FilterType_currentIndexChanged(int index);
     void on_LE_Filter_textEdited(const QString &arg1);
-
     void on_CB_CaseSensitive_stateChanged(int arg1);
-
     void on_BTN_Randomise_clicked();
-
     void on_LE_RandomMin_textEdited(const QString &arg1);
-
     void on_LE_RandomMax_textEdited(const QString &arg1);
+    void on_LE_RandomMin_editingFinished();
+    void on_LE_RandomMax_editingFinished();
 
 private:
     Ui::ItemPriceChanger *ui;
     qint8 GetPriceMultiplier(int price);
+    void FixPrice(int& price, qint8& multiplier);
     void FilterVisibleRows(const QString& filter);
     void ResetVisibleRows();
     void ResetPricesToDefault(void);

@@ -54,8 +54,29 @@ ItemPriceChanger::~ItemPriceChanger()
     delete ui;
 }
 
-QVector<ItemPrice_s *> ItemPriceChanger::GetPrices(void) {
+const QVector<ItemPrice_s *>& ItemPriceChanger::GetPrices(void) {
     return s_ItemPrices;
+}
+
+void ItemPriceChanger::ClearPrices(void) {
+    for (auto price : s_ItemPrices) {
+        delete price;
+    }
+
+    s_ItemPrices.clear();
+    s_ItemPrices.resize(0);
+}
+
+//Used to comply with how the game does prices (u16 price * s8 multiplier)
+void ItemPriceChanger::FixPrice(int& price, qint8& multiplier) {
+    multiplier = (price<0) ? -1 : 1;
+    if (price > 65535 || price < -65535) {
+        multiplier = GetPriceMultiplier(price);
+        while (multiplier == 1 || multiplier == -1) {
+            (price<0) ? price++ : price--;
+            multiplier = GetPriceMultiplier(price);
+        }
+    }
 }
 
 void ItemPriceChanger::ResetPricesToDefault(void) {
@@ -152,17 +173,8 @@ void ItemPriceChanger::SaveTable(void) {
         int itemid =  ui->tableWidget->item(i, TableColumns::ItemID)->text().toInt(nullptr, 16);
         ItemPrice_s* bin = s_ItemPrices[itemid-0x2000];
 
-        qint8 mul = (price<0) ? -1 : 1;
-        if (price > 65535 || price < -65535) {
-            mul = GetPriceMultiplier(price);
-            while (mul == 1 || mul == -1) {
-                (price<0) ? price++ : price--;
-                mul = GetPriceMultiplier(price);
-            }
-        }
-
-        bin->Multiplier = mul;
-        bin->ItemPrice = (price/mul)&0xFFFF;
+        FixPrice(price, bin->Multiplier);
+        bin->ItemPrice = (price/bin->Multiplier)&0xFFFF;
     }
 }
 
@@ -215,14 +227,8 @@ void ItemPriceChanger::on_tableWidget_itemChanged(QTableWidgetItem *item)
     running = true;
 
     int price = item->text().toInt();
-    qint8 mul = (price<0) ? -1 : 1;
-    if (price > 65535 || price < -65535) {
-        mul = GetPriceMultiplier(price);
-        while (mul == 1 || mul == -1) {
-            (price<0) ? price++ : price--;
-            mul = GetPriceMultiplier(price);
-        }
-    }
+    qint8 mul = 1; //FixPrice will set to -1 if needed
+    FixPrice(price, mul);
 
     int ownrown = item->row();
     if (g_TableIsSetup) {
@@ -315,10 +321,6 @@ void ItemPriceChanger::on_LE_RandomMin_textEdited(const QString &arg1)
     if (ui->LE_RandomMax->text() != "" && arg1 != "") {
         ui->BTN_Randomise->setEnabled(true);
     }
-
-    if (arg1.toInt() > ui->LE_RandomMax->text().toInt()) {
-        ui->LE_RandomMin->setText(ui->LE_RandomMax->text());
-    }
 }
 
 void ItemPriceChanger::on_LE_RandomMax_textEdited(const QString &arg1)
@@ -327,9 +329,23 @@ void ItemPriceChanger::on_LE_RandomMax_textEdited(const QString &arg1)
     if (ui->LE_RandomMin->text() != "" && arg1 != "") {
         ui->BTN_Randomise->setEnabled(true);
     }
+}
 
-    if (arg1.toInt() < ui->LE_RandomMin->text().toInt()) {
-        ui->LE_RandomMax->setText(ui->LE_RandomMin->text());
+void ItemPriceChanger::on_LE_RandomMin_editingFinished()
+{
+    if (ui->LE_RandomMax->text() != "") {
+        if (ui->LE_RandomMin->text().toInt() > ui->LE_RandomMax->text().toInt()) {
+            ui->LE_RandomMin->setText(ui->LE_RandomMax->text());
+        }
+    }
+}
+
+void ItemPriceChanger::on_LE_RandomMax_editingFinished()
+{
+    if (ui->LE_RandomMin->text() != "") {
+        if (ui->LE_RandomMax->text().toInt() < ui->LE_RandomMin->text().toInt()) {
+            ui->LE_RandomMax->setText(ui->LE_RandomMin->text());
+        }
     }
 }
 
@@ -339,6 +355,8 @@ void ItemPriceChanger::on_BTN_Randomise_clicked()
         for( int i = 0; i < ui->tableWidget->rowCount(); ++i) {
             QRandomGenerator *gen = QRandomGenerator::global();
             int price = gen->bounded(ui->LE_RandomMin->text().toInt(), ui->LE_RandomMax->text().toInt());
+            qint8 mul = 1; //unneeded
+            FixPrice(price, mul);
             ui->tableWidget->item(i, TableColumns::BuyPrice)->setText(QString::number(price));
         }
     }

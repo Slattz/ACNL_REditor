@@ -117,6 +117,11 @@ static const QVector<quint8> VillagersNeverMoveFunction = {
 0x63, 0x97, 0x01, 0x00, 0xFC, 0xF9, 0xFF, 0xFF //Const values
 };
 
+static const QVector<quint8> NoGrassDecayPattern = { //Thumb
+0x40, 0x18, 0x00, 0x90,
+0x31, 0x46, 0x96, 0xA8
+};
+
 //Check if button is newly pressed
 static const QVector<quint8> hidKeysDownPattern = { // -0x30 for function start
 0x00, 0x00, 0xA0, 0x93, 0x04, 0x00, 0x90, 0xE5,
@@ -182,7 +187,7 @@ Patch PickAllTours; //Pattern: F0 4F 2D E9 00 50 A0 E1 00 B0 A0 E3  02 8B 2D ED 
 Patch MusicHasEcho; //Pattern:
 Patch VillagersNeverMove; //Thumb; Pattern: 06 98 05 99 0A 28
 Patch VillagersNeverMove2; //Thumb; Pattern: 2F 18 03 20 38 56 00 28
-//Patch NoGrassDecay(JPN, USA, EUR, KOR, JPN, USA, EUR, WAKOR, 0xE3A0000FF);
+Patch NoGrassDecay; //Thumb; Pattern: 40 18 00 90 31 46 96 A8
 
 /* Exefs->Player */
 Patch PlayerSpeed;
@@ -322,7 +327,7 @@ void Patch::Init(void) {
     MusicHasEcho =      Patch(MusicEchoPattern, QVector<PatchValues>({{0xE1A00000,0}, {0xE3A01003, 4}}), 0xC);
     VillagersNeverMove= Patch(VillagersNeverMovePattern, MakeARMPatchValuesFromFunctionBytes(VillagersNeverMoveFunction), static_cast<quint32>(-4));
     VillagersNeverMove2=Patch(VillagersNeverMovePattern2, MakeARMPatchValuesFromFunctionBytes(VillagersNeverMoveFunction), static_cast<quint32>(-0xA));
-    //static const Patch  NoGrassDecay(JPN, USA, EUR, KOR, JPN, USA, EUR, WAKOR, 0xE3A0000FF);
+    NoGrassDecay =      Patch(NoGrassDecayPattern, QVector<PatchValues>({{0x980022FF, 0}, {0x980022FF, 0x12}}), 0xC);
     qDebug() << "End Exefs->General";
 
     /* Exefs->Player */

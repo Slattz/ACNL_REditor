@@ -130,7 +130,7 @@ extern Patch MusicHasEcho;
 extern Patch VillagersNeverMove;
 extern Patch VillagersNeverMove2;
 extern Patch RainbowText;
-//extern Patch NoGrassDecay;
+extern Patch NoGrassDecay;
 
 /* Exefs->Player */
 extern Patch PlayerSpeed;

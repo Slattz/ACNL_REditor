@@ -4,7 +4,6 @@
 #include <QFile>
 #include <QFileDialog>
 #include "file.h"
-#include "Headers/itemrandomiser.h"
 #include "ui_mainwindow.h"
 #include "Headers/shophourseditor.h"
 #include "Headers/patch.h"
@@ -49,7 +48,7 @@ public:
     static quint32 ReadCode(File *codebin, quint32 offset);
 
     bool ApplyPatches(Ui::MainWindow *mainui, File *codebin);
-    bool ApplyItemRandomiser(File *Itembin, QVector<ItemPrice_s *> ItemPrices);
+    bool ApplyItemRandomiser(File *Itembin);
     void ApplyCustomShopCode(File *codebin);
     bool ApplyAlwaysOpenPatches(File *codebin);
     bool MakeShopHourCode(File *codebin, Patch ShopBaseAddr, ShopCodeOffsets_s Shop, HoursInfo_s Hours, quint8 HourType);

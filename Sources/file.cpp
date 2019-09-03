@@ -87,22 +87,6 @@ bool File::Append(QByteArray bytes, QDataStream::ByteOrder bo) {
     return true;
 }
 
-quint32 File::Read(quint32 offset, QDataStream::ByteOrder bo) {
-
-    quint32 bytes;
-    if(!this->Exists() || offset >= m_size)
-        return 0xFFFFFFFF;
-
-    QDataStream fin(m_file);
-    fin.setByteOrder(bo);
-
-    if(!m_file->seek(offset))
-        return 0xFFFFFFFF;
-
-    fin >> bytes;
-    return bytes;
-}
-
 QByteArray* File::Read(quint32 offset, int size, QDataStream::ByteOrder bo) {
 
     QByteArray* bytes = new QByteArray;

@@ -24,17 +24,16 @@ private slots:
     void on_FileClose_triggered();
 
     void on_dial_PlyrSpeed_valueChanged(int value);
-    void on_BTN_RandomItemPrice_clicked();
     void on_BTN_ShopTimes_clicked();
+    void on_actionAbout_triggered();
+    void on_BTN_Remapper_clicked();
+    void on_BTN_ItemPriceChanger_clicked();
+
     /* Debug Stuff */
     void on_actionEnableAll_triggered();
     void on_actionListItemPrices_triggered();
-
     void on_actionSetup_OutDir_triggered();
-
-    void on_actionAbout_triggered();
-
-    void on_BTN_Remapper_clicked();
+    void on_actionQuick_Open_EUR_triggered();
 
 private:
     Ui::MainWindow *ui = nullptr;
@@ -42,6 +41,8 @@ private:
     Game *game = nullptr;
     QString exedir;
     QString outdir;
+
+    void OpenGame(const QString setupdir);
 };
 
 extern MainWindow* MainWindowInstance;

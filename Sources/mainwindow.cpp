@@ -1,7 +1,7 @@
 #include "Headers/mainwindow.h"
 #include "ui_mainwindow.h"
 #include "Headers/aboutwindow.h"
-#include "Headers/itemrandomiser.h"
+#include "Headers/itempricechanger.h"
 #include "Headers/buttonremap.h"
 #include "Headers/shophourseditor.h"
 #include "Headers/file.h"
@@ -11,7 +11,6 @@
 #define VERSION "v1.1"
 
 static const QString SpeedStrings[5] = {"Normal: x1", "Fast: x1.25", "Faster: x1.5", "Speedy: x2", "Speeding Bullet: x3"};
-static QVector<ItemPrice_s*> ItemPrices;
 
 MainWindow* MainWindowInstance = nullptr;
 
@@ -43,15 +42,8 @@ Game* MainWindow::GetGameInstance(void) {
     return MainWindowInstance->game;
 }
 
-void MainWindow::on_FileOpen_triggered() {
-    dir = QFileDialog::getExistingDirectory(this, tr("Open \"rom\" Directory"),
-                    QDir::currentPath(), QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
-
-    if (dir == "\0") { //If no dir selected
-        ui->statusBar->showMessage("No folder was opened!", 10000);
-        return;
-    }
-
+void MainWindow::OpenGame(const QString setupdir) {
+    this->dir = setupdir;
     game = new Game(dir);
     if (!game->codebin->Exists() && !game->m_romfs.exist) {
         if (game)
@@ -72,8 +64,20 @@ void MainWindow::on_FileOpen_triggered() {
     ui->tab_exefs->setEnabled(game->m_exefs.exist); //Can only use Exefs tab if folder exists
     ui->tab_cro->setEnabled(false); //No CRO cheats atm [Can only use CRO tab if folder exists]
 
-    ui->BTN_RandomItemPrice->setEnabled(game->m_Itembin.meta.exist); //Can only use if Item.bin exists
+    ui->BTN_ItemPriceChanger->setEnabled(game->m_Itembin.meta.exist); //Can only use if Item.bin exists
     ui->statusBar->showMessage("Folder opened successfully! Current Game: " + game->GetCurrentGame(), 10000);
+}
+
+void MainWindow::on_FileOpen_triggered() {
+    dir = QFileDialog::getExistingDirectory(this, tr("Open \"rom\" Directory"),
+                    QDir::currentPath(), QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+
+    if (dir == "\0") { //If no dir selected
+        ui->statusBar->showMessage("No folder was opened!", 10000);
+        return;
+    }
+
+    this->OpenGame(dir);
 }
 
 void MainWindow::on_FileSave_triggered()
@@ -126,7 +130,7 @@ void MainWindow::on_FileSave_triggered()
 
     if (game->m_Itembin.meta.exist) {
         File *ItemBin_o = new File(outdir + "/romfs/Item/Param/Item.bin", QFile::ReadWrite);
-        game->ApplyItemRandomiser(ItemBin_o, ItemPrices);
+        game->ApplyItemRandomiser(ItemBin_o);
         ItemBin_o->m_file->flush();
         ItemBin_o->m_file->close();
     }
@@ -149,15 +153,6 @@ void MainWindow::on_dial_PlyrSpeed_valueChanged(int value) {
     ui->label_PlyrSpeed->setText(SpeedStrings[value-1]);
 }
 
-void MainWindow::on_BTN_RandomItemPrice_clicked() {
-    qDebug() << "Random Items Pressed";
-    ItemRandomiser randWindow;
-    randWindow.setModal(false);
-    randWindow.exec();
-    ItemPrices.clear();
-    ItemPrices = randWindow.GetPrices();
-}
-
 void MainWindow::on_BTN_ShopTimes_clicked()
 {
     qDebug() << "Shop Hours Pressed";
@@ -174,30 +169,65 @@ void MainWindow::on_actionAbout_triggered()
     aboutWindow.exec();
 }
 
-/* Debug Stuff */
-void MainWindow::on_actionEnableAll_triggered()
-{
-    ui->tab_romfs->setEnabled(true);
-    ui->tab_exefs->setEnabled(true);
-    ui->tab_cro->setEnabled(true);
-}
-
-void MainWindow::on_actionListItemPrices_triggered()
-{
-    qDebug() << "ItemPrices.size(): " << ItemPrices.size();
-    for (int i = 0; i < ItemPrices.size(); i++) {
-        qDebug() << i+1 << ":  Price: " << ItemPrices[i]->ItemPrice * ItemPrices[i]->Multiplier;
-    }
-}
-
-void MainWindow::on_actionSetup_OutDir_triggered()
-{
-    game->SetupOutDir(exedir, exedir + "/luma/titles/" + TIDs[game->m_GameType]);
-}
-
 void MainWindow::on_BTN_Remapper_clicked()
 {
     ButtonRemap remapWindow;
     remapWindow.setModal(false);
     remapWindow.exec();
 }
+
+void MainWindow::on_BTN_ItemPriceChanger_clicked()
+{
+    qDebug() << "Item Price Changer Pressed";
+    ItemPriceChanger priceWindow;
+    priceWindow.setModal(false);
+    priceWindow.exec();
+}
+
+
+/* Debug Stuff */
+void MainWindow::on_actionEnableAll_triggered()
+{
+#ifdef QT_NO_DEBUG_OUTPUT //Only set for release ∴ can auto disable debug tab for release
+    return;
+#else
+    ui->tab_romfs->setEnabled(true);
+    ui->tab_exefs->setEnabled(true);
+    ui->tab_cro->setEnabled(true);
+#endif
+}
+
+void MainWindow::on_actionListItemPrices_triggered()
+{
+#ifdef QT_NO_DEBUG_OUTPUT //Only set for release ∴ can auto disable debug tab for release
+    return;
+#else
+    QVector<ItemPrice_s *> ItemPrices = ItemPriceChanger::GetPrices();
+    qDebug() << "ItemPrices.size(): " << ItemPrices.size();
+    for (int i = 0; i < ItemPrices.size(); i++) {
+        qDebug() << i+1 << ":  Price: " << ItemPrices[i]->ItemPrice * ItemPrices[i]->Multiplier;
+    }
+#endif
+}
+
+void MainWindow::on_actionSetup_OutDir_triggered()
+{
+#ifdef QT_NO_DEBUG_OUTPUT //Only set for release ∴ can auto disable debug tab for release
+    return;
+#else
+    game->SetupOutDir(exedir, exedir + "/luma/titles/" + TIDs[game->m_GameType]);
+#endif
+}
+
+void MainWindow::on_actionQuick_Open_EUR_triggered()
+{
+#ifdef QT_NO_DEBUG_OUTPUT //Only set for release ∴ can auto disable debug tab for release
+    return;
+#else
+    QString path = QFileInfo(exedir + "../../../../../ACNL_REditor/Orig_EUR/rom/").absolutePath();
+    qDebug() << path;
+    this->OpenGame(path);
+#endif
+}
+
+

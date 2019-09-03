@@ -22,7 +22,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG(release, debug|release):DEFINES += QT_NO_DEBUG_OUTPUT
 @
 
-CONFIG += c++17
+CONFIG += gnu++17
 
 # remove possible other optimization flags
 QMAKE_CXXFLAGS_RELEASE -= -O
@@ -48,7 +48,9 @@ SOURCES += \
         Sources/itemrandomiser.cpp \
         Sources/patch.cpp \
         Sources/aboutwindow.cpp \
-        Sources/buttonremap.cpp
+        Sources/buttonremap.cpp \
+        Sources/itempricechanger.cpp \
+        Sources/textboxdelegate.cpp
 
 HEADERS += \
         Headers/mainwindow.h \
@@ -58,9 +60,12 @@ HEADERS += \
         Headers/itemrandomiser.h \
         Headers/patch.h \
         Headers/aboutwindow.h \
-        Headers/buttonremap.h
+        Headers/buttonremap.h \
+        Headers/itempricechanger.h \
+        Headers/textboxdelegate.h
 
 FORMS += \
+        Forms/itempricechanger.ui \
         Forms/mainwindow.ui \
         Forms/shophourseditor.ui \
         Forms/itemrandomiser.ui \

@@ -1,5 +1,6 @@
 #include "Headers/game.h"
 #include "Headers/mainwindow.h"
+#include "Headers/itempricechanger.h"
 
 /* Each entry relative to Game_s */
 QString TIDs[8] = {"0004000000086200", "0004000000086300", "0004000000086400", "0004000000086500",  //Orig Game
@@ -175,7 +176,7 @@ quint32 Game::ReadCode(File *codebin, quint32 offset) {
     if(!codebin->Exists() || !offset || offset >= codebin->m_file->size())
         return false;
 
-    return codebin->Read(offset-0x100000, QDataStream::LittleEndian); //-0x100000 is actual code.bin file offset
+    return codebin->Read<quint32>(offset-0x100000, QDataStream::LittleEndian); //-0x100000 is actual code.bin file offset
 }
 
 bool Game::ApplyPatches(Ui::MainWindow *mainui, File *codebin) {
@@ -276,17 +277,19 @@ bool Game::ApplyPatches(Ui::MainWindow *mainui, File *codebin) {
     return true; //No PatchCode Failed
 }
 
-bool Game::ApplyItemRandomiser(File *Itembin, QVector<ItemPrice_s *> ItemPrices) {
+bool Game::ApplyItemRandomiser(File *Itembin) {
     if(!Itembin->Exists())
         return false;
 
     QDataStream fout(Itembin->m_file);
     fout.setByteOrder(QDataStream::LittleEndian);
 
+    QVector<ItemPrice_s *> ItemPrices = ItemPriceChanger::GetPrices();
+
     if (ItemPrices.size() > 0x172B)
         ItemPrices.resize(0x172B);
 
-    for (int i = 1; i < ItemPrices.size()-1; i++) { //Start at 1 to skip setting price for invalid items
+    for (int i = 0; i < ItemPrices.size(); i++) { //Start at 1 to skip setting price for invalid items
         Itembin->m_file->seek((0x1e*i)+2); //u16 ItemPrice
         fout << ItemPrices[i]->ItemPrice;
 

@@ -6,7 +6,7 @@
 #include <QAbstractButton>
 #include <QMessageBox>
 
-struct ItemPrice_s {
+struct ItemPrices_s {
     quint16 ItemPrice;
     quint8  Multiplier;
 };
@@ -23,7 +23,7 @@ public:
     explicit ItemRandomiser(QWidget *parent = nullptr);
     ~ItemRandomiser();
     void Save();
-    QVector<ItemPrice_s *> GetPrices(void);
+    QVector<ItemPrices_s *> GetPrices(void);
 
 private slots:
     void on_LE_MaxPrice_textChanged(const QString &maxtxt);
@@ -33,11 +33,11 @@ private slots:
 
 private:
     Ui::ItemRandomiser *ui;
-    ItemPrice_s *SplitItemPrice(quint32 Rand);
+    ItemPrices_s *SplitItemPrice(quint32 Rand);
     bool FixRange(int min, int max);
     void SetCanAccept(bool CanAccept);
 
-    QVector<ItemPrice_s*> m_Prices;
+    QVector<ItemPrices_s*> m_Prices;
     bool m_CanSave = false;
 };
 

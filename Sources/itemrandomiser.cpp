@@ -20,10 +20,10 @@ ItemRandomiser::~ItemRandomiser() {
     delete ui;
 }
 
-ItemPrice_s* ItemRandomiser::SplitItemPrice(quint32 Rand) {
+ItemPrices_s* ItemRandomiser::SplitItemPrice(quint32 Rand) {
     quint32 ItemPrice = Rand;
     quint8 multiplier = 1;
-    ItemPrice_s* price = new ItemPrice_s;
+    ItemPrices_s* price = new ItemPrices_s;
 
     while (ItemPrice > 0xFFFF && multiplier < 0xFF) {
         multiplier++;
@@ -32,7 +32,6 @@ ItemPrice_s* ItemRandomiser::SplitItemPrice(quint32 Rand) {
     price->ItemPrice = ItemPrice&0xFFFF;
     price->Multiplier = multiplier;
     return price;
-
 }
 
 void ItemRandomiser::Save() {
@@ -97,7 +96,7 @@ bool ItemRandomiser::FixRange(int min, int max) {
     return res;
 }
 
-QVector<ItemPrice_s*> ItemRandomiser::GetPrices(void) {
+QVector<ItemPrices_s*> ItemRandomiser::GetPrices(void) {
     return m_Prices;
 }
 

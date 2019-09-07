@@ -360,6 +360,9 @@
             </item>
             <item row="0" column="0">
              <widget class="QCheckBox" name="CB_GrassDecay">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code stops grass from decaying any further.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
               <property name="text">
                <string>Grass Doesn't Deteriorate</string>
               </property>

@@ -131,6 +131,7 @@ extern Patch VillagersNeverMove;
 extern Patch VillagersNeverMove2;
 extern Patch RainbowText;
 extern Patch NoGrassDecay;
+extern Patch FlowersNoWilt;
 
 /* Exefs->Player */
 extern Patch PlayerSpeed;

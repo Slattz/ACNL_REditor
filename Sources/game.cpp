@@ -212,7 +212,11 @@ bool Game::ApplyPatches(Ui::MainWindow *mainui, File *codebin) {
         res |= NoGrassDecay.Apply(codebin);
     }
 
-    if(mainui->CB_FlowersNoWilt->isChecked()) {
+    if (mainui->CB_FlowersNoWilt->checkState() == Qt::PartiallyChecked) {
+        res |= OnlyBlackRoseWilts.Apply(codebin);
+    }
+
+    else if (mainui->CB_FlowersNoWilt->checkState() == Qt::Checked) {
         res |= FlowersNoWilt.Apply(codebin);
     }
 

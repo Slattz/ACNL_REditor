@@ -193,7 +193,8 @@ Patch MusicHasEcho; //Pattern:
 Patch VillagersNeverMove; //Thumb; Pattern: 06 98 05 99 0A 28
 Patch VillagersNeverMove2; //Thumb; Pattern: 2F 18 03 20 38 56 00 28
 Patch NoGrassDecay; //Thumb; Pattern: 40 18 00 90 31 46 96 A8
-Patch FlowersNoWilt; //Thumb; Pattern: 0E 21 06 90 41 56 00 29 07 91 + 0x4
+Patch FlowersNoWilt; //Thumb; Pattern: 0E 21 06 90 41 56 00 29 07 91 - 0x8
+Patch OnlyBlackRoseWilts; //Thumb; Pattern: 0E 21 06 90 41 56 00 29 07 91 - 0x10; Specifically for if black roses should still wilt
 
 /* Exefs->Player */
 Patch PlayerSpeed;
@@ -334,7 +335,8 @@ void Patch::Init(void) {
     VillagersNeverMove= Patch(VillagersNeverMovePattern, MakeARMPatchValuesFromFunctionBytes(VillagersNeverMoveFunction), static_cast<quint32>(-4));
     VillagersNeverMove2=Patch(VillagersNeverMovePattern2, MakeARMPatchValuesFromFunctionBytes(VillagersNeverMoveFunction), static_cast<quint32>(-0xA));
     NoGrassDecay =      Patch(NoGrassDecayPattern, QVector<PatchValues>({{0x980022FF, 0}, {0x980022FF, 0x12}}), 0xC);
-    FlowersNoWilt =     Patch(FlowersNoWiltPattern, QVector<PatchValues>({{0x29002100, 0}}), 0x4);
+    FlowersNoWilt =     Patch(FlowersNoWiltPattern, QVector<PatchValues>({{0xE04A9004, 0}}), static_cast<quint32>(-0x8));
+    OnlyBlackRoseWilts= Patch(FlowersNoWiltPattern, QVector<PatchValues>({{0x900428B9, 0}, {0xD14A9004, 2}}), static_cast<quint32>(-0xA)); //If people still want Black Roses to wilt
     qDebug() << "End Exefs->General";
 
     /* Exefs->Player */

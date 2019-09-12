@@ -281,10 +281,13 @@
             <item row="1" column="0">
              <widget class="QCheckBox" name="CB_FlowersNoWilt">
               <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code patches the game so that no flowers ever wilt, no matter how long you leave the game for or time travel.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;This is useful for those who don't want to always have the &amp;quot;Keep Town Beautiful&amp;quot; ordinance on, but would like to still have all their flowers.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code patches the game so that flowers never wilt(**), no matter how long you leave the game for or time travel.&lt;/p&gt;&lt;p&gt;This is useful for those who don't want to always have the &amp;quot;Keep Town Beautiful&amp;quot; ordinance on, but would like to still have all their flowers.&lt;/p&gt;&lt;p&gt;** This depends on the following states:&lt;/p&gt;&lt;p&gt;Partially Checked: Only Black Roses can wilt (to still allow creating Gold Roses).&lt;/p&gt;&lt;p&gt;Fully Checked: All flowers never wilt, including Black Roses (Golden Roses can no longer be created).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="text">
                <string>Flowers Never Wilt</string>
+              </property>
+              <property name="tristate">
+               <bool>true</bool>
               </property>
              </widget>
             </item>

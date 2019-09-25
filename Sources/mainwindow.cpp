@@ -11,6 +11,8 @@
 #define VERSION "v1.1"
 
 static const QString SpeedStrings[5] = {"Normal: x1", "Fast: x1.25", "Faster: x1.5", "Speedy: x2", "Speeding Bullet: x3"};
+static const QString CameraZoomOutStrings[6] = {"Normal", "Tiny", "Small", "Medium", "Large", "Huge"};
+static const QString CameraZoomBaseStr = "Camera Zoom Out Level: ";
 
 MainWindow* MainWindowInstance = nullptr;
 
@@ -30,12 +32,22 @@ MainWindow::MainWindow(QWidget *parent) :
 
     this->setWindowTitle(title);
     ui->label_PlyrSpeed->setText(SpeedStrings[0]);
+    ui->LBL_CameraZoomOut->setText(CameraZoomBaseStr+CameraZoomOutStrings[0]);
     exedir = QCoreApplication::applicationDirPath();
+
+    QImage CameraZoomImage(exedir + "/Resources/Images/CameraZoomOut/0.png", "PNG");
+
+    if (!CameraZoomImage.isNull()) {
+        ui->LBL_CameraZoomOutPic->setPixmap(QPixmap::fromImage(CameraZoomImage));
+        ui->LBL_CameraZoomOutPic->show();
+    }
+
     MainWindowInstance = this;
 }
 
 MainWindow::~MainWindow() {
     delete ui;
+    MainWindowInstance = nullptr;
 }
 
 Game* MainWindow::GetGameInstance(void) {
@@ -185,6 +197,19 @@ void MainWindow::on_BTN_ItemPriceChanger_clicked()
     priceWindow.exec();
 }
 
+void MainWindow::on_dial_CameraZoomOut_valueChanged(int value)
+{
+    ui->LBL_CameraZoomOut->setText(CameraZoomBaseStr+CameraZoomOutStrings[value]);
+    ui->LBL_CameraZoomOutPic->hide();
+    QString basepath = QCoreApplication::applicationDirPath() + "/Resources/Images/CameraZoomOut/";
+    QImage image(basepath + QString::number(value, 10) + ".png", "PNG");
+
+    if (!image.isNull()) {
+        ui->LBL_CameraZoomOutPic->setPixmap(QPixmap::fromImage(image));
+        ui->LBL_CameraZoomOutPic->show();
+    }
+}
+
 
 /* Debug Stuff */
 void MainWindow::on_actionEnableAll_triggered()
@@ -230,5 +255,3 @@ void MainWindow::on_actionQuick_Open_EUR_triggered()
     this->OpenGame(path);
 #endif
 }
-
-

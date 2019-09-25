@@ -145,6 +145,7 @@ extern Patch RegionCheck;
 extern Patch ChecksumCheck;
 extern Patch SecureValueCheck;
 extern Patch InstantText;
+extern Patch CameraZoomOut;
 
 /* Shop Times: Addresses are start of function */
 extern Patch Retail;

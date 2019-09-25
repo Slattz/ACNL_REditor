@@ -35,6 +35,8 @@ private slots:
     void on_actionSetup_OutDir_triggered();
     void on_actionQuick_Open_EUR_triggered();
 
+    void on_dial_CameraZoomOut_valueChanged(int value);
+
 private:
     Ui::MainWindow *ui = nullptr;
     QString dir = "\0";

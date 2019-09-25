@@ -89,6 +89,12 @@ static const QVector<quint8> FlowersNoWiltPattern = { //Thumb
 0x07, 0x91
 };
 
+static const QVector<quint8> CameraZoomOutPattern = { //Float; +0x14
+0x05, 0x1A, 0xC0, 0xED, 0x06, 0x0A, 0x80, 0xED,
+0x0A, 0x1A, 0x80, 0xED, 0x0B, 0x3A, 0xC0, 0xED,
+0x1E, 0xFF, 0x2F, 0xE1
+};
+
 /*
  * Pattern for 'MoveVillagerOutOfTown' function;
  * This is called by only 'CheckVillagersThatNeedToMoveOut' in code.bin which we also patch
@@ -189,7 +195,7 @@ Patch CherryBTrees; //Pattern: 00 80 A0 E1  20 10 A0 E3 50 00 8D E2 + 0x0
 Patch AlwaysXmasTrees; //Thumb; Pattern: F8 B5 7B 21 14 46 06 9E + 0xA
 Patch Island3Nums; //Pattern: 56 10 A0 E3 4C 40 86 E2 00 10 80 E5 11 1E A0 E3 - 0x10
 Patch PickAllTours; //Pattern: F0 4F 2D E9 00 50 A0 E1 00 B0 A0 E3  02 8B 2D ED + 0x8
-Patch MusicHasEcho; //Pattern:
+Patch MusicHasEcho; //Pattern: 6C 02 95 E5 06 00 50 E1 01 00 76 13 + 0xC
 Patch VillagersNeverMove; //Thumb; Pattern: 06 98 05 99 0A 28
 Patch VillagersNeverMove2; //Thumb; Pattern: 2F 18 03 20 38 56 00 28
 Patch NoGrassDecay; //Thumb; Pattern: 40 18 00 90 31 46 96 A8
@@ -206,7 +212,8 @@ Patch NoMosquito; //Pattern: 10 40 BD E8 03 20 A0 E1 A6 10 A0 E3
 Patch RegionCheck; //Pattern: 62 5A 84 E2 4E 01 D5 E5 0F 00 00 E2 - 0xC
 Patch ChecksumCheck; //Pattern: 08 D0 4D E2 0B B0 A0 E3 05 80 A0 E3 0C 60 A0 E3 + 0xB4
 Patch SecureValueCheck; //Pattern: 08 D0 4D E2 0B B0 A0 E3 05 80 A0 E3 0C 60 A0 E3 + 0xE0
-Patch InstantText; //Pattern: 08 10 8D E5 08 10 8D E2 04 00 A0 E1 + 0x10
+Patch InstantText; //Pattern: 08 10 8D E5 08 10 8D E2 04 00 A0 E1 + 0x48
+Patch CameraZoomOut; //Float; Pattern: 05 1A C0 ED 06 0A 80 ED  0A 1A 80 ED 0B 3A C0 ED 1E FF 2F E1 + 0x14
 
 /* Shop Times: Addresses are start of function */
 Patch Retail;
@@ -351,6 +358,7 @@ void Patch::Init(void) {
     ChecksumCheck =     Patch(SaveChecksPattern, QVector<PatchValues>({{0xE3A00001,0}, {0xE3A00001,0x1C}}), 0xB4);
     SecureValueCheck =  Patch(SaveChecksPattern, QVector<PatchValues>({{0xE3A00001, 0}}), 0xE0);
     InstantText =       Patch(InstantTextPattern, QVector<PatchValues>({{0xE3A00001, 0}}), 0x48);
+    CameraZoomOut =     Patch(CameraZoomOutPattern, QVector<PatchValues>({{0x3F800000, 0}}), 0x14);
     qDebug() << "End Exefs->Utilities";
 
     /* Shop Times: Addresses are start of function */

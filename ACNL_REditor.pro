@@ -6,6 +6,8 @@
 
 QT       += core gui
 
+VERSION = 1.1.0.0
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = ACNL_REditor

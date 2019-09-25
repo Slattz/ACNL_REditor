@@ -12,6 +12,7 @@ static const QByteArray CodebinMD5Hashes[8] = {"361749f1011b7a4deacc1cba3f1553fe
                                  "846d694886bcab0fdd43f62a02a0c24c", "ffffffffffffffffffffffffffffffff"};
 
 static const quint32    PlayerSpeeds[5]   = {0x3F800000, 0x3fa00000, 0x3fc00000, 0x40000000, 0x40400000};
+static const quint32    CameraZoomOutVals[6] = {0x3F800000, 0x3F700000, 0x3F600000, 0x3F500000, 0x3F400000, 0x3F300000};
 static const quint8     ConfettiAmount[5] = {0x0F, 0x3C, 0x78, 0xB4, 0xF0};
 static const quint8     CherryBAmount[5]  = {0x0F, 0x1E, 0x3C, 0x78, 0xF0};
 static const quint8     SeasonVals[4]  = {0x3, 0x7, 0x12, 0x16};
@@ -285,6 +286,8 @@ bool Game::ApplyPatches(Ui::MainWindow *mainui, File *codebin) {
 
     if(mainui->CB_InstantText->isChecked())
         res |= InstantText.Apply(codebin);
+
+    res |= !PatchCode(codebin, CameraZoomOut.m_Offset, CameraZoomOutVals[mainui->dial_CameraZoomOut->value()-1]);
 
     if (res == true)
         return false; //At least one PatchCode Failed

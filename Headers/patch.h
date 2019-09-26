@@ -139,6 +139,7 @@ extern Patch PlayerSpeed;
 extern Patch EditPattern;
 extern Patch FlowersNoTrample;
 extern Patch NoMosquito;
+extern Patch WalkOverThings;
 
 /* Exefs->Utilities */
 extern Patch RegionCheck;

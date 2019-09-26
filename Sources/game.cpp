@@ -261,6 +261,9 @@ bool Game::ApplyPatches(Ui::MainWindow *mainui, File *codebin) {
     if(mainui->CB_Mosquito->isChecked())
         res |= NoMosquito.Apply(codebin);
 
+    if(mainui->CB_WalkOverThings->isChecked())
+        res |= WalkOverThings.Apply(codebin);
+
     /* Exefs->Shops */
     if(mainui->CB_NativeFruitSellPrice->isChecked())
         res |= NativeFruitPrice.Apply(codebin);

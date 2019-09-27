@@ -252,7 +252,7 @@ bool Game::ApplyPatches(Ui::MainWindow *mainui, File *codebin) {
     }
 
     /* Exefs->Player */
-    res |= !PatchCode(codebin, PlayerSpeed.m_Offset, PlayerSpeeds[mainui->dial_PlyrSpeed->value()-1]);
+    res |= !PatchCode(codebin, PlayerSpeed.m_Offset, PlayerSpeeds[mainui->dial_PlyrSpeed->value()]);
 
     if (mainui->CB_Resetti->isChecked())
         res |= NoResetti.Apply(codebin);
@@ -295,7 +295,7 @@ bool Game::ApplyPatches(Ui::MainWindow *mainui, File *codebin) {
     if(mainui->CB_InstantText->isChecked())
         res |= InstantText.Apply(codebin);
 
-    res |= !PatchCode(codebin, CameraZoomOut.m_Offset, CameraZoomOutVals[mainui->dial_CameraZoomOut->value()-1]);
+    res |= !PatchCode(codebin, CameraZoomOut.m_Offset, CameraZoomOutVals[mainui->dial_CameraZoomOut->value()]);
 
     if (res == true)
         return false; //At least one PatchCode Failed

@@ -163,7 +163,7 @@ void MainWindow::on_FileClose_triggered() {
 }
 
 void MainWindow::on_dial_PlyrSpeed_valueChanged(int value) {
-    ui->label_PlyrSpeed->setText(SpeedStrings[value-1]);
+    ui->label_PlyrSpeed->setText(SpeedStrings[value]);
 }
 
 void MainWindow::on_BTN_ShopTimes_clicked()

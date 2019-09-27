@@ -246,6 +246,11 @@ bool Game::ApplyPatches(Ui::MainWindow *mainui, File *codebin) {
     if(mainui->CMB_Weather->currentIndex() != 7) //If not set at no changes
         res |= Weather.Apply(codebin, static_cast<quint8>(mainui->CMB_Weather->currentIndex()));
 
+    if(mainui->CMB_FishyBiteWhen->currentIndex() != 8) { //If not set at no changes
+        FishyBiteWhen.m_Values[0].Value |= (mainui->CMB_FishyBiteWhen->currentIndex()&0xFF);
+        res |= FishyBiteWhen.Apply(codebin);
+    }
+
     /* Exefs->Player */
     res |= !PatchCode(codebin, PlayerSpeed.m_Offset, PlayerSpeeds[mainui->dial_PlyrSpeed->value()-1]);
 

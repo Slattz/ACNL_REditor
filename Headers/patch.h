@@ -133,6 +133,7 @@ extern Patch RainbowText;
 extern Patch NoGrassDecay;
 extern Patch FlowersNoWilt;
 extern Patch OnlyBlackRoseWilts;
+extern Patch FishyBiteWhen;
 
 /* Exefs->Player */
 extern Patch PlayerSpeed;

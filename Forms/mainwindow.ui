@@ -93,33 +93,13 @@
             <string>General</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_3">
-            <item row="9" column="0">
-             <widget class="QCheckBox" name="CB_MusicEcho">
+            <item row="2" column="0">
+             <widget class="QCheckBox" name="CB_CherryBTrees">
               <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code patches the game so all music will have an echo.&lt;br/&gt;The echo is usually only enabled when in a Dream Town.&lt;br/&gt;&lt;br/&gt;This patches the game so it available regardless of in a Dream Town or not.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code will force Cherry Blossom Trees in your town all year round. Usually, they only appears for a few days during April.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This might not apply to the dream towns you upload.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This may only be visible to you and not other players.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="text">
-               <string>Music Always Has The Dream World Echo</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="0">
-             <widget class="QCheckBox" name="CB_Confetti">
-              <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code will force Confetti in your town's sky all year round. Usually, it only appears during Pavé's Festivale.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This might not apply to the dream towns you upload.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This may only be visible to you and not other players.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-              <property name="text">
-               <string>Always Have Confetti In Sky</string>
-              </property>
-             </widget>
-            </item>
-            <item row="7" column="0">
-             <widget class="QCheckBox" name="CB_Island3Nums">
-              <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code patches the game so you can type more than 3 numbers in a message on the island. This allows people to once again send their Friend Codes easily, for example.&lt;/p&gt;&lt;p&gt;Pre-WA, this limit was not in-place.&lt;/p&gt;&lt;p&gt;Credit to Levi for the original concept of this code :)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-              <property name="text">
-               <string>Can Type More Than 3 Numbers On The Island</string>
+               <string>Always Have Cherry Blossom Trees</string>
               </property>
              </widget>
             </item>
@@ -133,46 +113,77 @@
               </property>
              </widget>
             </item>
-            <item row="5" column="0">
-             <widget class="QCheckBox" name="CB_CherryB">
+            <item row="3" column="2">
+             <widget class="QComboBox" name="CMB_CherryB">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="currentIndex">
+               <number>2</number>
+              </property>
+              <property name="maxCount">
+               <number>5</number>
+              </property>
+              <item>
+               <property name="text">
+                <string>Tiny</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Small</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Normal</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Big</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Large</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QCheckBox" name="CB_FlowersNoWilt">
               <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code will force Cherry Blossoms in your town's sky all year round. Usually, they only appears for a few days during April.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This might not apply to the dream towns you upload.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This may only be visible to you and not other players.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code patches the game so that flowers never wilt(**), no matter how long you leave the game for or time travel.&lt;/p&gt;&lt;p&gt;This is useful for those who don't want to always have the &amp;quot;Keep Town Beautiful&amp;quot; ordinance on, but would like to still have all their flowers.&lt;/p&gt;&lt;p&gt;** This depends on the following states:&lt;/p&gt;&lt;p&gt;Partially Checked: Only Black Roses can wilt (to still allow creating Gold Roses).&lt;/p&gt;&lt;p&gt;Fully Checked: All flowers never wilt, including Black Roses (Golden Roses can no longer be created).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="text">
-               <string>Always Have Cherry Blossoms in Sky</string>
+               <string>Flowers Never Wilt</string>
+              </property>
+              <property name="tristate">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
-            <item row="6" column="2" rowspan="7">
-             <spacer name="verticalSpacer_5">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>40</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="2" column="0">
-             <widget class="QCheckBox" name="CB_CherryBTrees">
+            <item row="7" column="0">
+             <widget class="QCheckBox" name="CB_Island3Nums">
               <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code will force Cherry Blossom Trees in your town all year round. Usually, they only appears for a few days during April.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This might not apply to the dream towns you upload.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This may only be visible to you and not other players.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code patches the game so you can type more than 3 numbers in a message on the island. This allows people to once again send their Friend Codes easily, for example.&lt;/p&gt;&lt;p&gt;Pre-WA, this limit was not in-place.&lt;/p&gt;&lt;p&gt;Credit to Levi for the original concept of this code :)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="text">
-               <string>Always Have Cherry Blossom Trees</string>
+               <string>Can Type More Than 3 Numbers On The Island</string>
               </property>
              </widget>
             </item>
-            <item row="10" column="0">
-             <widget class="QCheckBox" name="CB_VillagersNMove">
+            <item row="9" column="0">
+             <widget class="QCheckBox" name="CB_MusicEcho">
               <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code patches the game so that no villagers ever move out.&lt;br/&gt;Currently, villagers can still ask to move out, but never actually will.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code patches the game so all music will have an echo.&lt;br/&gt;The echo is usually only enabled when in a Dream Town.&lt;br/&gt;&lt;br/&gt;This patches the game so it available regardless of in a Dream Town or not.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="text">
-               <string>Villagers Never Move Out</string>
+               <string>Music Always Has The Dream World Echo</string>
               </property>
              </widget>
             </item>
@@ -189,14 +200,81 @@
               </property>
              </spacer>
             </item>
-            <item row="6" column="0">
-             <widget class="QCheckBox" name="CB_XmasTrees">
+            <item row="3" column="1">
+             <widget class="QLabel" name="label_CherryB">
               <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code patches the game so it will never remove the Xmas Cedar Trees, regardless of the time of the year. &lt;/p&gt;&lt;p&gt;This can be used in conjuction with the NTR Plugin and it's Real Time World Edit feature, or various save editors to place the trees in specific locations. &lt;/p&gt;&lt;p&gt;Otherwise, time travelling to time of the year that these appear in-game should convert normal cedar trees to the Xmas cedar trees.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This changes how much Cherry Blossoms will be in the sky at once.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This may only be visible to you and not other players.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="text">
-               <string>Keep Xmas Cedar Trees All Year</string>
+               <string>Cherry Blossoms Amount:</string>
               </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLabel" name="label_Confetti">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This changes how much Confetti will be in the sky at once.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This may only be visible to you and not other players.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="text">
+               <string>Confetti Amount:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="0">
+             <widget class="QCheckBox" name="CB_CherryB">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code will force Cherry Blossoms in your town's sky all year round. Usually, they only appears for a few days during April.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This might not apply to the dream towns you upload.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This may only be visible to you and not other players.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="text">
+               <string>Always Have Cherry Blossoms in Sky</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="2">
+             <widget class="QComboBox" name="CMB_Confetti">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="currentIndex">
+               <number>2</number>
+              </property>
+              <property name="maxCount">
+               <number>7</number>
+              </property>
+              <item>
+               <property name="text">
+                <string>Tiny</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Small</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Normal</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Big</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Large</string>
+               </property>
+              </item>
              </widget>
             </item>
             <item row="0" column="2">
@@ -255,6 +333,16 @@
               </item>
              </widget>
             </item>
+            <item row="6" column="0">
+             <widget class="QCheckBox" name="CB_XmasTrees">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code patches the game so it will never remove the Xmas Cedar Trees, regardless of the time of the year. &lt;/p&gt;&lt;p&gt;This can be used in conjuction with the NTR Plugin and it's Real Time World Edit feature, or various save editors to place the trees in specific locations. &lt;/p&gt;&lt;p&gt;Otherwise, time travelling to time of the year that these appear in-game should convert normal cedar trees to the Xmas cedar trees.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="text">
+               <string>Keep Xmas Cedar Trees All Year</string>
+              </property>
+             </widget>
+            </item>
             <item row="0" column="1">
              <widget class="QLabel" name="label_WeatherTxt">
               <property name="toolTip">
@@ -268,65 +356,13 @@
               </property>
              </widget>
             </item>
-            <item row="8" column="0">
-             <widget class="QCheckBox" name="CB_AnyTours">
+            <item row="10" column="0">
+             <widget class="QCheckBox" name="CB_VillagersNMove">
               <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code patches the game to allow you to pick from all tour when on the Island.&lt;/p&gt;&lt;p&gt;This allows you to pick from any tour in the game rather than just what is being offerend for that day.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code patches the game so that no villagers ever move out.&lt;br/&gt;Currently, villagers can still ask to move out, but never actually will.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="text">
-               <string>Pick From All Tours On The Island</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QCheckBox" name="CB_FlowersNoWilt">
-              <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code patches the game so that flowers never wilt(**), no matter how long you leave the game for or time travel.&lt;/p&gt;&lt;p&gt;This is useful for those who don't want to always have the &amp;quot;Keep Town Beautiful&amp;quot; ordinance on, but would like to still have all their flowers.&lt;/p&gt;&lt;p&gt;** This depends on the following states:&lt;/p&gt;&lt;p&gt;Partially Checked: Only Black Roses can wilt (to still allow creating Gold Roses).&lt;/p&gt;&lt;p&gt;Fully Checked: All flowers never wilt, including Black Roses (Golden Roses can no longer be created).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-              <property name="text">
-               <string>Flowers Never Wilt</string>
-              </property>
-              <property name="tristate">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QLabel" name="label_Season">
-              <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This allows you to force a specific season at all times.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This might not apply to the dream towns you upload.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This may only be visible to you and not other players.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-              <property name="text">
-               <string>Season Modifier:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1">
-             <widget class="QLabel" name="label_Confetti">
-              <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This changes how much Confetti will be in the sky at once.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This may only be visible to you and not other players.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-              <property name="text">
-               <string>Confetti Amount:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="1">
-             <widget class="QLabel" name="label_CherryB">
-              <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This changes how much Cherry Blossoms will be in the sky at once.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This may only be visible to you and not other players.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-              <property name="text">
-               <string>Cherry Blossoms Amount:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               <string>Villagers Never Move Out</string>
               </property>
              </widget>
             </item>
@@ -365,86 +401,125 @@
               </item>
              </widget>
             </item>
-            <item row="2" column="2">
-             <widget class="QComboBox" name="CMB_Confetti">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
+            <item row="8" column="0">
+             <widget class="QCheckBox" name="CB_AnyTours">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code patches the game to allow you to pick from all tour when on the Island.&lt;/p&gt;&lt;p&gt;This allows you to pick from any tour in the game rather than just what is being offerend for that day.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
+              <property name="text">
+               <string>Pick From All Tours On The Island</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLabel" name="label_Season">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This allows you to force a specific season at all times.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This might not apply to the dream towns you upload.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This may only be visible to you and not other players.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="text">
+               <string>Season Modifier:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QCheckBox" name="CB_Confetti">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code will force Confetti in your town's sky all year round. Usually, it only appears during Pavé's Festivale.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This might not apply to the dream towns you upload.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This may only be visible to you and not other players.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="text">
+               <string>Always Have Confetti In Sky</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="2">
+             <widget class="QComboBox" name="CMB_FishyBiteWhen">
               <property name="currentIndex">
-               <number>2</number>
+               <number>8</number>
               </property>
               <property name="maxCount">
-               <number>7</number>
+               <number>10</number>
               </property>
               <item>
                <property name="text">
-                <string>Tiny</string>
+                <string>1st Bite (Instant)</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>Small</string>
+                <string>2nd Bite</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>Normal</string>
+                <string>3rd Bite</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>Big</string>
+                <string>4th Bite</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>Large</string>
+                <string>5th Bite</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>6th Bite</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>7th Bite</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>8th Bite</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>No Changes</string>
                </property>
               </item>
              </widget>
             </item>
-            <item row="3" column="2">
-             <widget class="QComboBox" name="CMB_CherryB">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
+            <item row="5" column="1">
+             <widget class="QLabel" name="label_FishyBiteWhen">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This changes how many bites a fish will take before the fishing bobber sinks.&lt;/p&gt;&lt;p&gt;It makes it always be on a specific bite.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Credit to Natfoth for the original concept of this code :)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
-              <property name="currentIndex">
-               <number>2</number>
+              <property name="text">
+               <string>Fish Always Bite on:</string>
               </property>
-              <property name="maxCount">
-               <number>5</number>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
-              <item>
-               <property name="text">
-                <string>Tiny</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Small</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Normal</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Big</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Large</string>
-               </property>
-              </item>
+             </widget>
+            </item>
+            <item row="7" column="2" rowspan="3">
+             <spacer name="verticalSpacer_5">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="10" column="2">
+             <widget class="QCheckBox" name="CB_NoScareFishy">
+              <property name="text">
+               <string>Fish Can't be Scared Away</string>
+              </property>
              </widget>
             </item>
            </layout>

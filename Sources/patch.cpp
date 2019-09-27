@@ -177,6 +177,27 @@ static const QVector<quint8> BTN_General = { //0x68D140 in EUR orig 1.5
 0x14, 0xD0, 0x8D, 0xE2, 0x00, 0x00, 0xA0, 0xE3
 };
 
+static const QVector<quint8> FishyBiteWhenPattern = { //-0x4
+0xFF, 0x50, 0x00, 0xE2, 0xCE, 0x01, 0xD4, 0xE5,
+0x00, 0x01, 0x80, 0xE0, 0x00, 0x01, 0x55, 0xE1
+};
+
+/*
+ * FishyBiteWhenCode not actually a function, but custom code that's injected into a function
+
+MOV     R5, #0x00       ; This is how many bites (max bites) (we manually change the 0 to user selection)
+LDRB    R0, [R4,#0x1CE] ; This is where we'll store current amount of bites (i.e. repurpose)
+CMP     R5, R0          ; Compare current bites to max
+ADDLT   R0, #1          ; Add 1 to cur bites if less than max
+STRB    R0, [R4,#0x1CE] ; This new current bites
+*/
+
+static const QVector<quint8> FishyBiteWhenCode = {
+0x00, 0x50, 0xA0, 0xE3, 0xCE, 0x01, 0xD4, 0xE5,
+0x00, 0x00, 0x55, 0xE1, 0x01, 0x00, 0x80, 0xB2,
+0xCE, 0x01, 0xC4, 0xE5
+};
+
 /* General Utils */
 Patch UnusedCode;
 Patch UnusedRoData;
@@ -206,7 +227,7 @@ Patch VillagersNeverMove2; //Thumb; Pattern: 2F 18 03 20 38 56 00 28
 Patch NoGrassDecay; //Thumb; Pattern: 40 18 00 90 31 46 96 A8
 Patch FlowersNoWilt; //Thumb; Pattern: 0E 21 06 90 41 56 00 29 07 91 - 0x8
 Patch OnlyBlackRoseWilts; //Thumb; Pattern: 0E 21 06 90 41 56 00 29 07 91 - 0x10; Specifically for if black roses should still wilt
-
+Patch FishyBiteWhen; // Pattern: FF 50 00 E2 CE 01 D4 E5 00 01 80 E0 00 01 55 E1 - 0x4
 /* Exefs->Player */
 Patch PlayerSpeed;
 Patch EditPattern;
@@ -350,6 +371,7 @@ void Patch::Init(void) {
     NoGrassDecay =      Patch(NoGrassDecayPattern, QVector<PatchValues>({{0x980022FF, 0}, {0x980022FF, 0x12}}), 0xC);
     FlowersNoWilt =     Patch(FlowersNoWiltPattern, QVector<PatchValues>({{0xE04A9004, 0}}), static_cast<quint32>(-0x8));
     OnlyBlackRoseWilts= Patch(FlowersNoWiltPattern, QVector<PatchValues>({{0x900428B9, 0}, {0xD14A9004, 2}}), static_cast<quint32>(-0xA)); //If people still want Black Roses to wilt
+    FishyBiteWhen =     Patch(FishyBiteWhenPattern, MakeARMPatchValuesFromFunctionBytes(FishyBiteWhenCode), static_cast<quint32>(-4));
     qDebug() << "End Exefs->General";
 
     /* Exefs->Player */

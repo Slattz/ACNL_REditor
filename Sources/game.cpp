@@ -251,6 +251,10 @@ bool Game::ApplyPatches(Ui::MainWindow *mainui, File *codebin) {
         res |= FishyBiteWhen.Apply(codebin);
     }
 
+    if(mainui->CB_NoScareFishy->isChecked())
+        res |= NoScareFishy.Apply(codebin);
+
+
     /* Exefs->Player */
     res |= !PatchCode(codebin, PlayerSpeed.m_Offset, PlayerSpeeds[mainui->dial_PlyrSpeed->value()]);
 

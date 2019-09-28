@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>653</width>
-    <height>409</height>
+    <height>412</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -517,6 +517,9 @@
             </item>
             <item row="10" column="2">
              <widget class="QCheckBox" name="CB_NoScareFishy">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code makes it so fish are no longer scared away when running near them.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This may only be visible to you and not other players.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Credit to Natfoth for this code :)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
               <property name="text">
                <string>Fish Can't be Scared Away</string>
               </property>

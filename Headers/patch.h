@@ -134,6 +134,7 @@ extern Patch NoGrassDecay;
 extern Patch FlowersNoWilt;
 extern Patch OnlyBlackRoseWilts;
 extern Patch FishyBiteWhen;
+extern Patch NoScareFishy;
 
 /* Exefs->Player */
 extern Patch PlayerSpeed;

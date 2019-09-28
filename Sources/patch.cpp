@@ -177,6 +177,11 @@ static const QVector<quint8> BTN_General = { //0x68D140 in EUR orig 1.5
 0x14, 0xD0, 0x8D, 0xE2, 0x00, 0x00, 0xA0, 0xE3
 };
 
+static const QVector<quint8> NoScareFishyPattern = { //+0x10
+0x90, 0x51, 0x90, 0xE5, 0x01, 0x60, 0xA0, 0xE1,
+0x00, 0x40, 0xA0, 0xE1
+};
+
 static const QVector<quint8> FishyBiteWhenPattern = { //-0x4
 0xFF, 0x50, 0x00, 0xE2, 0xCE, 0x01, 0xD4, 0xE5,
 0x00, 0x01, 0x80, 0xE0, 0x00, 0x01, 0x55, 0xE1
@@ -228,6 +233,8 @@ Patch NoGrassDecay; //Thumb; Pattern: 40 18 00 90 31 46 96 A8
 Patch FlowersNoWilt; //Thumb; Pattern: 0E 21 06 90 41 56 00 29 07 91 - 0x8
 Patch OnlyBlackRoseWilts; //Thumb; Pattern: 0E 21 06 90 41 56 00 29 07 91 - 0x10; Specifically for if black roses should still wilt
 Patch FishyBiteWhen; // Pattern: FF 50 00 E2 CE 01 D4 E5 00 01 80 E0 00 01 55 E1 - 0x4
+Patch NoScareFishy; //Pattern: 90 51 90 E5 01 60 A0 E1 00 40 A0 E1 + 0x10
+
 /* Exefs->Player */
 Patch PlayerSpeed;
 Patch EditPattern;
@@ -372,6 +379,7 @@ void Patch::Init(void) {
     FlowersNoWilt =     Patch(FlowersNoWiltPattern, QVector<PatchValues>({{0xE04A9004, 0}}), static_cast<quint32>(-0x8));
     OnlyBlackRoseWilts= Patch(FlowersNoWiltPattern, QVector<PatchValues>({{0x900428B9, 0}, {0xD14A9004, 2}}), static_cast<quint32>(-0xA)); //If people still want Black Roses to wilt
     FishyBiteWhen =     Patch(FishyBiteWhenPattern, MakeARMPatchValuesFromFunctionBytes(FishyBiteWhenCode), static_cast<quint32>(-4));
+    NoScareFishy =      Patch(NoScareFishyPattern, QVector<PatchValues>({{0xE3500001, 0}}), 0x10);
     qDebug() << "End Exefs->General";
 
     /* Exefs->Player */

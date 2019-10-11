@@ -25,6 +25,7 @@ CONFIG(release, debug|release):DEFINES += QT_NO_DEBUG_OUTPUT
 @
 
 CONFIG += gnu++17
+QMAKE_CXXFLAGS += -fshort-wchar
 
 # remove possible other optimization flags
 QMAKE_CXXFLAGS_RELEASE -= -O

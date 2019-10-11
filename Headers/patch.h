@@ -14,6 +14,8 @@
 #define NOP 0xE1A00000
 #define SHOPALWAYSOPEN 0xE3A00001
 
+#define CMD_AMOUNT 12 //For Command Keyboard Rodata struct
+
 /* Obtained from patcher.h in Luma3DS: https://github.com/AuroraWright/Luma3DS/blob/master/sysmodules/loader/source/patcher.h */
 #define MAKE_BRANCH(src,dst)      (0xEA000000 | (static_cast<quint32>(((reinterpret_cast<quint8 *>(dst) - reinterpret_cast<quint8 *>(src)) >> 2) - 2) & 0xFFFFFF))
 #define MAKE_BRANCH_LINK(src,dst) (0xEB000000 | (static_cast<quint32>(((reinterpret_cast<quint8 *>(dst) - reinterpret_cast<quint8 *>(src)) >> 2) - 2) & 0xFFFFFF))
@@ -36,6 +38,13 @@ enum ShopTime : quint8 {
 struct PatchValues {
     quint32 Value;
     quint32 OffsetFromBaseAddr;
+};
+
+struct CmdKeyboardRodata {
+    quint32 func_ptrs[CMD_AMOUNT];
+    qint8 func_cmd_size[CMD_AMOUNT];
+    quint32 func_cmds[CMD_AMOUNT];
+    wchar_t func_cmd_strs[256];
 };
 
 extern ShopCodeOffsets_s off_Retail;
@@ -89,6 +98,7 @@ public:
           QVector<PatchValues> Values);
 
     Patch(const QVector<quint8> Pattern, QVector<PatchValues> Values, quint32 OffsetFromPattern = 0);
+    Patch(const QVector<quint8> Pattern, QVector<quint8> Values, quint32 OffsetFromPattern = 0);
 
     bool Apply(File* codebin, quint8 OR = 0);
 
@@ -97,21 +107,29 @@ public:
 
     quint32 m_Offset = 0; //Offsets are code.bin + 0x100000, i.e. same offsets as hardware
     QVector<PatchValues> m_Values;
+    QVector<quint8> m_Valuesu8;
 
 };
 
 /* General Utils */
 extern Patch UnusedCode;
 extern Patch UnusedRoData;
+extern Patch GetBasePlayerAddr;
+extern Patch wcstoulAddr;
 
 /* Button Remapper Utils */
 extern Patch hidKeysDown;
 extern Patch hidKeysHeld;
 extern Patch hidKeysUp;
 
-/* Rainbow Text Utils */
-extern Patch RainbowFunction;
-extern Patch RainbowFunctionRoData;
+/* Command Keyboard Utils */
+extern Patch CmdKeyboardFunction;
+extern Patch CmdKeyboardRoData;
+
+extern Patch CmdKeyboard_Text2Item;
+extern Patch CmdKeyboard_ChangeTime;
+extern Patch CmdKeyboard_DupeAll;
+extern Patch CmdKeyboard_ClearInv;
 
 extern Patch NativeFruitPrice;
 extern Patch ReeseBuy;
@@ -129,7 +147,6 @@ extern Patch PickAllTours;
 extern Patch MusicHasEcho;
 extern Patch VillagersNeverMove;
 extern Patch VillagersNeverMove2;
-extern Patch RainbowText;
 extern Patch NoGrassDecay;
 extern Patch FlowersNoWilt;
 extern Patch OnlyBlackRoseWilts;
@@ -149,6 +166,7 @@ extern Patch ChecksumCheck;
 extern Patch SecureValueCheck;
 extern Patch InstantText;
 extern Patch CameraZoomOut;
+extern Patch CmdKeyboardHook;
 
 /* Shop Times: Addresses are start of function */
 extern Patch Retail;

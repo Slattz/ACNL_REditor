@@ -64,6 +64,7 @@ bool File::Write(quint32 offset, QByteArray bytes, QDataStream::ByteOrder bo) {
     if(!m_file->seek(offset))
         return false;
 
+    qDebug() << "Seeked offset: 0x" + QString::number(offset, 16);
     int amount = fout.writeRawData(bytes.constData(), bytes.size());
     qDebug() << "Amount written: " + QString::number(amount);
     if (!m_file->flush())

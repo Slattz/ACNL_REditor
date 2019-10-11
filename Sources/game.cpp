@@ -299,6 +299,54 @@ bool Game::ApplyPatches(Ui::MainWindow *mainui, File *codebin) {
     if(mainui->CB_InstantText->isChecked())
         res |= InstantText.Apply(codebin);
 
+    if (mainui->CB_CMDKeyboard->isChecked()) {
+        //Moves the game's functions down two instructions to make room for custom code
+        if (Game::MoveExistingCode(codebin, CmdKeyboardHook.m_Offset, CmdKeyboardHook.m_Offset+0x3C, 2)) {
+            qDebug() << "off_Rodata: 0x" + QString::number(UnusedRoData.m_Offset, 16);
+
+            CmdKeyboard_Text2Item.m_Offset = UnusedCode.m_Offset;
+            int size = CmdKeyboard_Text2Item.m_Values.size();
+            CmdKeyboard_Text2Item.m_Values[size-3].Value = GetBasePlayerAddr.m_Offset; //Get_Base_Player_Address
+            CmdKeyboard_Text2Item.m_Values[size-4].Value = wcstoulAddr.m_Offset; //wcstoul
+            res |= CmdKeyboard_Text2Item.Apply(codebin);
+            UnusedCode.m_Offset += static_cast<quint32>(size)*sizeof(CmdKeyboard_Text2Item.m_Values[0].Value);
+
+            CmdKeyboard_ClearInv.m_Offset = UnusedCode.m_Offset;
+            size = CmdKeyboard_ClearInv.m_Values.size();
+            CmdKeyboard_ClearInv.m_Values[size-2].Value = GetBasePlayerAddr.m_Offset; //Get_Base_Player_Address
+            res |= CmdKeyboard_ClearInv.Apply(codebin);
+            UnusedCode.m_Offset += static_cast<quint32>(size)*sizeof(CmdKeyboard_ClearInv.m_Values[0].Value);
+
+            CmdKeyboard_DupeAll.m_Offset = UnusedCode.m_Offset;
+            size = CmdKeyboard_DupeAll.m_Values.size();
+            CmdKeyboard_DupeAll.m_Values[size-1].Value = GetBasePlayerAddr.m_Offset; //Get_Base_Player_Address
+            res |= CmdKeyboard_DupeAll.Apply(codebin);
+            UnusedCode.m_Offset += static_cast<quint32>(size)*sizeof(CmdKeyboard_DupeAll.m_Values[0].Value);
+
+            /*
+            CmdKeyboard_ChangeTime.m_Offset = UnusedCode.m_Offset;
+            size = CmdKeyboard_ChangeTime.m_Values.size();
+            CmdKeyboard_ChangeTime.Apply(codebin);
+            UnusedCode.m_Offset += static_cast<quint32>(size)*sizeof(CmdKeyboard_ChangeTime.m_Values[0].Value);
+            */
+
+            CmdKeyboardRoData.m_Offset = UnusedRoData.m_Offset;
+            CmdKeyboardRodata* rodata = reinterpret_cast<CmdKeyboardRodata*>(CmdKeyboardRoData.m_Valuesu8.data());
+            UpdateCmdKeyboardRodata(*rodata);
+            res |= CmdKeyboardRoData.Apply(codebin);
+            UnusedRoData.m_Offset += static_cast<quint32>(CmdKeyboardRoData.m_Values.size())*sizeof(CmdKeyboardRoData.m_Valuesu8[0]);
+
+            CmdKeyboardFunction.m_Offset = UnusedCode.m_Offset;
+            size = CmdKeyboardFunction.m_Values.size();
+            CmdKeyboardFunction.m_Values[size-2].Value = CmdKeyboardRoData.m_Offset;
+            res |= CmdKeyboardFunction.Apply(codebin);
+            UnusedCode.m_Offset += static_cast<quint32>(CmdKeyboardFunction.m_Values.size())*sizeof(CmdKeyboardFunction.m_Values[0].Value);
+
+            CmdKeyboardHook.m_Values[0].Value = MAKE_BRANCH_LINK(CmdKeyboardHook.m_Offset, CmdKeyboardFunction.m_Offset);
+            res |= CmdKeyboardHook.Apply(codebin);
+        }
+    }
+
     res |= !PatchCode(codebin, CameraZoomOut.m_Offset, CameraZoomOutVals[mainui->dial_CameraZoomOut->value()]);
 
     if (res == true)
@@ -516,3 +564,88 @@ bool Game::ApplyShopTimes(File *codebin) {
 
     return true; //No PatchCode Failed
 }
+
+bool Game::MoveExistingCode(File *codebin, quint32 startOffset, quint32 endOffset, qint32 moveByAmount, bool thumbCode) {
+    if (codebin == nullptr || startOffset >= endOffset || moveByAmount == 0) return false;
+    quint8 instructSize = 2*(!thumbCode ? 2 : 1);
+    quint32 size = endOffset-startOffset;
+    if (size == 0) return false;
+
+    for (quint32 i = 0; i <= size; i+=instructSize) {
+        quint32 curOffset = 0;
+        if (moveByAmount < 0) curOffset = startOffset+i; //Code Moved Backwards
+        else if (moveByAmount > 0) curOffset = endOffset-i; //Code Moved Forwards
+        else return false;
+
+        quint32 origCode = ReadCode(codebin, curOffset); //Read existing code
+        quint32 newOffset = curOffset+static_cast<quint32>(moveByAmount*instructSize);
+
+        if (((origCode>>24)&0x0F) == 0xB || ((origCode>>24)&0x0F) == 0xA) //if BL # or B # instruction
+            origCode+=static_cast<quint32>(moveByAmount*-1); //*-1 swaps positive <-> negative
+
+        else if (((origCode>>24)&0x0F) == 0x5 && ((origCode>>16)&0x0F) == 0xF) { //if LDR RX, [PC, #X]
+            origCode+=static_cast<quint32>((moveByAmount*instructSize)*-1); //*-1 swaps positive <-> negative
+        }
+
+        PatchCode(codebin, newOffset, origCode);
+    }
+
+    for (qint32 i = 0; i < moveByAmount; i++) { //NOP the now old code, just so it doesn't mess with anything
+        if (moveByAmount < 0) { //Code Moved Backwards
+            PatchCode(codebin, endOffset-static_cast<quint32>(i*4), 0xE1A00000);
+        }
+
+        else if (moveByAmount > 0) { //Code Moved Forwards
+            PatchCode(codebin, startOffset+static_cast<quint32>(i*4), 0xE1A00000);
+        }
+    }
+
+    return true;
+}
+
+void Game::UpdateCmdKeyboardRodata(CmdKeyboardRodata& roData) {
+    static const wchar_t* func_cmds[CMD_AMOUNT] = {L"t2i ", L"clearinv", L"dupeall", L"", L"", L"",
+                                                   L"", L"", L"", L"", L"", L""};
+
+    roData.func_ptrs[0]  = CmdKeyboard_Text2Item.m_Offset; //Text2item (/t2i ID)
+    roData.func_ptrs[1]  = CmdKeyboard_ClearInv.m_Offset; //ClearInv (/clearinv)
+    roData.func_ptrs[2]  = CmdKeyboard_DupeAll.m_Offset; //DupeAll (/dupeall)
+    /* Don't feel like implementing these */
+    roData.func_ptrs[3]  = 0xFFFFFFFF; //CmdKeyboard_ChangeTime.m_Offset;
+    roData.func_ptrs[4]  = 0xFFFFFFFF; //RTWE (/rtwe ID)
+    roData.func_ptrs[5]  = 0xFFFFFFFF; //Search & Replace (/sr SEARCH_ID REPLACE_ID)
+    roData.func_ptrs[6]  = 0xFFFFFFFF; //Faint (/faint)
+    roData.func_ptrs[7]  = 0xFFFFFFFF; //Player Name Changer (/pname NAME)
+    roData.func_ptrs[8]  = 0xFFFFFFFF; //Town Name Changer (/tname NAME)
+    roData.func_ptrs[9]  = 0xFFFFFFFF; //?
+    roData.func_ptrs[10] = 0xFFFFFFFF; //?
+    roData.func_ptrs[11] = 0xFFFFFFFF; //?
+
+    roData.func_cmd_size[0]  = 5; //t2i ID
+    roData.func_cmd_size[1]  = 8; //clearinv
+    roData.func_cmd_size[2]  = 7; //dupeinv
+    roData.func_cmd_size[3]  = -1; //time
+    roData.func_cmd_size[4]  = -1;
+    roData.func_cmd_size[5]  = -1; //e.g: sr 1 2
+    roData.func_cmd_size[6]  = -1;
+    roData.func_cmd_size[7]  = -1;
+    roData.func_cmd_size[8]  = -1;
+    roData.func_cmd_size[9]  = -1;
+    roData.func_cmd_size[10] = -1;
+    roData.func_cmd_size[11] = -1;
+
+    wchar_t* cmd_str_ptr = roData.func_cmd_strs;
+    quint32 baseOffset = CmdKeyboardRoData.m_Offset+(4*CMD_AMOUNT)+(1*CMD_AMOUNT)+(4*CMD_AMOUNT);
+
+    //qDebug() << "baseOffset: 0x" + QString::number(baseOffset, 16);
+    for (int i = 0; i < CMD_AMOUNT; i++) {
+        size_t size = wcslen(func_cmds[i]);
+
+        wcsncpy(cmd_str_ptr, func_cmds[i], size&0xFF);
+        roData.func_cmds[i] = baseOffset;
+
+        cmd_str_ptr+=(size+1); //+1 for null terminator
+        baseOffset+=(size+1)*sizeof(wchar_t);
+    }
+}
+

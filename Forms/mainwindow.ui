@@ -772,7 +772,7 @@
             <string>Utilities</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_2">
-            <item row="6" column="0">
+            <item row="7" column="0">
              <widget class="QDial" name="dial_CameraZoomOut">
               <property name="toolTip">
                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code patches the game to change the camera zoom level in-game.&lt;br/&gt;&lt;br/&gt;This can create a more 'immersive' feeling, aswell as allowing the player to see more of it's surroundings. The pictures on the right showcase the various zoom levels.&lt;/p&gt;&lt;p&gt;Credit to Jay for this code :)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -801,55 +801,6 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="0">
-             <widget class="QCheckBox" name="CB_ChecksumPass">
-              <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enabling this code makes the game skip garden_plus.dat checksum checks.&lt;/p&gt;&lt;p&gt;This allows the game to load most saves that it would otherwise consider corrupt.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-              <property name="text">
-               <string>Bypass Save Checksums</string>
-              </property>
-              <property name="checked">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="0">
-             <widget class="QCheckBox" name="CB_InstantText">
-              <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enabling this code makes text render instantly.&lt;/p&gt;&lt;p&gt;Generally, text renders a letter at a time.&lt;/p&gt;&lt;p&gt;This speeds up rendering so text appears instantly.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-              <property name="text">
-               <string>Instant Text</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QCheckBox" name="CB_SecureValPass">
-              <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enabling this code makes the game skip the Secure Value check.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;The Secure Value is used by ACNL for Save Data Rollback Protection.&lt;br/&gt;i.e. you can't restore a previous version of your save. &lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;However, most popular Save Managers (e.g. Checkpoint and JKSM) automatically delete the Secure Value upon restoring a save anyways.&lt;br/&gt;Therefore, this patch is here more for completion and is not that useful.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-              <property name="text">
-               <string>Bypass Secure Value Checks</string>
-              </property>
-              <property name="checked">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="0">
-             <spacer name="verticalSpacer_4">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>40</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
             <item row="1" column="2">
              <spacer name="horizontalSpacer_2">
               <property name="orientation">
@@ -863,13 +814,26 @@
               </property>
              </spacer>
             </item>
-            <item row="5" column="0">
+            <item row="6" column="0">
              <widget class="QLabel" name="LBL_CameraZoomOut">
               <property name="toolTip">
                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code patches the game to change the camera zoom level in-game.&lt;br/&gt;&lt;br/&gt;This can create a more 'immersive' feeling, aswell as allowing the player to see more of it's surroundings. The pictures on the right showcase the various zoom levels.&lt;/p&gt;&lt;p&gt;Credit to Jay for this code :)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
               <property name="text">
                <string>Camera Zoom Out Level: Init</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QCheckBox" name="CB_SecureValPass">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enabling this code makes the game skip the Secure Value check.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;The Secure Value is used by ACNL for Save Data Rollback Protection.&lt;br/&gt;i.e. you can't restore a previous version of your save. &lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;However, most popular Save Managers (e.g. Checkpoint and JKSM) automatically delete the Secure Value upon restoring a save anyways.&lt;br/&gt;Therefore, this patch is here more for completion and is not that useful.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="text">
+               <string>Bypass Secure Value Checks</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
@@ -889,7 +853,43 @@
               </property>
              </widget>
             </item>
-            <item row="2" column="1" rowspan="5" colspan="2">
+            <item row="3" column="0">
+             <widget class="QCheckBox" name="CB_InstantText">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enabling this code makes text render instantly.&lt;/p&gt;&lt;p&gt;Generally, text renders a letter at a time.&lt;/p&gt;&lt;p&gt;This speeds up rendering so text appears instantly.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="text">
+               <string>Instant Text</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="0">
+             <spacer name="verticalSpacer_4">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="1" column="0">
+             <widget class="QCheckBox" name="CB_ChecksumPass">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enabling this code makes the game skip garden_plus.dat checksum checks.&lt;/p&gt;&lt;p&gt;This allows the game to load most saves that it would otherwise consider corrupt.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="text">
+               <string>Bypass Save Checksums</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1" rowspan="6" colspan="2">
              <widget class="QLabel" name="LBL_CameraZoomOutPic">
               <property name="toolTip">
                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code patches the game to change the camera zoom level in-game.&lt;br/&gt;&lt;br/&gt;This can create a more 'immersive' feeling, aswell as allowing the player to see more of it's surroundings.&lt;/p&gt;&lt;p&gt;Credit to Jay for this code :)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -899,6 +899,16 @@
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QCheckBox" name="CB_CMDKeyboard">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enabling this code allows the user to type commands into ACNL's ingame keyboard.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Current Commands:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;/t2i&lt;/span&gt;: This command provides Text 2 Item functionality for the user. The specified Item goes into Slot 1 of the inventory.   Usage: &amp;quot;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;/t2i ItemID&lt;/span&gt;&amp;quot;, where ItemID is an ID from &lt;a href=&quot;https://raw.githubusercontent.com/SirBeethoven/LeafHacks/gh-pages/pages/All.txt&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;this list&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;/clearinv&lt;/span&gt;:This commands clears the player's inventory.   Usage: &amp;quot;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;/clearinv&lt;/span&gt;&amp;quot;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;/dupeall&lt;/span&gt;: This command duplicates the item in Slot 1 of the player's inveotry to all other spaces in the inventory.   Usage: &amp;quot;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;/dupeall&lt;/span&gt;&amp;quot;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Note:&lt;/span&gt; Thiese commands only affect you, not other players.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="text">
+               <string>Command Keyboard</string>
               </property>
              </widget>
             </item>

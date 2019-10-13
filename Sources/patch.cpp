@@ -361,18 +361,7 @@ Patch EditPattern;
 Patch FlowersNoTrample;
 Patch NoMosquito; //Pattern: 10 40 BD E8 03 20 A0 E1 A6 10 A0 E3
 Patch WalkOverThings; //Pattern: 0C 20 8D E2 18 10 8D E2 04 00 A0 E1
-
-/* To use functionality:
- * code.bin Patch: 0x5D95FC -> MOV R0, #1
- * CRO Patch: 0xBE4D18 (CRO: 0x2D18) -> MOV R0, #0xA;
-   Alt Patch in code.bin: 0x29E1A0 -> MOV R3, #7; STR R3, [R5]; MOV R6, #1
- * For visual QR machine:
- * Todo: Get what reads @ 0x0x621D5 in save and patch
- *
- * Complete alternative: Set the necessary flags when game is loading -> avoids needing to do CRO stuff
-    -> probably better, since it'd work without the patch enabled also
- */
-Patch QRMachineAlwaysUnlocked;
+Patch QRMachineAlwaysUnlocked; //Pattern: 01 50 80 E0 06 00 D5 E5 A0 03 B0 E1 00 40 A0 03 -0xC
 
 /* Exefs->Utilities */
 Patch RegionCheck; //Pattern: 62 5A 84 E2 4E 01 D5 E5 0F 00 00 E2 - 0xC

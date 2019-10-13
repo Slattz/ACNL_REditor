@@ -148,6 +148,11 @@ static const QVector<quint8> WalkOverThingsPattern = { //+0x14
 0x04, 0x00, 0xA0, 0xE1
 };
 
+static const QVector<quint8> QRAlwaysUnlockedPattern = { //-0xC
+0x01, 0x50, 0x80, 0xE0, 0x06, 0x00, 0xD5, 0xE5,
+0xA0, 0x03, 0xB0, 0xE1, 0x00, 0x40, 0xA0, 0x03
+};
+
 //Check if button is newly pressed
 static const QVector<quint8> hidKeysDownPattern = { // -0x30 for function start
 0x00, 0x00, 0xA0, 0x93, 0x04, 0x00, 0x90, 0xE5,
@@ -357,6 +362,18 @@ Patch FlowersNoTrample;
 Patch NoMosquito; //Pattern: 10 40 BD E8 03 20 A0 E1 A6 10 A0 E3
 Patch WalkOverThings; //Pattern: 0C 20 8D E2 18 10 8D E2 04 00 A0 E1
 
+/* To use functionality:
+ * code.bin Patch: 0x5D95FC -> MOV R0, #1
+ * CRO Patch: 0xBE4D18 (CRO: 0x2D18) -> MOV R0, #0xA;
+   Alt Patch in code.bin: 0x29E1A0 -> MOV R3, #7; STR R3, [R5]; MOV R6, #1
+ * For visual QR machine:
+ * Todo: Get what reads @ 0x0x621D5 in save and patch
+ *
+ * Complete alternative: Set the necessary flags when game is loading -> avoids needing to do CRO stuff
+    -> probably better, since it'd work without the patch enabled also
+ */
+Patch QRMachineAlwaysUnlocked;
+
 /* Exefs->Utilities */
 Patch RegionCheck; //Pattern: 62 5A 84 E2 4E 01 D5 E5 0F 00 00 E2 - 0xC
 Patch ChecksumCheck; //Pattern: 08 D0 4D E2 0B B0 A0 E3 05 80 A0 E3 0C 60 A0 E3 + 0xB4
@@ -543,6 +560,9 @@ void Patch::Init(void) {
     FlowersNoTrample =  Patch(0x596890, 0x597F58, 0x596FA0, KOR, 0x596890, 0x597470, 0x596FA0, WAKOR, QVector<PatchValues>({{0xE3A0001D, 0}}));
     NoMosquito =        Patch(0x5C245C, 0x5C3B24, 0x5C2B6C, KOR, 0x5C245C, 0x5C3054, 0x5C2B6C, WAKOR, QVector<PatchValues>({{0xE3A01006,0}})); //Pattern: 10 40 BD E8 03 20 A0 E1 A6 10 A0 E3
     WalkOverThings =    Patch(WalkOverThingsPattern, QVector<PatchValues>({{0xEA000094, 0}, {0xE1A00000, 0x2A8}, {0xE1A00000, 0x2C0}, {0xEA000026, 0x2C4}, {0xEA000065, 0x2F0}}), 0x14);
+    QRMachineAlwaysUnlocked = Patch(QRAlwaysUnlockedPattern, QVector<PatchValues>({{0xE3A00000, 0x10}, {0xE3A04000, 0x18}, {0xE1A00000, 0x20},
+                                                                                   {0xE5D06000, 0x40}, {0xE3C66078, 0x44}, {0xE3866050, 0x48},
+                                                                                   {0xE5C06000, 0x4C}, {0xE1A00000, 0x5C}}), static_cast<quint32>(-0xC));
     qDebug() << "End Exefs->Player";
 
     /* Exefs->Utilities */

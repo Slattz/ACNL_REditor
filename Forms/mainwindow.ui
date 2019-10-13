@@ -519,7 +519,7 @@
             <string>Player</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_7">
-            <item row="9" column="0">
+            <item row="10" column="0">
              <spacer name="verticalSpacer_7">
               <property name="orientation">
                <enum>Qt::Vertical</enum>
@@ -532,23 +532,25 @@
               </property>
              </spacer>
             </item>
-            <item row="0" column="0">
-             <widget class="QCheckBox" name="CB_Resetti">
-              <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code makes it so Resetti no longer appears if you exit the game without saving.&lt;/p&gt;&lt;p&gt;This is useful if you don't want Resetti but still want the Reset Centre for example.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Note:&lt;/span&gt; This also disables Isabelle's &amp;quot;You quit without saving&amp;quot; message.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            <item row="0" column="3" rowspan="3">
+             <widget class="QDial" name="dial_PlyrSpeed">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
               </property>
-              <property name="text">
-               <string>Disable Resetti</string>
+              <property name="minimum">
+               <number>0</number>
               </property>
-             </widget>
-            </item>
-            <item row="1" column="2">
-             <widget class="QLabel" name="label_PlyrSpeed">
-              <property name="text">
-               <string>Init_SpeedText</string>
+              <property name="maximum">
+               <number>4</number>
               </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              <property name="pageStep">
+               <number>1</number>
+              </property>
+              <property name="notchesVisible">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
@@ -575,35 +577,43 @@
               </property>
              </spacer>
             </item>
-            <item row="0" column="2">
-             <widget class="QLabel" name="label_PlyrSpeedTxt">
-              <property name="text">
-               <string>Player's Speed:</string>
+            <item row="0" column="0">
+             <widget class="QCheckBox" name="CB_Resetti">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code makes it so Resetti no longer appears if you exit the game without saving.&lt;/p&gt;&lt;p&gt;This is useful if you don't want Resetti but still want the Reset Centre for example.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Note:&lt;/span&gt; This also disables Isabelle's &amp;quot;You quit without saving&amp;quot; message.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              <property name="text">
+               <string>Disable Resetti</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="3" rowspan="3">
-             <widget class="QDial" name="dial_PlyrSpeed">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
+            <item row="2" column="0">
+             <widget class="QCheckBox" name="CB_TrampleFlowers">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This allows you to run through flowers without ever trampling them.&lt;/p&gt;&lt;p&gt;Credit to Scotline for the original code. :)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
-              <property name="minimum">
-               <number>0</number>
+              <property name="text">
+               <string>Never Trample Flowers</string>
               </property>
-              <property name="maximum">
-               <number>4</number>
+             </widget>
+            </item>
+            <item row="8" column="0">
+             <widget class="QCheckBox" name="CB_WalkOverThings">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code makes it so you can walk over anything (i.e. it disables collisions).&lt;/p&gt;&lt;p&gt;Credit to Sc0tline for this code :)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
-              <property name="pageStep">
-               <number>1</number>
+              <property name="text">
+               <string>Walk Over Everything</string>
               </property>
-              <property name="notchesVisible">
-               <bool>true</bool>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QLabel" name="label_PlyrSpeed">
+              <property name="text">
+               <string>Init_SpeedText</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
              </widget>
             </item>
@@ -623,42 +633,6 @@
               </property>
              </widget>
             </item>
-            <item row="9" column="3">
-             <spacer name="verticalSpacer_6">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>40</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="9" column="2">
-             <spacer name="verticalSpacer_8">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>40</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="2" column="0">
-             <widget class="QCheckBox" name="CB_TrampleFlowers">
-              <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This allows you to run through flowers without ever trampling them.&lt;/p&gt;&lt;p&gt;Credit to Scotline for the original code. :)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-              <property name="text">
-               <string>Never Trample Flowers</string>
-              </property>
-             </widget>
-            </item>
             <item row="0" column="1">
              <spacer name="horizontalSpacer_6">
               <property name="orientation">
@@ -672,13 +646,46 @@
               </property>
              </spacer>
             </item>
-            <item row="8" column="0">
-             <widget class="QCheckBox" name="CB_WalkOverThings">
-              <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code makes it so you can walk over anything (i.e. it disables collisions).&lt;/p&gt;&lt;p&gt;Credit to Sc0tline for this code :)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
+            <item row="0" column="2">
+             <widget class="QLabel" name="label_PlyrSpeedTxt">
               <property name="text">
-               <string>Walk Over Everything</string>
+               <string>Player's Speed:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="10" column="2">
+             <spacer name="verticalSpacer_8">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="10" column="3">
+             <spacer name="verticalSpacer_6">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="9" column="0">
+             <widget class="QCheckBox" name="CB_QRUnlocked">
+              <property name="text">
+               <string>QR Machine Unlocked From The Start</string>
               </property>
              </widget>
             </item>

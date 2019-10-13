@@ -273,6 +273,9 @@ bool Game::ApplyPatches(Ui::MainWindow *mainui, File *codebin) {
     if(mainui->CB_WalkOverThings->isChecked())
         res |= WalkOverThings.Apply(codebin);
 
+    if (mainui->CB_QRUnlocked->isChecked())
+        res |= QRMachineAlwaysUnlocked.Apply(codebin);
+
     /* Exefs->Shops */
     if(mainui->CB_NativeFruitSellPrice->isChecked())
         res |= NativeFruitPrice.Apply(codebin);

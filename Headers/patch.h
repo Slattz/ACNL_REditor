@@ -159,6 +159,7 @@ extern Patch EditPattern;
 extern Patch FlowersNoTrample;
 extern Patch NoMosquito;
 extern Patch WalkOverThings;
+extern Patch QRMachineAlwaysUnlocked;
 
 /* Exefs->Utilities */
 extern Patch RegionCheck;

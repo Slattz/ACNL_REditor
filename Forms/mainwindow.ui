@@ -519,7 +519,7 @@
             <string>Player</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_7">
-            <item row="10" column="0">
+            <item row="11" column="0">
              <spacer name="verticalSpacer_7">
               <property name="orientation">
                <enum>Qt::Vertical</enum>
@@ -531,6 +531,16 @@
                </size>
               </property>
              </spacer>
+            </item>
+            <item row="9" column="0">
+             <widget class="QCheckBox" name="CB_QRUnlocked">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code makes it so the QR Machine in Able Sisters is always unlocked for every player from the start of the game.&lt;/p&gt;&lt;p&gt;This essentially allows you to skip having to talk to Sable for 10 days in a row.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Note:&lt;/span&gt; On a new save, you still need to plant the town tree and be able to save before the QR machine can be accessed.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="text">
+               <string>QR Machine Unlocked From The Start</string>
+              </property>
+             </widget>
             </item>
             <item row="0" column="3" rowspan="3">
              <widget class="QDial" name="dial_PlyrSpeed">
@@ -551,6 +561,65 @@
               </property>
               <property name="notchesVisible">
                <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QCheckBox" name="CB_Resetti">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code makes it so Resetti no longer appears if you exit the game without saving.&lt;/p&gt;&lt;p&gt;This is useful if you don't want Resetti but still want the Reset Centre for example.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Note:&lt;/span&gt; This also disables Isabelle's &amp;quot;You quit without saving&amp;quot; message.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="text">
+               <string>Disable Resetti</string>
+              </property>
+             </widget>
+            </item>
+            <item row="11" column="2">
+             <spacer name="verticalSpacer_8">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="11" column="3">
+             <spacer name="verticalSpacer_6">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="0" column="1">
+             <spacer name="horizontalSpacer_6">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="0" column="2">
+             <widget class="QLabel" name="label_PlyrSpeedTxt">
+              <property name="text">
+               <string>Player's Speed:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
              </widget>
             </item>
@@ -576,26 +645,6 @@
                </size>
               </property>
              </spacer>
-            </item>
-            <item row="0" column="0">
-             <widget class="QCheckBox" name="CB_Resetti">
-              <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code makes it so Resetti no longer appears if you exit the game without saving.&lt;/p&gt;&lt;p&gt;This is useful if you don't want Resetti but still want the Reset Centre for example.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Note:&lt;/span&gt; This also disables Isabelle's &amp;quot;You quit without saving&amp;quot; message.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-              <property name="text">
-               <string>Disable Resetti</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QCheckBox" name="CB_TrampleFlowers">
-              <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This allows you to run through flowers without ever trampling them.&lt;/p&gt;&lt;p&gt;Credit to Scotline for the original code. :)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-              <property name="text">
-               <string>Never Trample Flowers</string>
-              </property>
-             </widget>
             </item>
             <item row="8" column="0">
              <widget class="QCheckBox" name="CB_WalkOverThings">
@@ -633,59 +682,23 @@
               </property>
              </widget>
             </item>
-            <item row="0" column="1">
-             <spacer name="horizontalSpacer_6">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
+            <item row="2" column="0">
+             <widget class="QCheckBox" name="CB_TrampleFlowers">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This allows you to run through flowers without ever trampling them.&lt;/p&gt;&lt;p&gt;Credit to Scotline for the original code. :)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="0" column="2">
-             <widget class="QLabel" name="label_PlyrSpeedTxt">
               <property name="text">
-               <string>Player's Speed:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               <string>Never Trample Flowers</string>
               </property>
              </widget>
             </item>
-            <item row="10" column="2">
-             <spacer name="verticalSpacer_8">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
+            <item row="10" column="0">
+             <widget class="QCheckBox" name="CB_Permit100">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This code makes it so the development permit is already 100% from the start of the game.&lt;/p&gt;&lt;p&gt;This essentially allows you to skip the long task of trying to get 100%.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Note:&lt;/span&gt; You still need to upgrade from tent -&amp;gt; house to 'officially' complete the permit and therefore progress, but it will still say 100%.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>40</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="10" column="3">
-             <spacer name="verticalSpacer_6">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>40</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="9" column="0">
-             <widget class="QCheckBox" name="CB_QRUnlocked">
               <property name="text">
-               <string>QR Machine Unlocked From The Start</string>
+               <string>Development Permit 100% From The Start</string>
               </property>
              </widget>
             </item>

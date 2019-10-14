@@ -160,6 +160,8 @@ extern Patch FlowersNoTrample;
 extern Patch NoMosquito;
 extern Patch WalkOverThings;
 extern Patch QRMachineAlwaysUnlocked;
+extern Patch PermitAlways100_1;
+extern Patch PermitAlways100_2;
 
 /* Exefs->Utilities */
 extern Patch RegionCheck;

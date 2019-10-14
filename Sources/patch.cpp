@@ -153,6 +153,16 @@ static const QVector<quint8> QRAlwaysUnlockedPattern = { //-0xC
 0xA0, 0x03, 0xB0, 0xE1, 0x00, 0x40, 0xA0, 0x03
 };
 
+static const QVector<quint8> Permit100Pattern1 = { //+0xC
+0x1A, 0x10, 0xD0, 0xE5, 0x1B, 0x20, 0xD0, 0xE5,
+0xFE, 0x10, 0xC1, 0xE3, 0x14, 0x10, 0x81, 0xE3
+};
+
+static const QVector<quint8> Permit100Pattern2 = { //+0x8
+0xFE, 0x20, 0xC3, 0xE3, 0x0E, 0x4D, 0x01, 0xE2,
+0x81, 0x10, 0x82, 0xE1, 0x07, 0x30, 0xCC, 0xE3
+};
+
 //Check if button is newly pressed
 static const QVector<quint8> hidKeysDownPattern = { // -0x30 for function start
 0x00, 0x00, 0xA0, 0x93, 0x04, 0x00, 0x90, 0xE5,
@@ -362,6 +372,8 @@ Patch FlowersNoTrample;
 Patch NoMosquito; //Pattern: 10 40 BD E8 03 20 A0 E1 A6 10 A0 E3
 Patch WalkOverThings; //Pattern: 0C 20 8D E2 18 10 8D E2 04 00 A0 E1
 Patch QRMachineAlwaysUnlocked; //Pattern: 01 50 80 E0 06 00 D5 E5 A0 03 B0 E1 00 40 A0 03 -0xC
+Patch PermitAlways100_1; //New Player starts w/ 100%; Pattern: 1A 10 D0 E5 1B 20 D0 E5 FE 10 C1 E3 14 10 81 E3 + 0xC
+Patch PermitAlways100_2; //AddtoPermit func sets 100%; Pattern: FE 20 C3 E3 0E 4D 01 E2 81 10 82 E1 07 30 CC E3 + 0x8
 
 /* Exefs->Utilities */
 Patch RegionCheck; //Pattern: 62 5A 84 E2 4E 01 D5 E5 0F 00 00 E2 - 0xC
@@ -552,6 +564,8 @@ void Patch::Init(void) {
     QRMachineAlwaysUnlocked = Patch(QRAlwaysUnlockedPattern, QVector<PatchValues>({{0xE3A00000, 0x10}, {0xE3A04000, 0x18}, {0xE1A00000, 0x20},
                                                                                    {0xE5D06000, 0x40}, {0xE3C66078, 0x44}, {0xE3866050, 0x48},
                                                                                    {0xE5C06000, 0x4C}, {0xE1A00000, 0x5C}}), static_cast<quint32>(-0xC));
+    PermitAlways100_1 = Patch(Permit100Pattern1,  QVector<PatchValues>({{0xE38110C8, 0}}), 0xC);
+    PermitAlways100_2 = Patch(Permit100Pattern2, QVector<PatchValues>({{0xE38210C8, 0}}), 0x8);
     qDebug() << "End Exefs->Player";
 
     /* Exefs->Utilities */

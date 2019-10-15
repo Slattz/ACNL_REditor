@@ -135,7 +135,6 @@ extern Patch NativeFruitPrice;
 extern Patch ReeseBuy;
 extern Patch NooklingsBuy;
 extern Patch LeilaBuy;
-extern Patch NoResetti;
 extern Patch Confetti;
 extern Patch CherryBlossom;
 extern Patch Weather;
@@ -154,6 +153,8 @@ extern Patch FishyBiteWhen;
 extern Patch NoScareFishy;
 
 /* Exefs->Player */
+extern Patch NoResetti1;
+extern Patch NoResetti2;
 extern Patch PlayerSpeed;
 extern Patch EditPattern;
 extern Patch FlowersNoTrample;

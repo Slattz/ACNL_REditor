@@ -258,8 +258,10 @@ bool Game::ApplyPatches(Ui::MainWindow *mainui, File *codebin) {
     /* Exefs->Player */
     res |= !PatchCode(codebin, PlayerSpeed.m_Offset, PlayerSpeeds[mainui->dial_PlyrSpeed->value()]);
 
-    if (mainui->CB_Resetti->isChecked())
-        res |= NoResetti.Apply(codebin);
+    if (mainui->CB_Resetti->isChecked()) {
+        res |= NoResetti1.Apply(codebin);
+        res |= NoResetti2.Apply(codebin);
+    }
 
     if (mainui->CB_EditPatterns->isChecked())
         res |= EditPattern.Apply(codebin);

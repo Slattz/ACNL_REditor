@@ -29,9 +29,14 @@ static const QVector<quint8> UnusedCode_Pattern = {
 0xBC, 0xC0, 0x80, 0xE5
 };
 
-static const QVector<quint8> NoResettiPattern = {
+static const QVector<quint8> NoResetti1Pattern = {
 0x57, 0x0C, 0x80, 0xE2, 0x0A, 0x10, 0xD0, 0xE5,
 0x02, 0x10, 0x81, 0xE3, 0x0A, 0x10, 0xC0, 0xE5
+};
+
+static const QVector<quint8> NoResetti2Pattern = {
+0xF0, 0x4F, 0x2D, 0xE9, 0xA7, 0xDF, 0x4D, 0xE2,
+0x01, 0x40, 0xA0, 0xE1, 0x00, 0xB0, 0xA0, 0xE1
 };
 
 static const QVector<quint8> GetBasePlayerAddrPattern = { //ARM, -0x8
@@ -347,7 +352,6 @@ Patch NativeFruitPrice;
 Patch ReeseBuy;
 Patch NooklingsBuy;
 Patch LeilaBuy;
-Patch NoResetti; //Pattern: 57 0C 80 E2 0A 10 D0 E5  02 10 81 E3 0A 10 C0 E5 + 0x8
 Patch Confetti; //Pattern: 16 5B 84 E2 AC 50 85 E2  00 00 95 E5 00 00 50 E3 + 0x8
 Patch CherryBlossom; //Pattern: 10 D0 4D E2 02 00 A0 E3  16 6B 84 E2 AC 60 86 E2 + 0x8
 Patch Weather; //Pattern: 1st find of [06 10 41 E2 00 00 51 E3  18 10 81 B2 34 00 50 E3] + 0x88
@@ -366,6 +370,9 @@ Patch FishyBiteWhen; // Pattern: FF 50 00 E2 CE 01 D4 E5 00 01 80 E0 00 01 55 E1
 Patch NoScareFishy; //Pattern: 90 51 90 E5 01 60 A0 E1 00 40 A0 E1 + 0x10
 
 /* Exefs->Player */
+Patch NoResetti1; //Don't set 'ResetPending' flag; Pattern: 57 0C 80 E2 0A 10 D0 E5 02 10 81 E3 0A 10 C0 E5 + 0x8
+//NoResetti2: Resetti Never Appears (needed as NoResetti1 doesn't cover all cases);
+Patch NoResetti2; //Pattern: F0 4F 2D E9 A7 DF 4D E2 01 40 A0 E1 00 B0 A0 E1 + 0x8
 Patch PlayerSpeed;
 Patch EditPattern;
 Patch FlowersNoTrample;
@@ -536,7 +543,6 @@ void Patch::Init(void) {
     ReeseBuy =          Patch(0x768EE0, 0x76A740, 0x769748, KOR, 0x768EB8, 0x769724, 0x769720, WAKOR, NOPVec);
     NooklingsBuy =      Patch(0x769148, 0x76A9A8, 0x7699B0, KOR, 0x769120, 0x76998C, 0x769988, WAKOR, QVector<PatchValues>({{0xE1A041A0, 0}, {NOP, 8}}));
     LeilaBuy =          Patch(0x768884, 0x76A0E4, 0x7690EC, KOR, 0x76885C, 0x7690C8, 0x7690C4, WAKOR, QVector<PatchValues>({{0xE1A00004,0}}));
-    NoResetti =         Patch(NoResettiPattern, QVector<PatchValues>({{0xE3C11002, 0}}), 8);
     Confetti =          Patch(ConfettiPattern, QVector<PatchValues>({{0xE3A00001, 0}, {0xE3A00078, 0x30}}), 8);
     CherryBlossom =     Patch(CherryBPattern, QVector<PatchValues>({{0xE3A00001, 0}, {0xE3A00001, 0x28}, {0xE3A00004, 0x50}, {0xE3A01001, 0x60}}), 0x10);
     Weather =           Patch(0x62E728, 0x62FC30, 0x62EC68, KOR, 0x62E728, 0x62F158, 0x62EC68, WAKOR, QVector<PatchValues>({{0xE3A00000,0}})); //Pattern: 1st find of [06 10 41 E2 00 00 51 E3  18 10 81 B2 34 00 50 E3] + 0x88
@@ -556,6 +562,8 @@ void Patch::Init(void) {
     qDebug() << "End Exefs->General";
 
     /* Exefs->Player */
+    NoResetti1 =        Patch(NoResetti1Pattern, QVector<PatchValues>({{0xE3C11002, 0}}), 8);
+    NoResetti2 =        Patch(NoResetti2Pattern, QVector<PatchValues>({{0xE3A04000, 0}}), 8);
     PlayerSpeed =       Patch(0x651708, 0x652C10, 0x651C48, KOR, 0x651708, 0x652138, 0x651C48, WAKOR, QVector<PatchValues>({{0x3F800000, 0}}));
     EditPattern =       Patch(0x2FEC78, 0x2FEC44, 0x2FECCC, KOR, 0x2FEC78, 0x2FE9C0, 0x2FECCC, WAKOR, QVector<PatchValues>({{0xE3A00001, 0}}));
     FlowersNoTrample =  Patch(0x596890, 0x597F58, 0x596FA0, KOR, 0x596890, 0x597470, 0x596FA0, WAKOR, QVector<PatchValues>({{0xE3A0001D, 0}}));

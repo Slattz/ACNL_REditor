@@ -538,7 +538,7 @@ void Patch::Init(void) {
     LeilaBuy =          Patch(0x768884, 0x76A0E4, 0x7690EC, KOR, 0x76885C, 0x7690C8, 0x7690C4, WAKOR, QVector<PatchValues>({{0xE1A00004,0}}));
     NoResetti =         Patch(NoResettiPattern, QVector<PatchValues>({{0xE3C11002, 0}}), 8);
     Confetti =          Patch(ConfettiPattern, QVector<PatchValues>({{0xE3A00001, 0}, {0xE3A00078, 0x30}}), 8);
-    CherryBlossom =     Patch(CherryBPattern, QVector<PatchValues>({{0xE3A00001, 0}, {0xE3A00001, 0x28}, {0xE3A00004, 0x50}, {0xE3A01001, 0x60}}), 8);
+    CherryBlossom =     Patch(CherryBPattern, QVector<PatchValues>({{0xE3A00001, 0}, {0xE3A00001, 0x28}, {0xE3A00004, 0x50}, {0xE3A01001, 0x60}}), 0x10);
     Weather =           Patch(0x62E728, 0x62FC30, 0x62EC68, KOR, 0x62E728, 0x62F158, 0x62EC68, WAKOR, QVector<PatchValues>({{0xE3A00000,0}})); //Pattern: 1st find of [06 10 41 E2 00 00 51 E3  18 10 81 B2 34 00 50 E3] + 0x88
     Season =            Patch(0x56B090, 0x56C758, 0x56B7A0, KOR, 0x56B090, 0x56BC70, 0x56B7A0, WAKOR, QVector<PatchValues>({{0xE3A01000,0}})); //Pattern: 1st find of [00 00 A0 E3 0C 34 83 E1 00 10 A0 E1 73 30 FF E6] + 0x18
     CherryBTrees =      Patch(CherryBTreePattern, QVector<PatchValues>({{0xE3A08005,0}, {0xE28F2074, 0x150}}), 0);

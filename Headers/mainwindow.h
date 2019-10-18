@@ -28,14 +28,15 @@ private slots:
     void on_actionAbout_triggered();
     void on_BTN_Remapper_clicked();
     void on_BTN_ItemPriceChanger_clicked();
+    void on_dial_CameraZoomOut_valueChanged(int value);
+    void on_CB_CyrusCustoms_stateChanged(int arg1);
+    void on_LE_CustomiseSeconds_textChanged(const QString &arg1);
 
     /* Debug Stuff */
     void on_actionEnableAll_triggered();
     void on_actionListItemPrices_triggered();
     void on_actionSetup_OutDir_triggered();
     void on_actionQuick_Open_EUR_triggered();
-
-    void on_dial_CameraZoomOut_valueChanged(int value);
 
 private:
     Ui::MainWindow *ui = nullptr;

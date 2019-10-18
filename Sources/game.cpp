@@ -296,6 +296,16 @@ bool Game::ApplyPatches(Ui::MainWindow *mainui, File *codebin) {
     if(mainui->CB_LeilaBuy->isChecked())
         res |= LeilaBuy.Apply(codebin);
 
+    if (mainui->CB_CyrusCustoms->checkState() == Qt::Checked) { //Can do custom time
+        bool success = false;
+        quint32 val = mainui->CB_CyrusCustoms->text().toUInt(&success, 10);
+        res |= !PatchCode(codebin, InstantCyrusCustoms.m_Offset+0xF4, (success == true ? val : 1500));
+    }
+
+    else if (mainui->CB_CyrusCustoms->checkState() == Qt::PartiallyChecked) { //Instant customisation
+        res |= InstantCyrusCustoms.Apply(codebin);
+    }
+
     /* Exefs->Utilities */
     if(mainui->CB_RegionPass->isChecked())
         res |= RegionCheck.Apply(codebin);

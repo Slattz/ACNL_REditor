@@ -211,6 +211,35 @@ void MainWindow::on_dial_CameraZoomOut_valueChanged(int value)
 }
 
 
+void MainWindow::on_CB_CyrusCustoms_stateChanged(int arg1)
+{
+    ui->LE_CustomiseSeconds->setEnabled(false); //Nothing or Instant Unlock (nocheck or partially checked)
+
+    if (arg1 == Qt::Checked) { //Custom value
+        ui->LE_CustomiseSeconds->setEnabled(true);
+    }
+}
+
+void MainWindow::on_LE_CustomiseSeconds_textChanged(const QString &arg1)
+{
+    static constexpr char lblText[] = "Days: %02d | Hours: %02d | Mins: %02d | Seconds: %02d";
+    bool res = false;
+    quint32 days = 0, hours = 0, mins = 0, secs = 1;
+    quint32 val = arg1.toUInt(&res, 10);
+
+    if (res == true) {
+        secs = val%60;
+        mins = val/(60);
+        hours = mins/60;
+        mins %= 60;
+        days = hours/24;
+        hours%= 24;
+    }
+
+    ui->LBL_CustomiseParsed->setText(QString::asprintf(lblText, days,hours,mins,secs));
+}
+
+
 /* Debug Stuff */
 void MainWindow::on_actionEnableAll_triggered()
 {

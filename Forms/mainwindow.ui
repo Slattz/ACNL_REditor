@@ -86,7 +86,7 @@
         <item row="1" column="0">
          <widget class="QTabWidget" name="tabWidget_exefs">
           <property name="currentIndex">
-           <number>0</number>
+           <number>2</number>
           </property>
           <widget class="QWidget" name="tab_exefs_general">
            <attribute name="title">
@@ -709,19 +709,6 @@
             <string>Shops</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_8">
-            <item row="5" column="1">
-             <spacer name="horizontalSpacer_5">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
             <item row="0" column="0">
              <widget class="QCheckBox" name="CB_ReeseBuy">
               <property name="toolTip">
@@ -732,16 +719,6 @@
               </property>
              </widget>
             </item>
-            <item row="2" column="0">
-             <widget class="QCheckBox" name="CB_LeilaBuy">
-              <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;On the island, Leila originally buys items for 1/80 of the price they'll be sold at. With this code enabled, Leila will buy items for their sell price.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This may only be visible to you and not other players.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-              <property name="text">
-               <string>Leila Buys Items For Their Sell Price</string>
-              </property>
-             </widget>
-            </item>
             <item row="1" column="0">
              <widget class="QCheckBox" name="CB_NooklingBuy">
               <property name="toolTip">
@@ -749,16 +726,6 @@
               </property>
               <property name="text">
                <string>Nooklings Buy Items For Their Sell Price</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="0">
-             <widget class="QPushButton" name="BTN_ShopTimes">
-              <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This allows you to customise the opening hours of shops to your liking!&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This may only be visible to you and not other players.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-              <property name="text">
-               <string>Change Shops Opening Hours</string>
               </property>
              </widget>
             </item>
@@ -773,6 +740,52 @@
              </widget>
             </item>
             <item row="4" column="0">
+             <widget class="QCheckBox" name="CB_CyrusCustoms">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This patch allows you to change the time it takes for Cyrus to customise an item. This patch behaves differently depending on the state of the checkbox:&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Unchecked&lt;/span&gt;: No changes.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Partially Checked&lt;/span&gt;: Items are instantly customised and can be collected right after giving to Cyrus.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Fully Checked&lt;/span&gt;: You can instead specify a custom time (in seconds) it takes for items to get customised.&lt;/p&gt;&lt;p&gt;Credit to Poyo for the save offsets used to create this patch :)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="text">
+               <string>Change Cyrus Customisation Time</string>
+              </property>
+              <property name="tristate">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="2" colspan="2">
+             <spacer name="horizontalSpacer_5">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="7" column="0">
+             <widget class="QPushButton" name="BTN_ShopTimes">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This allows you to customise the opening hours of shops to your liking!&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This may only be visible to you and not other players.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="text">
+               <string>Change Shops Opening Hours</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QCheckBox" name="CB_LeilaBuy">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;On the island, Leila originally buys items for 1/80 of the price they'll be sold at. With this code enabled, Leila will buy items for their sell price.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note: &lt;/span&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;This may only be visible to you and not other players.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="text">
+               <string>Leila Buys Items For Their Sell Price</string>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="0">
              <spacer name="verticalSpacer_3">
               <property name="orientation">
                <enum>Qt::Vertical</enum>
@@ -784,6 +797,41 @@
                </size>
               </property>
              </spacer>
+            </item>
+            <item row="5" column="1" colspan="3">
+             <widget class="QLabel" name="LBL_CustomiseParsed">
+              <property name="autoFillBackground">
+               <bool>true</bool>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::StyledPanel</enum>
+              </property>
+              <property name="text">
+               <string>Days: 00 | Hours: 00 | Mins: 25 | Seconds: 00</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+              <property name="textInteractionFlags">
+               <set>Qt::NoTextInteraction</set>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1" colspan="3">
+             <widget class="QLineEdit" name="LE_CustomiseSeconds">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="inputMask">
+               <string>999999</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+              <property name="placeholderText">
+               <string>Enter Amount In Seconds (Default Is 1500).</string>
+              </property>
+             </widget>
             </item>
            </layout>
           </widget>

@@ -168,6 +168,11 @@ static const QVector<quint8> Permit100Pattern2 = { //+0x8
 0x81, 0x10, 0x82, 0xE1, 0x07, 0x30, 0xCC, 0xE3
 };
 
+static const QVector<quint8> InstantCyrusCustomsPattern = { //+0
+0x03, 0x70, 0xA0, 0xE1, 0x27, 0x00, 0x00, 0x2A,
+0x04, 0x20, 0x85, 0xE0, 0x01, 0x00, 0xA0, 0xE3
+};
+
 //Check if button is newly pressed
 static const QVector<quint8> hidKeysDownPattern = { // -0x30 for function start
 0x00, 0x00, 0xA0, 0x93, 0x04, 0x00, 0x90, 0xE5,
@@ -348,10 +353,6 @@ Patch CmdKeyboard_DupeAll;
 Patch CmdKeyboard_ClearInv;
 
 /* Exefs->General */
-Patch NativeFruitPrice;
-Patch ReeseBuy;
-Patch NooklingsBuy;
-Patch LeilaBuy;
 Patch Confetti; //Pattern: 16 5B 84 E2 AC 50 85 E2  00 00 95 E5 00 00 50 E3 + 0x8
 Patch CherryBlossom; //Pattern: 10 D0 4D E2 02 00 A0 E3  16 6B 84 E2 AC 60 86 E2 + 0x8
 Patch Weather; //Pattern: 1st find of [06 10 41 E2 00 00 51 E3  18 10 81 B2 34 00 50 E3] + 0x88
@@ -389,6 +390,13 @@ Patch SecureValueCheck; //Pattern: 08 D0 4D E2 0B B0 A0 E3 05 80 A0 E3 0C 60 A0 
 Patch InstantText; //Pattern: 08 10 8D E5 08 10 8D E2 04 00 A0 E1 + 0x48
 Patch CameraZoomOut; //Float; Pattern: 05 1A C0 ED 06 0A 80 ED  0A 1A 80 ED 0B 3A C0 ED 1E FF 2F E1 + 0x14
 Patch CmdKeyboardHook;
+
+/* Exefs->Shops */
+Patch NativeFruitPrice;
+Patch ReeseBuy;
+Patch NooklingsBuy;
+Patch LeilaBuy;
+Patch InstantCyrusCustoms; //Pattern: 03 70 A0 E1 27 00 00 2A  04 20 85 E0 01 00 A0 E3 + 0
 
 /* Shop Times: Addresses are start of function */
 Patch Retail;
@@ -539,10 +547,6 @@ void Patch::Init(void) {
     qDebug() << "End Button Remap Utils";
 
     /* Exefs->General */
-    NativeFruitPrice =  Patch(0x30576C, 0x3056AC, 0x3056B8, KOR, 0x30576C, 0x305714, 0x3056B8, WAKOR, NOPVec);
-    ReeseBuy =          Patch(0x768EE0, 0x76A740, 0x769748, KOR, 0x768EB8, 0x769724, 0x769720, WAKOR, NOPVec);
-    NooklingsBuy =      Patch(0x769148, 0x76A9A8, 0x7699B0, KOR, 0x769120, 0x76998C, 0x769988, WAKOR, QVector<PatchValues>({{0xE1A041A0, 0}, {NOP, 8}}));
-    LeilaBuy =          Patch(0x768884, 0x76A0E4, 0x7690EC, KOR, 0x76885C, 0x7690C8, 0x7690C4, WAKOR, QVector<PatchValues>({{0xE1A00004,0}}));
     Confetti =          Patch(ConfettiPattern, QVector<PatchValues>({{0xE3A00001, 0}, {0xE3A00078, 0x30}}), 8);
     CherryBlossom =     Patch(CherryBPattern, QVector<PatchValues>({{0xE3A00001, 0}, {0xE3A00001, 0x28}, {0xE3A00004, 0x50}, {0xE3A01001, 0x60}}), 0x10);
     Weather =           Patch(0x62E728, 0x62FC30, 0x62EC68, KOR, 0x62E728, 0x62F158, 0x62EC68, WAKOR, QVector<PatchValues>({{0xE3A00000,0}})); //Pattern: 1st find of [06 10 41 E2 00 00 51 E3  18 10 81 B2 34 00 50 E3] + 0x88
@@ -584,6 +588,15 @@ void Patch::Init(void) {
     CameraZoomOut =     Patch(CameraZoomOutPattern, QVector<PatchValues>({{0x3F800000, 0}}), 0x14);
     CmdKeyboardHook =   Patch(CmdKeyboardHookPattern, QVector<PatchValues>({{0xE3A00000, 0}, {0xE3500000, 4}, {0xE59F6064, 8}, {0x15960000, 0xC}}), static_cast<quint32>(-0x10));
     qDebug() << "End Exefs->Utilities";
+
+    /* Exefs->Shops */
+    NativeFruitPrice =  Patch(0x30576C, 0x3056AC, 0x3056B8, KOR, 0x30576C, 0x305714, 0x3056B8, WAKOR, NOPVec);
+    ReeseBuy =          Patch(0x768EE0, 0x76A740, 0x769748, KOR, 0x768EB8, 0x769724, 0x769720, WAKOR, NOPVec);
+    NooklingsBuy =      Patch(0x769148, 0x76A9A8, 0x7699B0, KOR, 0x769120, 0x76998C, 0x769988, WAKOR, QVector<PatchValues>({{0xE1A041A0, 0}, {NOP, 8}}));
+    LeilaBuy =          Patch(0x768884, 0x76A0E4, 0x7690EC, KOR, 0x76885C, 0x7690C8, 0x7690C4, WAKOR, QVector<PatchValues>({{0xE1A00004,0}}));
+    InstantCyrusCustoms=Patch(InstantCyrusCustomsPattern, QVector<PatchValues>({{0xE1A07002, 0}, {0xE3A00000, 0xC}}),0);
+    qDebug() << "End Exefs->Shops";
+
 
     /* Shop Times: Addresses are start of function */
     Retail =            Patch(0x309310, 0x30929C, 0x309298, KOR, 0x309310, 0x309384, 0x309298, WAKOR, FFVec);

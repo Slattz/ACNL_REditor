@@ -131,10 +131,7 @@ extern Patch CmdKeyboard_ChangeTime;
 extern Patch CmdKeyboard_DupeAll;
 extern Patch CmdKeyboard_ClearInv;
 
-extern Patch NativeFruitPrice;
-extern Patch ReeseBuy;
-extern Patch NooklingsBuy;
-extern Patch LeilaBuy;
+/* Exefs->General */
 extern Patch Confetti;
 extern Patch CherryBlossom;
 extern Patch Weather;
@@ -171,6 +168,13 @@ extern Patch SecureValueCheck;
 extern Patch InstantText;
 extern Patch CameraZoomOut;
 extern Patch CmdKeyboardHook;
+
+/* Exefs->Shops */
+extern Patch NativeFruitPrice;
+extern Patch ReeseBuy;
+extern Patch NooklingsBuy;
+extern Patch LeilaBuy;
+extern Patch InstantCyrusCustoms;
 
 /* Shop Times: Addresses are start of function */
 extern Patch Retail;

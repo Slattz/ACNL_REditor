@@ -1,6 +1,9 @@
 ---
 name: Bug Report
 about: Create a bug report to help get issues fixed easier & faster
+title: ''
+labels: ''
+assignees: ''
 
 ---
 
@@ -15,6 +18,9 @@ A clear and concise description of what the bug is.
 * [x] Europe/Australia
 * [ ] USA
 * [ ] Japan
+
+**Patches Enabled:**
+List the patches you enabled here.
 
 **Expected behavior**
 A clear and concise description of what you expected to happen.

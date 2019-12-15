@@ -128,7 +128,7 @@ goto GameSelect_Exit
 set PREVIEW_MODE "ACNL REditor USA WA Files Dumper\nby Slattz\n\n> Dumping Files From $[GAME]"
 
 if not find C:/00040000$[TIDLOW]_*.3ds CARTPATH
-    goto DumpWAUSAFiles_Installed_On_SD
+    goto DumpUSA_WAFiles_Installed_On_SD
 end
 
 labelsel -o -s "Choose which game type to dump files from." DumpUSA_WAFiles_*
